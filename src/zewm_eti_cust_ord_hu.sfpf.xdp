@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xfa generator="AdobeLiveCycleDesigner_V11.0.1.20140218.1.907162_SAP" APIVersion="3.6.13324.0"?><xdp:xdp xmlns:xdp="http://ns.adobe.com/xdp/" timeStamp="2023-04-13T08:47:28Z" uuid="84c9234b-c1a9-4c80-8f55-c5ca7de9e2d3">
+<template xmlns:xliff="urn:oasis:names:tc:xliff:document:1.1" xmlns="http://www.xfa.org/schema/xfa-template/2.8/">
+   <xft-xliff:tags xmlns="http://www.xfa.org/schema/xfa-xliff/1.0/" xmlns:xft-xliff="http://www.xfa.org/schema/xfa-xliff/1.0/" xmlns:xhtml="http://www.w3.org/1999/xhtml"><xft-xliff:value id="N122">HU Label</xft-xliff:value><xft-xliff:value id="N152">Print Repeat</xft-xliff:value><xft-xliff:value id="N155">Barcode</xft-xliff:value><xft-xliff:value id="N185">Bar code</xft-xliff:value><xft-xliff:value id="N211">HU:</xft-xliff:value><xft-xliff:value id="N268">Repeat Print</xft-xliff:value><xft-xliff:value id="N273">Handling Unit</xft-xliff:value><xft-xliff:value id="N358">Handling Unit</xft-xliff:value></xft-xliff:tags>
+   <?formServer allowRenderCaching 0?>
+   <?formServer formModel both?>
+   <?formServer defaultPDFRenderFormat acrobat9.0static?>
+   <subform layout="tb" locale="ambient" name="data">
+      <pageSet name="Master_Page">
+         <pageArea id="Page1" name="Page1">
+            <contentArea h="148mm" id="Content_area_ID" name="Content_area" w="105mm"/>
+            <medium long="148mm" short="105mm" stock="custom"/>
+            <?templateDesigner expand 1?></pageArea>
+         <?templateDesigner expand 1?></pageSet>
+      <subform layout="tb" name="Bodypage" w="105mm">
+         <bind match="none"/>
+         <margin bottomInset="0mm" leftInset="5mm" topInset="5mm"/>
+         <subform h="138.415mm" name="label" w="94.975mm">
+            <bind match="none"/>
+            <subform layout="lr-tb" name="BlocEntête" w="95mm">
+               <bind match="none"/>
+               <subform h="19.975mm" name="TypeEtiquette" w="34mm">
+                  <bind match="none"/>
+                  <border>
+                     <edge presence="hidden"/>
+                     <edge/>
+                     <edge/>
+                     <edge presence="hidden"/>
+                     <corner/>
+                     <corner/>
+                  </border>
+                  <traversal>
+                     <traverse operation="first" ref="GV_NIMP[0]"/>
+                     <traverse ref="NumeroHU_nombreHU[0]"/>
+                  </traversal>
+                  <field minH="20mm" minW="34mm" name="COF_LABEL">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="48pt" typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="0mm" rightInset="1mm" topInset="1mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_LABELS.COF_LABEL"/>
+                     <traversal>
+                        <traverse ref="NumeroHU_nombreHU[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <keep intact="contentArea"/>
+               <traversal>
+                  <traverse operation="first" ref="TypeEtiquette[0]"/>
+                  <traverse ref="BlocPincipal[0]"/>
+               </traversal>
+               <subform h="20mm" name="NumeroHU_nombreHU" w="61mm">
+                  <bind match="none"/>
+                  <border>
+                     <edge presence="hidden"/>
+                     <edge presence="hidden"/>
+                     <edge/>
+                     <edge presence="hidden"/>
+                     <corner/>
+                  </border>
+                  <traversal>
+                     <traverse operation="first" ref="HU_POSITION[0]"/>
+                  </traversal>
+                  <field minH="20mm" minW="61mm" name="HU_POSITION">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="48pt" typeface="Arial"/>
+                     <margin bottomInset="1mm" leftInset="0mm" rightInset="1mm" topInset="1mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.HU_POSITION"/>
+                     <traversal>
+                        <traverse ref="BlocPincipal[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <?templateDesigner expand 1?></subform>
+            <subform layout="tb" name="BlocPincipal" w="95mm" y="22mm">
+               <bind match="none"/>
+               <subform layout="lr-tb" name="Commande" w="95mm">
+                  <bind match="none"/>
+                  <keep intact="contentArea"/>
+                  <traversal>
+                     <traverse operation="first" ref="REF_CUST_ORDER[0]"/>
+                     <traverse ref="DateDeLivraison[0]"/>
+                  </traversal>
+                  <field minH="8.467mm" minW="95mm" name="REF_CUST_ORDER">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="48pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="justify" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="justify" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.REF_CUST_ORDER"/>
+                     <traversal>
+                        <traverse ref="DateDeLivraison[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <subform layout="lr-tb" name="DateDeLivraison" w="95mm">
+                  <bind match="none"/>
+                  <keep intact="contentArea"/>
+                  <event activity="initialize" name="event__initialize">
+                     <script contentType="application/x-javascript">if ($record.ETIQUETTES.GV_FLAG_GESTION_LOT.value == 'X')
+{
+	this.presence = 'visible';
+}
+else
+{
+	this.presence = 'hidden';
+	this.presence = 'inactive';
+}
+</script>
+                  </event>
+                  <margin bottomInset="0mm"/>
+                  <field minH="6.533mm" minW="95mm" name="CUST_ORDER_DELIVERY_DATE_LABEL">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="26pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_LABELS.CUST_ORDER_DELIVERY_DATE_LABEL"/>
+                  </field>
+                  <traversal>
+                     <traverse ref="CommandeCodeBarre[0]"/>
+                     <traverse operation="first" ref="CUST_ORDER_DELIVERY_DATE_LABEL[0]"/>
+                  </traversal>
+                  <field minH="7mm" minW="95mm" name="CUST_ORDER_DELIVERY_DATE">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="26pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.CUST_ORDER_DELIVERY_DATE"/>
+                     <traversal>
+                        <traverse ref="CommandeCodeBarre[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <keep intact="contentArea"/>
+               <traversal>
+                  <traverse operation="first" ref="Commande[0]"/>
+                  <traverse ref="BlocDétail[0]"/>
+               </traversal>
+               <subform h="18.722mm" name="CommandeCodeBarre" w="95mm">
+                  <bind match="none"/>
+                  <traversal>
+                     <traverse operation="first" ref="CommandeCodeBarre[0]"/>
+                  </traversal>
+                  <subform anchorType="middleCenter" h="14mm" name="CommandeCodeBarre" w="95mm" x="47.5mm" y="9mm">
+                     <bind match="none"/>
+                     <field anchorType="middleRight" h="13.594mm" name="REF_CUST_ORDER" w="95mm" x="95mm" y="6.797mm">
+                        <ui>
+                           <barcode checksum="auto" dataLength="10" textLocation="none" type="code128" wideNarrowRatio="fixed"/>
+                        </ui>
+                        <font typeface="Courier New"/>
+                        <value>
+                           <text xliff:rid="8662D30F-45F1-4A35-8439-DA40DD6ABB62">1234567890</text>
+                        </value>
+                        <bind match="dataRef" ref="$.GS_FORM_VALUES.REF_CUST_ORDER"/>
+                        <traversal>
+                           <traverse ref="BlocDétail[0]"/>
+                        </traversal>
+                     </field>
+                     <traversal>
+                        <traverse operation="first" ref="REF_CUST_ORDER[0]"/>
+                        <traverse ref="CommandeNuméro[0]"/>
+                     </traversal>
+                     <?templateDesigner expand 1?></subform>
+                  <?templateDesigner expand 1?></subform>
+               <?templateDesigner expand 1?></subform>
+            <traversal>
+               <traverse operation="first" ref="BlocEntête[0]"/>
+            </traversal>
+            <subform h="29mm" name="BlocDétail" w="95mm" y="76mm">
+               <bind match="none"/>
+               <traversal>
+                  <traverse operation="first" ref="DateCréationHU[0]"/>
+                  <traverse ref="BlocCodeBarre[0].HuidentNum[0]"/>
+               </traversal>
+               <subform layout="lr-tb" name="DésignationDuClient" w="95mm" y="0mm">
+                  <bind match="none"/>
+                  <keep intact="contentArea"/>
+                  <event activity="initialize" name="event__initialize">
+                     <script contentType="application/x-javascript">if ($record.ETIQUETTES.GV_FLAG_GESTION_LOT.value == 'X')
+{
+	this.presence = 'visible';
+}
+else
+{
+	this.presence = 'hidden';
+	this.presence = 'inactive';
+}
+</script>
+                  </event>
+                  <margin bottomInset="0mm"/>
+                  <field minH="5mm" minW="3mm" name="CUSTOMER_NAME_LABEL">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_LABELS.CUSTOMER_NAME_LABEL"/>
+                  </field>
+                  <traversal>
+                     <traverse operation="first" ref="CUSTOMER_NAME_LABEL[0]"/>
+                  </traversal>
+                  <field minH="5mm" minW="17mm" name="CUSTOMER_NAME">
+                     <ui>
+                        <textEdit multiLine="1">
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.CUSTOMER_NAME"/>
+                     <traversal>
+                        <traverse ref="BlocCodeBarre[0].HuidentNum[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <subform layout="lr-tb" name="DateCréationHU" w="94.975mm" y="6.937mm">
+                  <bind match="none"/>
+                  <keep intact="contentArea"/>
+                  <event activity="initialize" name="event__initialize">
+                     <script contentType="application/x-javascript">if ($record.ETIQUETTES.GV_FLAG_GESTION_LOT.value == 'X')
+{
+	this.presence = 'visible';
+}
+else
+{
+	this.presence = 'hidden';
+	this.presence = 'inactive';
+}
+</script>
+                  </event>
+                  <margin bottomInset="0mm"/>
+                  <field minH="5mm" minW="3mm" name="HU_CREATION_DATE_LABEL">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_LABELS.HU_CREATION_DATE_LABEL"/>
+                  </field>
+                  <traversal>
+                     <traverse operation="first" ref="HU_CREATION_DATE_LABEL[0]"/>
+                     <traverse ref="TypeLivraison[0]"/>
+                  </traversal>
+                  <field minH="5mm" minW="17mm" name="HU_CREATION_DATE">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.HU_CREATION_DATE"/>
+                     <traversal>
+                        <traverse ref="TypeLivraison[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <subform layout="lr-tb" name="TypeLivraison" w="94.975mm" y="14mm">
+                  <bind match="none"/>
+                  <keep intact="contentArea"/>
+                  <event activity="initialize" name="event__initialize">
+                     <script contentType="application/x-javascript">if ($record.ETIQUETTES.GV_FLAG_GESTION_LOT.value == 'X')
+{
+	this.presence = 'visible';
+}
+else
+{
+	this.presence = 'hidden';
+	this.presence = 'inactive';
+}
+</script>
+                  </event>
+                  <margin bottomInset="0mm"/>
+                  <field minH="5mm" minW="3mm" name="DELIVERY_TYPE_LABEL">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_LABELS.DELIVERY_TYPE_LABEL"/>
+                  </field>
+                  <traversal>
+                     <traverse operation="first" ref="DELIVERY_TYPE_LABEL[0]"/>
+                     <traverse ref="TypeDeCommande[0]"/>
+                  </traversal>
+                  <field minH="5mm" minW="17mm" name="DELIVERY_TYPE">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.DELIVERY_TYPE"/>
+                     <traversal>
+                        <traverse ref="TypeDeCommande[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <subform layout="lr-tb" name="TypeDeCommande" w="94.975mm" y="21mm">
+                  <bind match="none"/>
+                  <keep intact="contentArea"/>
+                  <event activity="initialize" name="event__initialize">
+                     <script contentType="application/x-javascript">if ($record.ETIQUETTES.GV_FLAG_GESTION_LOT.value == 'X')
+{
+	this.presence = 'visible';
+}
+else
+{
+	this.presence = 'hidden';
+	this.presence = 'inactive';
+}
+</script>
+                  </event>
+                  <margin bottomInset="0mm"/>
+                  <traversal>
+                     <traverse operation="first" ref="KIND_OF_CUST_ORDER[0]"/>
+                  </traversal>
+                  <field minH="5mm" minW="17mm" name="KIND_OF_CUST_ORDER">
+                     <ui>
+                        <textEdit>
+                           <border presence="hidden"/>
+                           <margin/>
+                        </textEdit>
+                     </ui>
+                     <font size="16pt" typeface="Arial"/>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="1mm" topInset="0mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption reserve="0mm">
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.KIND_OF_CUST_ORDER"/>
+                     <traversal>
+                        <traverse ref="BlocCodeBarre[0]"/>
+                     </traversal>
+                  </field>
+                  <?templateDesigner expand 1?></subform>
+               <?templateDesigner expand 1?></subform>
+            <subform h="29.96mm" name="BlocCodeBarre" w="94.975mm" x="0mm" y="108.04mm">
+               <bind match="none"/>
+               <field anchorType="middleLeft" h="4.233mm" name="SSCC_LABEL" w="94.975mm" y="2.116mm">
+                  <ui>
+                     <textEdit/>
+                  </ui>
+                  <font size="12pt" typeface="Arial" weight="bold">
+                     <fill>
+                        <color value="153,153,153"/>
+                     </fill>
+                  </font>
+                  <margin bottomInset="0mm" leftInset="0mm" rightInset="0mm" topInset="0mm"/>
+                  <caption reserve="0mm">
+                     <para vAlign="middle"/>
+                     <value>
+                        <text xliff:rid="42AAE7BB-1028-4F9C-A369-0E750C36E9E5"/>
+                     </value>
+                  </caption>
+                  <border>
+                     <edge presence="hidden"/>
+                     <corner presence="hidden"/>
+                     <corner/>
+                     <corner/>
+                     <corner/>
+                  </border>
+                  <para vAlign="middle"/>
+                  <bind match="dataRef" ref="$.GS_FORM_LABELS.SSCC_LABEL"/>
+                  <traversal>
+                     <traverse ref="BlocDétail[0].DésignationDuClient[0]"/>
+                  </traversal>
+               </field>
+               <subform h="16mm" hAlign="center" name="HuidentCodeBarre" w="94.975mm" y="4.96mm">
+                  <bind match="none"/>
+                  <traversal>
+                     <traverse operation="first" ref="HUIDENT[0]"/>
+                  </traversal>
+                  <?templateDesigner expand 1?>
+                  <field h="16mm" name="HUIDENT" w="45mm" x="25mm">
+                     <ui>
+                        <barcode checksum="auto" dataLength="18" textLocation="none" type="code128" wideNarrowRatio="fixed"/>
+                     </ui>
+                     <font typeface="Courier New"/>
+                     <value>
+                        <text xliff:rid="47A02B52-5ACD-4A4D-BAAC-998987CB1BBD">1234567890</text>
+                     </value>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.HUIDENT"/>
+                  </field>
+               </subform>
+               <border>
+                  <edge/>
+                  <edge presence="hidden"/>
+                  <edge presence="hidden"/>
+                  <edge presence="hidden"/>
+                  <corner/>
+               </border>
+               <traversal>
+                  <traverse operation="first" ref="SSCC_LABEL[0]"/>
+                  <traverse ref="BlocDétail[0].DésignationDuClient[0]"/>
+               </traversal>
+               <subform h="7.865mm" name="HuidentNum" w="95.07mm" y="20.96mm">
+                  <bind match="none"/>
+                  <field hAlign="center" minH="5mm" name="HUIDENT_00" w="94.916mm" y="0mm">
+                     <ui>
+                        <textEdit/>
+                     </ui>
+                     <font size="16pt" typeface="Arial" weight="bold">
+                        <fill>
+                           <color value="153,153,153"/>
+                        </fill>
+                     </font>
+                     <margin bottomInset="0mm" leftInset="0mm" rightInset="0mm" topInset="0.25mm"/>
+                     <para hAlign="center" vAlign="middle"/>
+                     <caption>
+                        <para hAlign="center" vAlign="middle"/>
+                     </caption>
+                     <bind match="dataRef" ref="$.GS_FORM_VALUES.HUIDENT_00"/>
+                     <traversal>
+                        <traverse ref="HuidentCodeBarre[0]"/>
+                     </traversal>
+                  </field>
+                  <traversal>
+                     <traverse operation="first" ref="HUIDENT[0]"/>
+                     <traverse ref="HuidentCodeBarre[0]"/>
+                  </traversal>
+                  <?templateDesigner expand 1?></subform>
+               <?templateDesigner expand 1?></subform>
+            <?templateDesigner expand 1?></subform>
+         <traversal>
+            <traverse operation="first" ref="label[0]"/>
+         </traversal>
+         <?templateDesigner expand 1?></subform>
+      <proto/>
+      <?templateDesigner expand 1?>
+      <?renderCache.subset "Courier New" 0 0 ISO-8859-1 4 40 10 0013001400150016001700180019001A001B001C0123456789?>
+   </subform>
+   <?templateDesigner DefaultLanguage FormCalc?>
+   <?templateDesigner DefaultRunAt client?>
+   <?templateDesigner DefaultPreviewType print?>
+   <?templateDesigner XDPPreviewFormat 1?>
+   <?originalXFAVersion http://www.xfa.org/schema/xfa-template/2.4/?>
+   <?templateDesigner SaveTaggedPDF 1?>
+   <?templateDesigner SavePDFWithEmbeddedFonts 1?>
+   <?templateDesigner Grid show:0, snap:1, units:17, color:ff8080, origin:(0,0), interval:(25000,25000), objsnap:0, guidesnap:0, pagecentersnap:0?>
+   <?templateDesigner FormTargetVersion 28?>
+   <?templateDesigner Rulers horizontal:1, vertical:1, guidelines:1, crosshairs:0?>
+   <?templateDesigner Zoom 228?></template>
+<config xmlns="http://www.xfa.org/schema/xci/2.8/">
+   <agent name="designer">
+      <!--  [0..n]  -->
+      <destination>pdf</destination>
+      <pdf>
+         <!--  [0..n]  -->
+         <fontInfo/>
+         <taggedMode>custom</taggedMode>
+      </pdf>
+      <common>
+         <template>
+            <base>https://S4.SAP-PRO.DEV.ADEO.COM:443/sap/bc/fp/form/layout/</base>
+         </template>
+      </common>
+   </agent>
+   <present>
+      <!--  [0..n]  -->
+      <pdf>
+         <!--  [0..n]  -->
+         <version>1.7</version>
+         <adobeExtensionLevel>3</adobeExtensionLevel>
+      </pdf>
+      <common>
+         <data>
+            <xsl>
+               <uri/>
+            </xsl>
+            <outputXSL>
+               <uri/>
+            </outputXSL>
+         </data>
+      </common>
+      <cache>
+         <macroCache/>
+      </cache>
+      <xdp>
+         <packets>*</packets>
+      </xdp>
+   </present>
+   <psMap/>
+</config>
+<connectionSet xmlns="http://www.xfa.org/schema/xfa-connection-set/2.8/">
+   <xsdConnection dataDescription="data" name="ZEWM_ETI_CUST_ORD_HU">
+      <uri/>
+      <rootElement>data</rootElement>
+   </xsdConnection>
+   <?originalXFAVersion http://www.xfa.org/schema/xfa-connection-set/2.1/?></connectionSet>
+<xfa:datasets xmlns:xfa="http://www.xfa.org/schema/xfa-data/1.0/">
+   <xfa:data xfa:dataNode="dataGroup"/>
+   <dd:dataDescription xmlns:dd="http://ns.adobe.com/data-description/" dd:name="data">
+      <data>
+         <PRINT_PARAM>
+            <REPEAT_PRT/>
+         </PRINT_PARAM>
+         <HU_HEADER dd:minOccur="0">
+            <DATA dd:maxOccur="-1">
+               <MANDT/>
+               <GUID_HU/>
+               <HUIDENT/>
+               <PMAT_GUID/>
+               <CREATED_BY/>
+               <CREATED_AT/>
+               <ORIG_SYSTEM/>
+               <CHANGED_BY/>
+               <CHANGED_AT/>
+               <G_WEIGHT/>
+               <N_WEIGHT/>
+               <UNIT_GW/>
+               <T_WEIGHT/>
+               <UNIT_TW/>
+               <G_VOLUME/>
+               <N_VOLUME/>
+               <UNIT_GV/>
+               <T_VOLUME/>
+               <UNIT_TV/>
+               <G_CAPA/>
+               <N_CAPA/>
+               <T_CAPA/>
+               <LENGTH/>
+               <WIDTH/>
+               <HEIGHT/>
+               <UNIT_LWH/>
+               <MAX_WEIGHT/>
+               <TOLW/>
+               <TARE_VAR/>
+               <MAX_VOLUME/>
+               <TOLV/>
+               <CLOSED_PACKAGE/>
+               <MAX_CAPA/>
+               <TOLC/>
+               <MAX_LENGTH/>
+               <MAX_WIDTH/>
+               <MAX_HEIGHT/>
+               <UNIT_MAX_LWH/>
+               <LGNUM/>
+               <VHI/>
+               <LETYP/>
+               <FLGAVQ/>
+               <FLGMOVE/>
+               <PROCS/>
+               <COPST/>
+               <PRCES/>
+               <DSTGRP/>
+               <WKLID/>
+               <ENTITLED/>
+               <WSTYP/>
+               <WSSEC/>
+               <WSBIN/>
+               <WCR/>
+               <IPICK/>
+               <MFSERROR/>
+               <WTCONF/>
+               <UKCON/>
+               <TRANSIT/>
+               <MFS_STOCKTRANS_CNT/>
+               <FLGTWEXT/>
+               <PMTYP/>
+               <PACKGR/>
+               <SAPRL/>
+               <PHYSTAT/>
+               <TOP/>
+               <BOTTOM/>
+               <STSMA/>
+               <PS_GUID/>
+               <PS_LEVEL_SEQ/>
+               <OBJREF/>
+               <HZMT/>
+               <LOGPOS/>
+               <HUHDR_DUMMY/>
+               <UPDKZ/>
+               <PMAT/>
+               <PMTEXT/>
+               <DB_LOCK/>
+               <HIGHER_GUID/>
+               <PMCAT/>
+               <VOLUM_FIX/>
+               <CAPA_FIX/>
+               <GUID_LOC/>
+               <LOC_IDX/>
+               <LOC_TYPE/>
+               <LGTYP/>
+               <LGPLA/>
+               <LGBER/>
+               <RSRC/>
+               <TU_NUM/>
+               <LGNUM_VIEW/>
+               <FREE>
+                  <WEIGHT/>
+                  <UNIT_W/>
+                  <VOLUM/>
+                  <UNIT_V/>
+                  <CAPA/>
+               </FREE>
+               <FREE_TOL>
+                  <WEIGHT/>
+                  <UNIT_W/>
+                  <VOLUM/>
+                  <UNIT_V/>
+                  <CAPA/>
+               </FREE_TOL>
+               <NO_QUAN_CHANGES/>
+               <NO_ATTR_CHANGES/>
+               <NO_MOVE/>
+               <SEL_ALL/>
+               <LVL/>
+               <TO_READ/>
+               <HUDEL/>
+               <EMPTY/>
+               <CHECK_DEL/>
+               <SYSTEM_STATUS/>
+               <USER_STATUS/>
+               <ICON_STATUS/>
+               <PROCTY/>
+               <RES>
+                  <WEIGHT/>
+                  <UNIT_W/>
+                  <VOLUM/>
+                  <UNIT_V/>
+                  <CAPA/>
+               </RES>
+               <LB_MOVE/>
+               <LB_READ/>
+               <HDR_EPC/>
+               <SGTIN/>
+               <HUTYPGRP/>
+               <CONS/>
+               <CREA_STEP/>
+               <LP_ORIENTATION/>
+               <LP_ROW_OFFSET/>
+               <LP_STACK_OFFSET/>
+               <LP_LEVEL_OFFSET/>
+               <LP_ROW_NUM/>
+               <LP_STACK_NUM/>
+               <LP_LEVEL_NUM/>
+               <LP_SPLIT_DECK_LVL/>
+               <LP_LOAD_SEQ/>
+               <ORIGINAL_DOCCAT/>
+               <ORIGINAL_DOCID/>
+               <ORIGINAL_ITMID/>
+               <TWHUTYPE/>
+               <REF_DOCCAT/>
+               <REF_DOCID/>
+               <REF_ITMID/>
+               <TU_NUM_TW/>
+               <TU_SR_ACT_NUM_TW/>
+               <FRD_NUM/>
+               <FRD_ITEM/>
+               <FRD_ITEM_CAT/>
+               <STOP_ID_FO/>
+               <TRANSPL_LOGSYS/>
+               <MTR/>
+               <TOP_HU_PHYS/>
+               <NO_UNPACK/>
+               <AIR_CARGO_SECURITY_STATUS_CODE/>
+               <DAMAGED/>
+               <VEH_NUM_TW/>
+               <VEH_SR_ACT_NUM_TW/>
+               <ACS_TARGET/>
+               <CSS_CURRENT/>
+               <CSS_SET_BY/>
+               <CSS_SET_AT/>
+               <DEP_COUNTRY/>
+               <EXEMPTION1/>
+               <EXEMPTION2/>
+            </DATA>
+         </HU_HEADER>
+         <GS_FORM_VALUES>
+            <HU_POSITION/>
+            <REF_CUST_ORDER/>
+            <CUST_ORDER_DELIVERY_DATE/>
+            <CUSTOMER_NAME/>
+            <HU_CREATION_DATE/>
+            <DELIVERY_TYPE/>
+            <KIND_OF_CUST_ORDER/>
+            <HUIDENT/>
+            <HUIDENT_00/>
+         </GS_FORM_VALUES>
+         <GS_FORM_LABELS>
+            <COF_LABEL/>
+            <CUST_ORDER_DELIVERY_DATE_LABEL/>
+            <CUSTOMER_NAME_LABEL/>
+            <HU_CREATION_DATE_LABEL/>
+            <DELIVERY_TYPE_LABEL/>
+            <SSCC_LABEL/>
+         </GS_FORM_LABELS>
+      </data>
+   </dd:dataDescription>
+</xfa:datasets>
+<localeSet xmlns="http://www.xfa.org/schema/xfa-locale-set/2.7/">
+   <locale desc="English (United States)" name="en_US">
+      <calendarSymbols name="gregorian">
+         <monthNames>
+            <month>January</month>
+            <month>February</month>
+            <month>March</month>
+            <month>April</month>
+            <month>May</month>
+            <month>June</month>
+            <month>July</month>
+            <month>August</month>
+            <month>September</month>
+            <month>October</month>
+            <month>November</month>
+            <month>December</month>
+         </monthNames>
+         <monthNames abbr="1">
+            <month>Jan</month>
+            <month>Feb</month>
+            <month>Mar</month>
+            <month>Apr</month>
+            <month>May</month>
+            <month>Jun</month>
+            <month>Jul</month>
+            <month>Aug</month>
+            <month>Sep</month>
+            <month>Oct</month>
+            <month>Nov</month>
+            <month>Dec</month>
+         </monthNames>
+         <dayNames>
+            <day>Sunday</day>
+            <day>Monday</day>
+            <day>Tuesday</day>
+            <day>Wednesday</day>
+            <day>Thursday</day>
+            <day>Friday</day>
+            <day>Saturday</day>
+         </dayNames>
+         <dayNames abbr="1">
+            <day>Sun</day>
+            <day>Mon</day>
+            <day>Tue</day>
+            <day>Wed</day>
+            <day>Thu</day>
+            <day>Fri</day>
+            <day>Sat</day>
+         </dayNames>
+         <meridiemNames>
+            <meridiem>AM</meridiem>
+            <meridiem>PM</meridiem>
+         </meridiemNames>
+         <eraNames>
+            <era>BC</era>
+            <era>AD</era>
+         </eraNames>
+      </calendarSymbols>
+      <datePatterns>
+         <datePattern name="full">EEEE, MMMM D, YYYY</datePattern>
+         <datePattern name="long">MMMM D, YYYY</datePattern>
+         <datePattern name="med">MMM D, YYYY</datePattern>
+         <datePattern name="short">M/D/YY</datePattern>
+      </datePatterns>
+      <timePatterns>
+         <timePattern name="full">h:MM:SS A Z</timePattern>
+         <timePattern name="long">h:MM:SS A Z</timePattern>
+         <timePattern name="med">h:MM:SS A</timePattern>
+         <timePattern name="short">h:MM A</timePattern>
+      </timePatterns>
+      <dateTimeSymbols>GyMdkHmsSEDFwWahKzZ</dateTimeSymbols>
+      <numberPatterns>
+         <numberPattern name="numeric">z,zz9.zzz</numberPattern>
+         <numberPattern name="currency">$z,zz9.99|($z,zz9.99)</numberPattern>
+         <numberPattern name="percent">z,zz9%</numberPattern>
+      </numberPatterns>
+      <numberSymbols>
+         <numberSymbol name="decimal">.</numberSymbol>
+         <numberSymbol name="grouping">,</numberSymbol>
+         <numberSymbol name="percent">%</numberSymbol>
+         <numberSymbol name="minus">-</numberSymbol>
+         <numberSymbol name="zero">0</numberSymbol>
+      </numberSymbols>
+      <currencySymbols>
+         <currencySymbol name="symbol">$</currencySymbol>
+         <currencySymbol name="isoname">USD</currencySymbol>
+         <currencySymbol name="decimal">.</currencySymbol>
+      </currencySymbols>
+   </locale>
+   <?originalXFAVersion http://www.xfa.org/schema/xfa-locale-set/2.1/?>
+   <locale desc="English_Belgium" name="en_BE">
+      <calendarSymbols name="gregorian">
+         <monthNames>
+            <month>January</month>
+            <month>February</month>
+            <month>March</month>
+            <month>April</month>
+            <month>May</month>
+            <month>June</month>
+            <month>July</month>
+            <month>August</month>
+            <month>September</month>
+            <month>October</month>
+            <month>November</month>
+            <month>December</month>
+         </monthNames>
+         <monthNames abbr="1">
+            <month>Jan</month>
+            <month>Feb</month>
+            <month>Mar</month>
+            <month>Apr</month>
+            <month>May</month>
+            <month>Jun</month>
+            <month>Jul</month>
+            <month>Aug</month>
+            <month>Sep</month>
+            <month>Oct</month>
+            <month>Nov</month>
+            <month>Dec</month>
+         </monthNames>
+         <dayNames>
+            <day>Sunday</day>
+            <day>Monday</day>
+            <day>Tuesday</day>
+            <day>Wednesday</day>
+            <day>Thursday</day>
+            <day>Friday</day>
+            <day>Saturday</day>
+         </dayNames>
+         <dayNames abbr="1">
+            <day>Sun</day>
+            <day>Mon</day>
+            <day>Tue</day>
+            <day>Wed</day>
+            <day>Thu</day>
+            <day>Fri</day>
+            <day>Sat</day>
+         </dayNames>
+         <meridiemNames>
+            <meridiem>AM</meridiem>
+            <meridiem>PM</meridiem>
+         </meridiemNames>
+         <eraNames>
+            <era>BC</era>
+            <era>AD</era>
+         </eraNames>
+      </calendarSymbols>
+      <datePatterns>
+         <datePattern name="full">EEEE D MMMM YYYY</datePattern>
+         <datePattern name="long">EEE D MMM YYYY</datePattern>
+         <datePattern name="med">DD MMM YYYY</datePattern>
+         <datePattern name="short">DD/MM/YY</datePattern>
+      </datePatterns>
+      <timePatterns>
+         <timePattern name="full">HH' h 'MM' min 'SS' s 'Z</timePattern>
+         <timePattern name="long">HH:MM:SS Z</timePattern>
+         <timePattern name="med">HH:MM:SS</timePattern>
+         <timePattern name="short">HH:MM</timePattern>
+      </timePatterns>
+      <dateTimeSymbols>GyMdkHmsSEDFwWahKzZ</dateTimeSymbols>
+      <numberPatterns>
+         <numberPattern name="numeric">z,zz9.zzz</numberPattern>
+         <numberPattern name="currency">z,zz9.99 $</numberPattern>
+         <numberPattern name="percent">z,zz9%</numberPattern>
+      </numberPatterns>
+      <numberSymbols>
+         <numberSymbol name="decimal">,</numberSymbol>
+         <numberSymbol name="grouping">.</numberSymbol>
+         <numberSymbol name="percent">%</numberSymbol>
+         <numberSymbol name="minus">-</numberSymbol>
+         <numberSymbol name="zero">0</numberSymbol>
+      </numberSymbols>
+      <currencySymbols>
+         <currencySymbol name="symbol">€</currencySymbol>
+         <currencySymbol name="isoname">EUR</currencySymbol>
+         <currencySymbol name="decimal">,</currencySymbol>
+      </currencySymbols>
+      <typefaces>
+         <typeface name="Myriad Pro"/>
+         <typeface name="Minion Pro"/>
+         <typeface name="Courier Std"/>
+         <typeface name="Adobe Pi Std"/>
+         <typeface name="Adobe Hebrew"/>
+         <typeface name="Adobe Arabic"/>
+         <typeface name="Adobe Thai"/>
+         <typeface name="Kozuka Gothic Pro-VI M"/>
+         <typeface name="Kozuka Mincho Pro-VI R"/>
+         <typeface name="Adobe Ming Std L"/>
+         <typeface name="Adobe Song Std L"/>
+         <typeface name="Adobe Myungjo Std M"/>
+         <typeface name="Adobe Devanagari"/>
+      </typefaces>
+   </locale>
+</localeSet>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.1-c041 52.337767, 2008/04/13-15:41:00        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:pdf="http://ns.adobe.com/pdf/1.3/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" rdf:about="">
+         <xmp:MetadataDate>2023-04-13T08:47:28Z</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe LiveCycle Designer 11.0</xmp:CreatorTool>
+         <pdf:Producer>Adobe LiveCycle Designer 11.0</pdf:Producer>
+         <xmpMM:DocumentID>uuid:84c9234b-c1a9-4c80-8f55-c5ca7de9e2d3</xmpMM:DocumentID>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta></xdp:xdp>

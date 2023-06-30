@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CUS0" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <CUS0>
+    <HEADER>
+     <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+     <DOCU_ID>SIMGZVG_MM_MAG_LOT</DOCU_ID>
+     <C_ACTIVITY>ZVG_MM_MAG_LOT</C_ACTIVITY>
+     <TCODE>Y_DS3_04000201</TCODE>
+    </HEADER>
+    <TEXTS>
+     <CUS_IMGACT>
+      <SPRAS>P</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+     <CUS_IMGACT>
+      <SPRAS>느</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+     <CUS_IMGACT>
+      <SPRAS>E</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+     <CUS_IMGACT>
+      <SPRAS>S</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+     <CUS_IMGACT>
+      <SPRAS>F</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+     <CUS_IMGACT>
+      <SPRAS>L</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+     <CUS_IMGACT>
+      <SPRAS>I</SPRAS>
+      <ACTIVITY>ZVG_MM_MAG_LOT</ACTIVITY>
+      <TEXT>Pilotage du Lot - Magasins 2.2</TEXT>
+     </CUS_IMGACT>
+    </TEXTS>
+   </CUS0>
+  </asx:values>
+ </asx:abap>
+</abapGit>

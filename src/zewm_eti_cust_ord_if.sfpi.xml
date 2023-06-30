@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SFPI" serializer_version="v1.0.0">
+ <asx:abap version="1.0" xmlns:asx="http://www.sap.com/abapxml">
+  <asx:values>
+   <VERSION>1</VERSION>
+   <TYPE/>
+   <INTERFACE href="#o1"/>
+   <INTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>P</LANGUAGE>
+     <ID/>
+     <TEXT>Reflects the content information of a hazardous product</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>E</LANGUAGE>
+     <ID/>
+     <TEXT>Reflects the content information of a hazardous product</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>F</LANGUAGE>
+     <ID/>
+     <TEXT>Etiquette réception - Interface</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>I</LANGUAGE>
+     <ID/>
+     <TEXT>Indica il contenuto di un materiale pericoloso</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>S</LANGUAGE>
+     <ID/>
+     <TEXT>Refleja indicación información de contenido sustancia pelig.</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>L</LANGUAGE>
+     <ID/>
+     <TEXT>Odwzorowuje specyfikację zawartości substancji niebezpiecz.</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>D</LANGUAGE>
+     <ID/>
+     <TEXT>Spiegelt die Gehaltsangabe eines Gefahrstoffes wieder</TEXT>
+    </FPINTERFACET>
+    <FPINTERFACET>
+     <NAME/>
+     <STATE/>
+     <LANGUAGE>느</LANGUAGE>
+     <ID/>
+     <TEXT>Reflects the content information of a hazardous product</TEXT>
+    </FPINTERFACET>
+   </INTERFACET>
+  </asx:values>
+  <asx:heap xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:abap="http://www.sap.com/abapxml/types/built-in" xmlns:cls="http://www.sap.com/abapxml/classes/global" xmlns:dic="http://www.sap.com/abapxml/types/dictionary">
+   <cls:CL_FP_INTERFACE_DATA id="o1">
+    <CL_FP_INTERFACE_DATA classVersion="1">
+     <CODING href="#o5"/>
+     <PARAMETERS href="#o4"/>
+     <GLOBAL_DEFINITIONS href="#o3"/>
+     <REFERENCE_FIELDS href="#o2"/>
+     <XSD_DEFINITIONS/>
+    </CL_FP_INTERFACE_DATA>
+   </cls:CL_FP_INTERFACE_DATA>
+   <cls:CL_FP_REFERENCE_FIELDS id="o2">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_REFERENCE_FIELDS classVersion="1">
+     <REFERENCE_FIELDS/>
+    </CL_FP_REFERENCE_FIELDS>
+   </cls:CL_FP_REFERENCE_FIELDS>
+   <cls:CL_FP_GLOBAL_DEFINITIONS id="o3">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_GLOBAL_DEFINITIONS classVersion="1">
+     <GLOBAL_DATA>
+      <SFPGDATA>
+       <NAME>GS_FORM_VALUES</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>ZSETI_CUST_ORD_HU_VALUES</TYPENAME>
+       <DEFAULTVAL/>
+       <CONSTANT/>
+      </SFPGDATA>
+      <SFPGDATA>
+       <NAME>GS_FORM_LABELS</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>ZSETI_CUST_ORD_HU_LABELS</TYPENAME>
+       <DEFAULTVAL/>
+       <CONSTANT/>
+      </SFPGDATA>
+     </GLOBAL_DATA>
+     <TYPES/>
+     <FIELDSYMBOLS/>
+    </CL_FP_GLOBAL_DEFINITIONS>
+   </cls:CL_FP_GLOBAL_DEFINITIONS>
+   <cls:CL_FP_PARAMETERS id="o4">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_PARAMETERS classVersion="1">
+     <IMPORT_PARAMETERS>
+      <SFPIOPAR>
+       <NAME>HU_HEADER</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>/SCWM/TT_HUHDR_INT</TYPENAME>
+       <OPTIONAL>X</OPTIONAL>
+       <BYVALUE/>
+       <DEFAULTVAL/>
+       <STANDARD/>
+       <CONSTANT/>
+      </SFPIOPAR>
+      <SFPIOPAR>
+       <NAME>PRINT_PARAM</NAME>
+       <TYPING>TYPE</TYPING>
+       <TYPENAME>/SCWM/S_PRINT</TYPENAME>
+       <OPTIONAL>X</OPTIONAL>
+       <BYVALUE/>
+       <DEFAULTVAL/>
+       <STANDARD/>
+       <CONSTANT/>
+      </SFPIOPAR>
+     </IMPORT_PARAMETERS>
+     <EXPORT_PARAMETERS/>
+     <TABLE_PARAMETERS/>
+     <EXCEPTIONS/>
+    </CL_FP_PARAMETERS>
+   </cls:CL_FP_PARAMETERS>
+   <cls:CL_FP_CODING id="o5">
+    <CL_FP_INTERFACE_DATA_CHANGED classVersion="1">
+     <INTERFACE_DATA href="#o1"/>
+    </CL_FP_INTERFACE_DATA_CHANGED>
+    <CL_FP_CODING classVersion="1">
+     <INPUT_PARAMETERS>
+      <FPPARAMETER>HU_HEADER</FPPARAMETER>
+      <FPPARAMETER>/1BCDWB/DOCPARAMS</FPPARAMETER>
+     </INPUT_PARAMETERS>
+     <OUTPUT_PARAMETERS>
+      <FPPARAMETER>USAGE_ERROR</FPPARAMETER>
+      <FPPARAMETER>SYSTEM_ERROR</FPPARAMETER>
+      <FPPARAMETER>INTERNAL_ERROR</FPPARAMETER>
+     </OUTPUT_PARAMETERS>
+     <INITIALIZATION>
+      <FPCLINE>*&amp;---------------------------------------------------------------------*</FPCLINE>
+      <FPCLINE>*&amp; Date       : 30/03/2023</FPCLINE>
+      <FPCLINE>*&amp; Author     : Coriolan FRUHAUF CFF</FPCLINE>
+      <FPCLINE>*&amp; Reference  : EMAG0XX_Etiquette_commande_v1.0</FPCLINE>
+      <FPCLINE>*&amp; Description: Impression de l&apos;étiquette HU en fin de contrôle de la</FPCLINE>
+      <FPCLINE>*&amp;              commande client</FPCLINE>
+      <FPCLINE>*&amp;---------------------------------------------------------------------*</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>&quot;On a toujours qu&apos;une seule ligne ici car on il s&apos;agit d&apos;une interface dédiée à une seule HU</FPCLINE>
+      <FPCLINE>DATA ls_first_huhdr LIKE LINE OF hu_header.</FPCLINE>
+      <FPCLINE>IF hu_header IS NOT INITIAL.</FPCLINE>
+      <FPCLINE>  ls_first_huhdr = hu_header[ 1 ].</FPCLINE>
+      <FPCLINE/>
+      <FPCLINE>  DATA(lo_cust_order_hu_form) = NEW zcl_cust_order_hu_form( is_huhdr = ls_first_huhdr ).</FPCLINE>
+      <FPCLINE>  gs_form_values = lo_cust_order_hu_form-&gt;get_form_values( ).</FPCLINE>
+      <FPCLINE>  gs_form_labels = lo_cust_order_hu_form-&gt;get_form_labels( ).</FPCLINE>
+      <FPCLINE>ENDIF.</FPCLINE>
+     </INITIALIZATION>
+     <FORMS/>
+    </CL_FP_CODING>
+   </cls:CL_FP_CODING>
+  </asx:heap>
+ </asx:abap>
+</abapGit>

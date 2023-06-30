@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_TABL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD02V>
+    <TABNAME>ZSETI_CUST_ORD_HU_LABELS</TABNAME>
+    <DDLANGUAGE>F</DDLANGUAGE>
+    <TABCLASS>INTTAB</TABCLASS>
+    <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    <EXCLASS>4</EXCLASS>
+   </DD02V>
+   <DD03P_TABLE>
+    <DD03P>
+     <FIELDNAME>COF_LABEL</FIELDNAME>
+     <ROLLNAME>ZEHU_LABELS_COF_LABEL</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>CUST_ORDER_DELIVERY_DATE_LABEL</FIELDNAME>
+     <ROLLNAME>ZEHU_LABELS_DELIV_DATE</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>CUSTOMER_NAME_LABEL</FIELDNAME>
+     <ROLLNAME>ZEHU_LABELS_CUST_NAME</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>HU_CREATION_DATE_LABEL</FIELDNAME>
+     <ROLLNAME>ZEHU_LABELS_HU_CREATION_DATE</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>DELIVERY_TYPE_LABEL</FIELDNAME>
+     <ROLLNAME>ZEHU_LABELS_DELIV_TYPE</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>SSCC_LABEL</FIELDNAME>
+     <ROLLNAME>ZEHU_LABELS_SSCC</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+   </DD03P_TABLE>
+   <I18N_LANGS>
+    <LANGU>E</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>P</LANGU>
+    <LANGU>S</LANGU>
+    <LANGU>느</LANGU>
+   </I18N_LANGS>
+   <DD02_TEXTS>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>I</DDLANGUAGE>
+     <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>느</DDLANGUAGE>
+     <DDTEXT>Interface SFP  ZEWM_ETI_CUST_ORD_IF - labels</DDTEXT>
+    </item>
+   </DD02_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

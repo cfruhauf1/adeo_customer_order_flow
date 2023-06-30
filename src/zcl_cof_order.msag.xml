@@ -1,0 +1,1762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZCL_COF_ORDER</ARBGB>
+    <MASTERLANG>F</MASTERLANG>
+    <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>Commande non payée</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Modification commande Maestro &amp;   ********</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>Magasin : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>Utilisateur : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>017</MSGNR>
+     <TEXT>Poste : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>018</MSGNR>
+     <TEXT>Statut : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>019</MSGNR>
+     <TEXT>Zone de retrait : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantité : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>021</MSGNR>
+     <TEXT>Commande SAP : &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>022</MSGNR>
+     <TEXT>Changement de statut du poste &amp; à &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>023</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête de la commande à &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>024</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête non effectué car commande non prête</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>026</MSGNR>
+     <TEXT>La commande n&apos;a pas été créée car date inférieure au Go Live &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>027</MSGNR>
+     <TEXT>Liste des statuts pour la commande client non trouvée</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>028</MSGNR>
+     <TEXT>Le statut du poste &amp; a été modifié de &amp; à &amp; et publié vers Maestro</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>029</MSGNR>
+     <TEXT>Le statut de l&apos;entête a été modifié de &amp; à &amp; et publié vers Maestro</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>030</MSGNR>
+     <TEXT>Poste &amp; de la commande n&apos;a pas été mis à jour, statut du poste à Annulé</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>031</MSGNR>
+     <TEXT>Poste &amp; de la commande a été mis à jour</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>032</MSGNR>
+     <TEXT>Le statut n&apos;existe pas</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>033</MSGNR>
+     <TEXT>Pas de données trouvées dans les table VBAK,VBAP pour la commande</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>034</MSGNR>
+     <TEXT>Commande &amp; non mise à jour, quantité supérieure à la quantitée commandée</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>035</MSGNR>
+     <TEXT>Commande &amp; mise à jour et changement de statut de l&apos;entête à Annulé</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>036</MSGNR>
+     <TEXT>Commande &amp; mise à jour et changement de statut de l&apos;article en Annulé</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>037</MSGNR>
+     <TEXT>Quantité déjà identique dans le poste</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>038</MSGNR>
+     <TEXT>Les quantités préparées ne peuvent pas être réduites,</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>039</MSGNR>
+     <TEXT>vous devez d&apos;abord annuler la préparation.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>040</MSGNR>
+     <TEXT>Entête de la commande n&apos;a pas été mise à jour car statut à &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>041</MSGNR>
+     <TEXT>Pas de données dans les tables : VBAP pour le poste de la commande</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>042</MSGNR>
+     <TEXT>Poste &amp; de la commande n&apos;a pas été mis à jour, statut du poste à &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>043</MSGNR>
+     <TEXT>Réduction impossible, le poste contient un article service</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>044</MSGNR>
+     <TEXT>Poste &amp; mis à jour et changement de statut de l&apos;article en Annulé</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>045</MSGNR>
+     <TEXT>Poste &amp; de la commande n&apos;a pas été mis à jour, statut du poste à &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>046</MSGNR>
+     <TEXT>Pas de mise à jour commande pour le statut CANCELLED, SHELVED ou SHIPPED</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>047</MSGNR>
+     <TEXT>WT</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>048</MSGNR>
+     <TEXT>Status</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>049</MSGNR>
+     <TEXT>Quantity Update</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>050</MSGNR>
+     <TEXT>Header</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>051</MSGNR>
+     <TEXT>Mov HU</TEXT>
+    </T100>
+   </T100>
+   <I18N_LANGS>
+    <LANGU>E</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>P</LANGU>
+    <LANGU>S</LANGU>
+    <LANGU>느</LANGU>
+   </I18N_LANGS>
+   <T100T>
+    <T100T>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+    </T100T>
+    <T100T>
+     <SPRSL>I</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+    </T100T>
+    <T100T>
+     <SPRSL>L</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+    </T100T>
+    <T100T>
+     <SPRSL>P</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+    </T100T>
+    <T100T>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+    </T100T>
+    <T100T>
+     <SPRSL>느</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <STEXT>Messages d&apos;erreur Customer Order Flow - Création de commande</STEXT>
+    </T100T>
+   </T100T>
+   <T100_TEXTS>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>012</MSGNR>
+     <TEXT>Order is not payed</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Update sales order Maestro &amp;   ********</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>014</MSGNR>
+     <TEXT>Store : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>016</MSGNR>
+     <TEXT>User : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>017</MSGNR>
+     <TEXT>Item : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>018</MSGNR>
+     <TEXT>Status : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>019</MSGNR>
+     <TEXT>Withdrawal Zone : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantity : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>021</MSGNR>
+     <TEXT>Sales order SD : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>022</MSGNR>
+     <TEXT>Status change for item &amp; to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>023</MSGNR>
+     <TEXT>Status change for header sales order to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>024</MSGNR>
+     <TEXT>Status is not changed for header because sales order is not ready</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>026</MSGNR>
+     <TEXT>Sales order is not created because date is less than Go Live date &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>028</MSGNR>
+     <TEXT>Status of post &amp; has been changed from &amp; to &amp; and published to Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>029</MSGNR>
+     <TEXT>Start status has been changed from &amp; to &amp; and was published to Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>030</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, post status to Canceled</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>031</MSGNR>
+     <TEXT>Position &amp; of the order has been updated</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>032</MSGNR>
+     <TEXT>The status does not exist</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>033</MSGNR>
+     <TEXT>No data found in the tables: VBAK, VBAP for the sales order</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>034</MSGNR>
+     <TEXT>customer order &amp; not updated, quantity greater than quantity ordered</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>036</MSGNR>
+     <TEXT>Customer Order &amp; updated and  Status change for item to Cancelled</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>037</MSGNR>
+     <TEXT>Already same quantity in item</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>038</MSGNR>
+     <TEXT>The quantities picked cannot be reduced,</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>039</MSGNR>
+     <TEXT>you must first cancel the picking</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>040</MSGNR>
+     <TEXT>customer order not updated, start status on &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>041</MSGNR>
+     <TEXT>No data in table : item is not in VBAP</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>042</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>043</MSGNR>
+     <TEXT>Quantities cannot be reduced, the item contains a serviceable item</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>044</MSGNR>
+     <TEXT>Order post &amp; has not been updated, Status change for item to CANCELLED</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>045</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>046</MSGNR>
+     <TEXT>No sales order update for status CANCELLED, SHELVED or SHIPPED</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>047</MSGNR>
+     <TEXT>WT</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>048</MSGNR>
+     <TEXT>Status</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>049</MSGNR>
+     <TEXT>Quantity Update</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>050</MSGNR>
+     <TEXT>Header</TEXT>
+    </item>
+    <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>051</MSGNR>
+     <TEXT>Mov HU</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>012</MSGNR>
+     <TEXT>Commande non payée</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Modification commande Maestro &amp;   ********</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>014</MSGNR>
+     <TEXT>Magasin : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>016</MSGNR>
+     <TEXT>Utilisateur : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>017</MSGNR>
+     <TEXT>Poste : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>018</MSGNR>
+     <TEXT>Statut : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>019</MSGNR>
+     <TEXT>Zone de retrait : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantité : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>021</MSGNR>
+     <TEXT>Commande SAP : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>022</MSGNR>
+     <TEXT>Changement de statut du poste &amp; à &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>023</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête de la commande à &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>024</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête non effectué car commande non prête</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>026</MSGNR>
+     <TEXT>La commande n&apos;a pas été créée car date inférieure au Go Live &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>028</MSGNR>
+     <TEXT>Lo stato di Post &amp; è stato cambiato da &amp; a &amp; ed è pubblicato a Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>029</MSGNR>
+     <TEXT>Lo stato di avvio è stato cambiato da &amp; a &amp; ed è pubblicato a Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>030</MSGNR>
+     <TEXT>Posizione &amp; dell&apos;ordine non è stata aggiornata, stato su cancellato</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>031</MSGNR>
+     <TEXT>La posizione &amp; dell&apos;ordine è stata aggiornata</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>032</MSGNR>
+     <TEXT>Lo stato non esiste</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>033</MSGNR>
+     <TEXT>Nessun dato trovato nelle tabelle: VBAK, VBAP per l&apos;ordine</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>034</MSGNR>
+     <TEXT>ordine  &amp; non aggiornato, quantità maggiore della quantità ordinata</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>035</MSGNR>
+     <TEXT>Ordine &amp; Aggiornato e modifica, stato dell&apos;intestazione per cancellare</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>036</MSGNR>
+     <TEXT>Ordine &amp; Aggiornato e modifica dello stato per l&apos;articolo per cancellare</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>037</MSGNR>
+     <TEXT>Già la stessa quantità nell&apos;articolo</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>038</MSGNR>
+     <TEXT>Le quantità preparate non possono essere ridotte,</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>039</MSGNR>
+     <TEXT>è necessario prima annullare la preparazione.</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>040</MSGNR>
+     <TEXT>ordine del cliente non aggiornato, lo stato di avvio è stato &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>042</MSGNR>
+     <TEXT>Posizione &amp; dell&apos;ordine non è stata aggiornata, lo stato del post su &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>043</MSGNR>
+     <TEXT>Quantità non possono essere ridotte, l&apos;articolo è un elemento di servizio</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>044</MSGNR>
+     <TEXT>Posizione &amp; dell&apos;ordine è stata aggiornata,stato articolo per cancellare</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>045</MSGNR>
+     <TEXT>Posizione &amp; dell&apos;ordine non è stata aggiornata, stato del post su &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>046</MSGNR>
+     <TEXT>No sales order update for status CANCELLED, SHELVED or SHIPPED</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>047</MSGNR>
+     <TEXT>WT</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>048</MSGNR>
+     <TEXT>Status</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>049</MSGNR>
+     <TEXT>Quantity Update</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>050</MSGNR>
+     <TEXT>Header</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>051</MSGNR>
+     <TEXT>Mov HU</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>012</MSGNR>
+     <TEXT>Commande non payée</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Modification commande Maestro &amp;   ********</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>014</MSGNR>
+     <TEXT>Magasin : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>016</MSGNR>
+     <TEXT>Utilisateur : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>017</MSGNR>
+     <TEXT>Poste : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>018</MSGNR>
+     <TEXT>Statut : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>019</MSGNR>
+     <TEXT>Zone de retrait : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantité : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>021</MSGNR>
+     <TEXT>Commande SAP : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>022</MSGNR>
+     <TEXT>Changement de statut du poste &amp; à &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>023</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête de la commande à &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>024</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête non effectué car commande non prête</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>026</MSGNR>
+     <TEXT>La commande n&apos;a pas été créée car date inférieure au Go Live &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>028</MSGNR>
+     <TEXT>Status Post &amp; zostal zmieniony z &amp; na &amp; i zostal opublikowany na maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>029</MSGNR>
+     <TEXT>Start zostal zmieniony z &amp; na &amp; i zostal opublikowany na Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>030</MSGNR>
+     <TEXT>Pozycja &amp; zamówienia nie zostala zaktualizowana, status postu anulowanego</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>031</MSGNR>
+     <TEXT>Pozycja &amp; zamówienia zostala zaktualizowana</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>032</MSGNR>
+     <TEXT>Status nie istnieje</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>033</MSGNR>
+     <TEXT>Brak danych w tabelach: VBAK, VBAP dla zamówienia</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>034</MSGNR>
+     <TEXT>Zamówienie &amp; nie jest zaktualizowane, ilosc wieksza niz zamówiona ilosc</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>035</MSGNR>
+     <TEXT>Zamówienie &amp; zaktualizowane i zmiana statusu na zlecenie do anulowania</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>036</MSGNR>
+     <TEXT>Zamówienie &amp; zaktualizowany i zmiana statusu dla elementu do anulowanego</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>037</MSGNR>
+     <TEXT>Juz sama ilosc w pozycji</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>038</MSGNR>
+     <TEXT>Przygotowanych ilosci nie mozna zmniejszyc,</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>039</MSGNR>
+     <TEXT>nalezy najpierw anulowac przygotowanie.</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>040</MSGNR>
+     <TEXT>Zamówienie nie jest zaktualizowane, start zostal do &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>042</MSGNR>
+     <TEXT>Pozycja &amp; zamówienia nie zostala zaktualizowana, status postu do &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>043</MSGNR>
+     <TEXT>Niemożliwe do zredukowania,pozycja zawiera element nadający się do użytku</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>044</MSGNR>
+     <TEXT>Pozycja &amp; zamówienia zostala zaktualizowana, statusu do anulowanego</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>045</MSGNR>
+     <TEXT>Pozycja &amp; zamówienia nie zostala zaktualizowana, status postu do &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>046</MSGNR>
+     <TEXT>No sales order update for status CANCELLED, SHELVED or SHIPPED</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>047</MSGNR>
+     <TEXT>WT</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>048</MSGNR>
+     <TEXT>Status</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>049</MSGNR>
+     <TEXT>Quantity Update</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>050</MSGNR>
+     <TEXT>Header</TEXT>
+    </item>
+    <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>051</MSGNR>
+     <TEXT>Mov HU</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>012</MSGNR>
+     <TEXT>Order is not payed</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Update sales order Maestro &amp;   ********</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>014</MSGNR>
+     <TEXT>Store : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>016</MSGNR>
+     <TEXT>User : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>017</MSGNR>
+     <TEXT>Item : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>018</MSGNR>
+     <TEXT>Status : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>019</MSGNR>
+     <TEXT>Withdrawal Zone : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantity : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>021</MSGNR>
+     <TEXT>Sales order SD : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>022</MSGNR>
+     <TEXT>Status change for item &amp; to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>023</MSGNR>
+     <TEXT>Status change for header sales order to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>024</MSGNR>
+     <TEXT>Status is not changed for header because sales order is not ready</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>026</MSGNR>
+     <TEXT>Sales order is not created because date is less than Go Live date &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>028</MSGNR>
+     <TEXT>Status of post &amp; has been changed from &amp; to &amp; and published to Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>029</MSGNR>
+     <TEXT>Start status has been changed from &amp; to &amp; and was published to Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>030</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, post status to Canceled</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>031</MSGNR>
+     <TEXT>Position &amp; of the order has been updated</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>032</MSGNR>
+     <TEXT>The status does not exist</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>033</MSGNR>
+     <TEXT>No data found in the tables: VBAK, VBAP for the sales order</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>034</MSGNR>
+     <TEXT>customer order &amp; not updated, quantity greater than quantity ordered</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>036</MSGNR>
+     <TEXT>Customer Order &amp; updated and  Status change for item to Cancelled</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>037</MSGNR>
+     <TEXT>Already same quantity in item</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>038</MSGNR>
+     <TEXT>The quantities picked cannot be reduced,</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>039</MSGNR>
+     <TEXT>you must first cancel the picking</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>040</MSGNR>
+     <TEXT>customer order not updated, start status on &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>042</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>043</MSGNR>
+     <TEXT>Quantities cannot be reduced, the item contains a serviceable item</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>044</MSGNR>
+     <TEXT>Order post &amp; has not been updated, Status change for item to CANCELLED</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>045</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>012</MSGNR>
+     <TEXT>Commande non payée</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Modification commande Maestro &amp;   ********</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>014</MSGNR>
+     <TEXT>Magasin : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>016</MSGNR>
+     <TEXT>Utilisateur : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>017</MSGNR>
+     <TEXT>Poste : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>018</MSGNR>
+     <TEXT>Statut : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>019</MSGNR>
+     <TEXT>Zone de retrait : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantité : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>021</MSGNR>
+     <TEXT>Commande SAP : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>022</MSGNR>
+     <TEXT>Changement de statut du poste &amp; à &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>023</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête de la commande à &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>024</MSGNR>
+     <TEXT>Changement de statut de l&apos;entête non effectué car commande non prête</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>026</MSGNR>
+     <TEXT>La commande n&apos;a pas été créée car date inférieure au Go Live &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>028</MSGNR>
+     <TEXT>El estado de Post &amp; se ha cambiado de &amp; a &amp; y fue publicado a Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>029</MSGNR>
+     <TEXT>El estado de inicio ha cambiado de &amp; a &amp; y fue publicado a Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>030</MSGNR>
+     <TEXT>Posición &amp; del pedido no se ha actualizado, el estado a cancelado</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>031</MSGNR>
+     <TEXT>La posición &amp; del pedido se ha actualizado</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>032</MSGNR>
+     <TEXT>El estado no existe</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>033</MSGNR>
+     <TEXT>No se encuentran datos en las tablas: VBAK, VBAP para el pedido</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>034</MSGNR>
+     <TEXT>pedido &amp; no actualizado, cantidad mayor que la cantidad ordenada</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>035</MSGNR>
+     <TEXT>Pedido &amp; actualizado y cambio de estado a cancelado</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>036</MSGNR>
+     <TEXT>Pedido &amp; actualizado y cambio de estado para el artículo a cancelado</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>037</MSGNR>
+     <TEXT>Ya la misma cantidad en el artículo</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>038</MSGNR>
+     <TEXT>Las cantidades preparadas no pueden reducirse,</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>039</MSGNR>
+     <TEXT>primero debe cancelar la preparación.</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>040</MSGNR>
+     <TEXT>pedido no actualizado, el estado de inicio &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>042</MSGNR>
+     <TEXT>Posición &amp; del pedido no se ha actualizado, estado a &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>043</MSGNR>
+     <TEXT>Las cantidades no pueden reducirse, el artículo es un elemento utilazable</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>044</MSGNR>
+     <TEXT>Posición &amp; del pedido se ha actualizado,estado del artículo a cancelado</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>045</MSGNR>
+     <TEXT>La posición &amp; no se ha actualizado, el estado de la publicación a &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>046</MSGNR>
+     <TEXT>No sales order update for status CANCELLED, SHELVED or SHIPPED</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>047</MSGNR>
+     <TEXT>WT</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>048</MSGNR>
+     <TEXT>Status</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>049</MSGNR>
+     <TEXT>Quantity Update</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>050</MSGNR>
+     <TEXT>Header</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>051</MSGNR>
+     <TEXT>Mov HU</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>001</MSGNR>
+     <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>002</MSGNR>
+     <TEXT>Aucun magasin trouvé dans la table ZTMM_MAG_LOT pour le lot 2.2</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>003</MSGNR>
+     <TEXT>Erreur sur la déserialization JSON</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>004</MSGNR>
+     <TEXT>Erreur message vide</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>005</MSGNR>
+     <TEXT>Erreur conversion sur le type de document</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>006</MSGNR>
+     <TEXT>Erreur conversion sur le magasin</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>007</MSGNR>
+     <TEXT>Erreur sur la récupération de l&apos;organisation commerciale</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>008</MSGNR>
+     <TEXT>Erreur sur la récupération de la devise</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>009</MSGNR>
+     <TEXT>Erreur conversion du temps de préparation</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>010</MSGNR>
+     <TEXT>Commande &amp; créée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>011</MSGNR>
+     <TEXT>Commande &amp; modifiée avec succès</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>012</MSGNR>
+     <TEXT>Order is not payed</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>013</MSGNR>
+     <TEXT>*******  Update sales order Maestro &amp;   ********</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>014</MSGNR>
+     <TEXT>Store : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>015</MSGNR>
+     <TEXT>BU : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>016</MSGNR>
+     <TEXT>User : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>017</MSGNR>
+     <TEXT>Item : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>018</MSGNR>
+     <TEXT>Status : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>019</MSGNR>
+     <TEXT>Withdrawal Zone : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>020</MSGNR>
+     <TEXT>Quantity : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>021</MSGNR>
+     <TEXT>Sales order SD : &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>022</MSGNR>
+     <TEXT>Status change for item &amp; to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>023</MSGNR>
+     <TEXT>Status change for header sales order to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>024</MSGNR>
+     <TEXT>Status is not changed for header because sales order is not ready</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>025</MSGNR>
+     <TEXT>Commande gérée en GPE</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>026</MSGNR>
+     <TEXT>Sales order is not created because date is less than Go Live date &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>028</MSGNR>
+     <TEXT>Status of post &amp; has been changed from &amp; to &amp; and published to Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>029</MSGNR>
+     <TEXT>Start status has been changed from &amp; to &amp; and was published to Maestro</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>030</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, post status to Canceled</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>031</MSGNR>
+     <TEXT>Position &amp; of the order has been updated</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>032</MSGNR>
+     <TEXT>The status does not exist</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>033</MSGNR>
+     <TEXT>No data found in the tables: VBAK, VBAP for the sales order</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>034</MSGNR>
+     <TEXT>customer order &amp; not updated, quantity greater than quantity ordered</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>036</MSGNR>
+     <TEXT>Customer Order &amp; updated and  Status change for item to Cancelled</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>037</MSGNR>
+     <TEXT>Already same quantity in item</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>038</MSGNR>
+     <TEXT>The quantities picked cannot be reduced,</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>039</MSGNR>
+     <TEXT>you must first cancel the picking</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>040</MSGNR>
+     <TEXT>customer order not updated, start status on &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>042</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>043</MSGNR>
+     <TEXT>Quantities cannot be reduced, the item contains a serviceable item</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>044</MSGNR>
+     <TEXT>Order post &amp; has not been updated, Status change for item to CANCELLED</TEXT>
+    </item>
+    <item>
+     <SPRSL>느</SPRSL>
+     <MSGNR>045</MSGNR>
+     <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+   </T100_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

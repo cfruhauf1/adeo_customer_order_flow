@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZEHU_LABELS_CUST_NAME</ROLLNAME>
+    <DDLANGUAGE>F</DDLANGUAGE>
+    <DOMNAME>CHAR50</DOMNAME>
+    <HEADLEN>50</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+    <REPTEXT>Nom du client</REPTEXT>
+    <SCRTEXT_S>Nom du cli</SCRTEXT_S>
+    <SCRTEXT_M>Nom du client</SCRTEXT_M>
+    <SCRTEXT_L>Nom du client</SCRTEXT_L>
+    <DTELMASTER>F</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>E</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>P</LANGU>
+    <LANGU>S</LANGU>
+    <LANGU>느</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+     <REPTEXT>Customer Name</REPTEXT>
+     <SCRTEXT_S>Customer N</SCRTEXT_S>
+     <SCRTEXT_M>Customer Name</SCRTEXT_M>
+     <SCRTEXT_L>Customer Name</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>I</DDLANGUAGE>
+     <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+     <REPTEXT>Nome del cliente</REPTEXT>
+     <SCRTEXT_S>Nome del c</SCRTEXT_S>
+     <SCRTEXT_M>Nome del cliente</SCRTEXT_M>
+     <SCRTEXT_L>Nome del cliente</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+     <REPTEXT>Nazwa klienta</REPTEXT>
+     <SCRTEXT_S>Nazwa klie</SCRTEXT_S>
+     <SCRTEXT_M>Nazwa klienta</SCRTEXT_M>
+     <SCRTEXT_L>Nazwa klienta</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+     <REPTEXT>Customer Name</REPTEXT>
+     <SCRTEXT_S>Customer N</SCRTEXT_S>
+     <SCRTEXT_M>Customer Name</SCRTEXT_M>
+     <SCRTEXT_L>Customer Name</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+     <REPTEXT>Nombre del cliente</REPTEXT>
+     <SCRTEXT_S>Nombre del</SCRTEXT_S>
+     <SCRTEXT_M>Nombre del cliente</SCRTEXT_M>
+     <SCRTEXT_L>Nombre del cliente</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>느</DDLANGUAGE>
+     <DDTEXT>Structure libellé du formulaire ZEWM_ETI_CUST_ORD_HU</DDTEXT>
+     <REPTEXT>Customer Name</REPTEXT>
+     <SCRTEXT_S>Customer N</SCRTEXT_S>
+     <SCRTEXT_M>Customer Name</SCRTEXT_M>
+     <SCRTEXT_L>Customer Name</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
