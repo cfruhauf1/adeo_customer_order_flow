@@ -314,6 +314,17 @@
      <MSGNR>051</MSGNR>
      <TEXT>Mov HU</TEXT>
     </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>052</MSGNR>
+     <TEXT>Pas de décimales car article géré à la pièce</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>F</SPRSL>
+     <ARBGB>ZCL_COF_ORDER</ARBGB>
+     <MSGNR>053</MSGNR>
+    </T100>
    </T100>
    <I18N_LANGS>
     <LANGU>E</LANGU>
@@ -602,6 +613,11 @@
      <TEXT>Mov HU</TEXT>
     </item>
     <item>
+     <SPRSL>E</SPRSL>
+     <MSGNR>052</MSGNR>
+     <TEXT>No decimals because item managed by piece</TEXT>
+    </item>
+    <item>
      <SPRSL>I</SPRSL>
      <MSGNR>001</MSGNR>
      <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
@@ -845,6 +861,11 @@
      <SPRSL>I</SPRSL>
      <MSGNR>051</MSGNR>
      <TEXT>Mov HU</TEXT>
+    </item>
+    <item>
+     <SPRSL>I</SPRSL>
+     <MSGNR>052</MSGNR>
+     <TEXT>Nessun decimale perché articolo gestito in camera</TEXT>
     </item>
     <item>
      <SPRSL>L</SPRSL>
@@ -1092,6 +1113,11 @@
      <TEXT>Mov HU</TEXT>
     </item>
     <item>
+     <SPRSL>L</SPRSL>
+     <MSGNR>052</MSGNR>
+     <TEXT>Brak miejsc po przecinku, ponieważ przedmiot zarządzany według kawałka</TEXT>
+    </item>
+    <item>
      <SPRSL>P</SPRSL>
      <MSGNR>001</MSGNR>
      <TEXT>Le magasin &amp; n&apos;est pas éligible à la créat./modif. de la commande client</TEXT>
@@ -1300,6 +1326,11 @@
      <SPRSL>P</SPRSL>
      <MSGNR>045</MSGNR>
      <TEXT>Position &amp; of the order has not been updated, status of the post to &amp;</TEXT>
+    </item>
+    <item>
+     <SPRSL>P</SPRSL>
+     <MSGNR>052</MSGNR>
+     <TEXT>Pas de décimales car article géré à la pièce</TEXT>
     </item>
     <item>
      <SPRSL>S</SPRSL>
@@ -1545,6 +1576,11 @@
      <SPRSL>S</SPRSL>
      <MSGNR>051</MSGNR>
      <TEXT>Mov HU</TEXT>
+    </item>
+    <item>
+     <SPRSL>S</SPRSL>
+     <MSGNR>052</MSGNR>
+     <TEXT>Sin decimales porque artículo gestionado por monedas</TEXT>
     </item>
     <item>
      <SPRSL>느</SPRSL>

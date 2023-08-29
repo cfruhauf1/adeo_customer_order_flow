@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SPRX" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PROXY_HEADER>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZOPTIONS</OBJ_NAME>
+     <OBJECT_M>TABL</OBJECT_M>
+     <OBJ_NAME_M>ZOPTIONS</OBJ_NAME_M>
+     <HASH_ID>742640A06E573DB7AD0DEA664D65168B066E7F6A</HASH_ID>
+     <ID>&lt;type&gt; options http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_GLOBAL>X</IFR_GLOBAL>
+     <IFR_TYPE>type</IFR_TYPE>
+     <IFR_NAME>options</IFR_NAME>
+     <IFR_NSPCE>http://cxf.shipping.soap.chronopost.fr/</IFR_NSPCE>
+     <IFR_GNSPCE>http://cxf.shipping.soap.chronopost.fr/</IFR_GNSPCE>
+     <GEN_VERS>0005</GEN_VERS>
+     <CATEGORY>ifmtypedef</CATEGORY>
+     <GEN_APPL>WEBSERVICES</GEN_APPL>
+     <X-ML_NSPCE>http://cxf.shipping.soap.chronopost.fr/</X-ML_NSPCE>
+     <X-ML_NAME>options</X-ML_NAME>
+    </item>
+   </PROXY_HEADER>
+   <PROXY_DATA>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZOPTIONS</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>AVISER_SUR_REALISATION</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>AVISER_SUR_REALISATION</OBJ_NAME2>
+     <ID>&lt;element&gt; aviserSurRealisation &lt;type&gt; options http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>aviserSurRealisation</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MINOCC>1</IFR_MINOCC>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_XSDTYP>boolean</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>AVISER_SUR_REALISATION</R3_NAME>
+     <R3_DTREF>XSDBOOLEAN</R3_DTREF>
+     <R3_SEQNUM>000001</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZOPTIONS</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>CHEZ_UN_TIERS</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>CHEZ_UN_TIERS</OBJ_NAME2>
+     <ID>&lt;element&gt; chezUnTiers &lt;type&gt; options http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>chezUnTiers</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MINOCC>1</IFR_MINOCC>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_XSDTYP>boolean</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>CHEZ_UN_TIERS</R3_NAME>
+     <R3_DTREF>XSDBOOLEAN</R3_DTREF>
+     <R3_SEQNUM>000002</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZOPTIONS</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>ENVOYER_LT_PAR_MAIL</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>ENVOYER_LT_PAR_MAIL</OBJ_NAME2>
+     <ID>&lt;element&gt; envoyerLtParMail &lt;type&gt; options http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>envoyerLtParMail</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MINOCC>1</IFR_MINOCC>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_XSDTYP>boolean</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>ENVOYER_LT_PAR_MAIL</R3_NAME>
+     <R3_DTREF>XSDBOOLEAN</R3_DTREF>
+     <R3_SEQNUM>000003</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZOPTIONS</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>LTA_IMPRIMER_PAR_CHRONOPOST</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>LTA_IMPRIMER_PAR_CHRONOPOST</OBJ_NAME2>
+     <ID>&lt;element&gt; LTaImprimerParChronopost &lt;type&gt; options http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>LTaImprimerParChronopost</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MINOCC>1</IFR_MINOCC>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_XSDTYP>boolean</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>LTA_IMPRIMER_PAR_CHRONOPOST</R3_NAME>
+     <R3_DTREF>XSDBOOLEAN</R3_DTREF>
+     <R3_SEQNUM>000004</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZOPTIONS</OBJ_NAME>
+     <OBJECT1>TABL</OBJECT1>
+     <OBJ_NAME1>ZOPTIONS</OBJ_NAME1>
+     <OBJECT2>TABL</OBJECT2>
+     <OBJ_NAME2>ZOPTIONS</OBJ_NAME2>
+     <ID>&lt;type&gt; options http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>type</IFR_TYPE>
+     <IFR_NAME>options</IFR_NAME>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>TABL</R3_TYPE>
+     <R3_NAME>ZOPTIONS</R3_NAME>
+     <R3_TEXT>Proxy Structure (generated)</R3_TEXT>
+     <CATEGORY>ifmtypedef</CATEGORY>
+    </item>
+   </PROXY_DATA>
+  </asx:values>
+ </asx:abap>
+</abapGit>

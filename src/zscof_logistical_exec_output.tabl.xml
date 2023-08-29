@@ -7,6 +7,7 @@
     <DDLANGUAGE>F</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
     <DDTEXT>Structure de sortie du rapport logistique des opérations</DDTEXT>
+    <EXCLASS>3</EXCLASS>
    </DD02V>
    <DD03P_TABLE>
     <DD03P>
@@ -194,6 +195,12 @@
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
     <DD03P>
+     <FIELDNAME>NLENR</FIELDNAME>
+     <ROLLNAME>/SCWM/LTAP_NLENR</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
      <FIELDNAME>QUANTITY</FIELDNAME>
      <ROLLNAME>/SCWM/LTAP_VSOLM</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
@@ -202,8 +209,20 @@
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
     <DD03P>
+     <FIELDNAME>QUANTITY_STRING</FIELDNAME>
+     <ROLLNAME>Z_VSOLM_STRING</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
      <FIELDNAME>MEINS</FIELDNAME>
      <ROLLNAME>MEINS</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>MEINS_STRING</FIELDNAME>
+     <ROLLNAME>ZE_MEINS_STRING</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
@@ -228,10 +247,15 @@
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
     <DD03P>
-     <FIELDNAME>TIMESTAMP15</FIELDNAME>
-     <ROLLNAME>/SCWM/DE_CREATED_DT</ROLLNAME>
+     <FIELDNAME>TIMESTAMP14</FIELDNAME>
+     <ROLLNAME>ZE_TIMESTAMP_NUMC14</ROLLNAME>
      <ADMINFIELD>0</ADMINFIELD>
-     <SHLPORIGIN>D</SHLPORIGIN>
+     <COMPTYPE>E</COMPTYPE>
+    </DD03P>
+    <DD03P>
+     <FIELDNAME>TIMESTAMPOFFSET</FIELDNAME>
+     <ROLLNAME>TIMESTAMPL</ROLLNAME>
+     <ADMINFIELD>0</ADMINFIELD>
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
     <DD03P>
@@ -281,6 +305,30 @@
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
    </DD03P_TABLE>
+   <I18N_LANGS>
+    <LANGU>E</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD02_TEXTS>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Structure de sortie du rapport logistique des opérations</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>I</DDLANGUAGE>
+     <DDTEXT>Structure de sortie du rapport logistique des opérations</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Structure de sortie du rapport logistique des opérations</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Structure de sortie du rapport logistique des opérations</DDTEXT>
+    </item>
+   </DD02_TEXTS>
   </asx:values>
  </asx:abap>
 </abapGit>

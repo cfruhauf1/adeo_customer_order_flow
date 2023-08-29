@@ -1,307 +1,334 @@
 *  inheriting from zcl_api_rest_ressource_modele
 *  final
-class zcl_cof_change_customer_order definition
+class ZCL_COF_CHANGE_CUSTOMER_ORDER definition
   public
   create public .
 
-  public section.
+public section.
 
-    types:
-      rt_ref_maestro type range of vbak-bstnk .
-    types:
-      rt_vbeln       type range of vbak-vbeln .
-    types:
-      begin of ty_shipped_products,
-        shipping_start_date          type string,
-        handling_unit_quantity       type string,
-        handling_unit_number         type string,
-        handling_unit_id             type string,
-        product_id                   type string,
-        product_quantity             type string,
-        tracking_i_d                 type string,
-        transportshipmentcarriername type string, "  transportShipmentCarrierName
-      end of ty_shipped_products .
-    types:
-      tt_shipped_products type table of ty_shipped_products with empty key .
-    types:
-      begin of ty_message_kafka,
-        customer_order_number          type string,
-        customer_order_status          type string,
-        customer_order_last_modif_date type string,
-        product_id                     type string,
-        product_additional_label       type string,
-        c1_code                        type string,
-        store_pick_task_exp_quant      type string,
-        store_pick_task_pick_quant     type string,
-        store_pick_taskcontrol_quant   type string,
-        store_pick_task_cancel_quant   type string,
-        withdrawal_zone                type string,
-        shipped_products               type tt_shipped_products,
-      end of ty_message_kafka .
-    types:
+  types:
+    rt_ref_maestro TYPE RANGE OF vbak-bstnk .
+  types:
+    rt_vbeln       TYPE RANGE OF vbak-vbeln .
+  types:
+    BEGIN OF ty_result_status,
+        sales_order TYPE vbeln,
+        ref_maestro TYPE  bstnk,
+        status      TYPE  j_txt30,
+        type        TYPE  bapi_mtype,
+        message     TYPE  bapi_msg,
+      END OF ty_result_status .
+  types:
+    tty_result_status TYPE TABLE OF ty_result_status.
+  types:
+    BEGIN OF ty_shipped_products,
+        shipping_start_date          TYPE string,
+        handling_unit_quantity       TYPE string,
+        handling_unit_number         TYPE string,
+        handling_unit_id             TYPE string,
+        product_id                   TYPE string,
+        product_quantity             TYPE string,
+        tracking_i_d                 TYPE string,
+        transportshipmentcarriername TYPE string, "  transportShipmentCarrierName
+      END OF ty_shipped_products .
+  types:
+    tt_shipped_products TYPE TABLE OF ty_shipped_products WITH EMPTY KEY .
+  types:
+    BEGIN OF ty_message_kafka,
+        customer_order_number          TYPE string,
+        customer_order_status          TYPE string,
+        customer_order_last_modif_date TYPE string,
+        product_id                     TYPE string,
+        product_additional_label       TYPE string,
+        c1_code                        TYPE string,
+        store_pick_task_exp_quant      TYPE string,
+        store_pick_task_pick_quant     TYPE string,
+        store_pick_taskcontrol_quant   TYPE string,
+        store_pick_task_cancel_quant   TYPE string,
+        withdrawal_zone                TYPE string,
+        shipped_products               TYPE tt_shipped_products,
+      END OF ty_message_kafka .
+  types:
 *         Messages SLG1
-      begin of ty_message,
-        message type string,
-        type    type symsgty,
-      end of ty_message .
-    types:
-      tty_messages type table of ty_message with empty key .
-    types:
-      begin of ty_header_info,
-        user_bu_code      type string,
-        user_store_code   type string,
-        called_bu_code    type string,
-        called_store_code type string,
-      end of ty_header_info .
-    types:
-      begin of ty_order_info,
-        vbeln        type vbeln_va,
-        objnr_header type j_objnr,
-        berid        type berid,
-        matnr        type matnr,
-        posnr        type posnr,
-        werks        type werks_d,
-        objnr_item   type j_objnr,
-        kwmeng       type kwmeng,
-        pstyv        type pstyv,
-      end of ty_order_info .
-    types:
-      tt_order_info type table of ty_order_info with empty key .
-    types:
-      begin of ty_status,
-        objnr    type j_objnr,
-        stat     type j_status,
-        udate    type cddatum,
-        utime    type cduzeit,
-        posnr    type posnr,
-        status   type char20,
-        pick_qty type /scwm/ltap_vsolm,
-        update   type timestampl,
-      end of ty_status .
-    types:
-      tt_status type table of ty_status with non-unique key objnr
-                       with further secondary keys .
-    types:
-      begin of ty_control_qty,
-        qdocid        type /scwm/de_docid,
-        qitmid        type /scwm/de_itmid,
-        sguid_hu      type /scwm/guid_hu,
-        vsolm_control type /scwm/ltap_vsolm,
-        reason        type /scwm/de_reason,
-      end of ty_control_qty .
-    types:
-      tt_control_qty type sorted table of ty_control_qty with non-unique key qdocid qitmid sguid_hu .
+    BEGIN OF ty_message,
+        message TYPE string,
+        type    TYPE symsgty,
+      END OF ty_message .
+  types:
+    tty_messages TYPE TABLE OF ty_message WITH EMPTY KEY .
+  types:
+    BEGIN OF ty_header_info,
+        user_bu_code      TYPE string,
+        user_store_code   TYPE string,
+        called_bu_code    TYPE string,
+        called_store_code TYPE string,
+      END OF ty_header_info .
+  types:
+    BEGIN OF ty_order_info,
+        vbeln        TYPE vbeln_va,
+        objnr_header TYPE j_objnr,
+        berid        TYPE berid,
+        matnr        TYPE matnr,
+        posnr        TYPE posnr,
+        werks        TYPE werks_d,
+        objnr_item   TYPE j_objnr,
+        kwmeng       TYPE kwmeng,
+        pstyv        TYPE pstyv,
+      END OF ty_order_info .
+  types:
+    tt_order_info TYPE TABLE OF ty_order_info WITH EMPTY KEY .
+  types:
+    BEGIN OF ty_status,
+        objnr    TYPE j_objnr,
+        stat     TYPE j_status,
+        udate    TYPE cddatum,
+        utime    TYPE cduzeit,
+        posnr    TYPE posnr,
+        status   TYPE char20,
+        pick_qty TYPE /scwm/ltap_vsolm,
+        update   TYPE timestampl,
+      END OF ty_status .
+  types:
+    tt_status TYPE TABLE OF ty_status WITH NON-UNIQUE KEY objnr
+                           WITH FURTHER SECONDARY KEYS .
+  types:
+    BEGIN OF ty_control_qty,
+        qdocid        TYPE /scwm/de_docid,
+        qitmid        TYPE /scwm/de_itmid,
+        sguid_hu      TYPE /scwm/guid_hu,
+        vsolm_control TYPE /scwm/ltap_vsolm,
+        reason        TYPE /scwm/de_reason,
+      END OF ty_control_qty .
+  types:
+    tt_control_qty TYPE SORTED TABLE OF ty_control_qty WITH NON-UNIQUE KEY qdocid qitmid sguid_hu .
 
-    constants mc_cancelled type j_status value 'E0011' ##NO_TEXT.
-    constants mc_completed type j_status value 'E0012' ##NO_TEXT.
-    constants mc_in_control type j_status value 'E0004' ##NO_TEXT.
-    constants mc_in_preparation type j_status value 'E0001' ##NO_TEXT.
-    constants mc_prepared type j_status value 'E0002' ##NO_TEXT.
-    constants mc_ready type j_status value 'E0006' ##NO_TEXT.
-    constants mc_shipped type j_status value 'E0010' ##NO_TEXT.
-    constants mc_to_consolidate type j_status value 'E0005' ##NO_TEXT.
-    constants mc_to_control type j_status value 'E0003' ##NO_TEXT.
-    constants mc_to_prepare type j_status value 'E0013' ##NO_TEXT.
-    constants mc_to_send type j_status value 'E0007' ##NO_TEXT.
-    constants mc_consolidated type j_status value 'E0015' ##NO_TEXT.
-    constants mc_controlled type j_status value 'E0014' ##NO_TEXT.
-    constants mc_shelved type j_status value 'E0016' ##NO_TEXT.
-    constants mc_object_item type tdobject value 'VBBP' ##NO_TEXT.
-    constants mc_tdid_c1code type tdid value '0002' ##NO_TEXT.
-    constants mc_tdid_add_label type tdid value '0007' ##NO_TEXT.
-    constants mc_drive type char20 value 'DRIVE' ##NO_TEXT.
-    constants mc_local type char20 value 'LOCAL' ##NO_TEXT.
-    constants mc_no_carrier type char20 value 'NO_CARRIER' ##NO_TEXT.
-    constants mc_chronopost type char20 value 'CHRONOPOST' ##NO_TEXT.
-    constants mc_balobj type balobj_d value 'ZSD_MOB_API' ##NO_TEXT.
-    constants mc_get_customer_order type balobj_d value '050' ##NO_TEXT.
-    constants mc_change_status type balobj_d value '051' ##NO_TEXT.
-    constants mc_order_reduction type balobj_d value '051B' ##NO_TEXT.
-    constants mc_get_customer_order_items type balobj_d value '052' ##NO_TEXT.
-    constants mc_get_log_modif_order_status type balobj_d value '053' ##NO_TEXT.
-    constants mc_reject_reason_for_shipped type abgru value 'Z1' ##NO_TEXT.
-    constants mc_update_flag type char1 value 'U' ##NO_TEXT.
-    constants mc_error type char1 value 'E' ##NO_TEXT.
-    constants mc_abort type char1 value 'A' ##NO_TEXT.
-    constants mc_success type char1 value 'S' ##NO_TEXT.
-    constants mc_maestro type zekey value 'MAESTRO_ORDER' ##NO_TEXT.
-    constants mc_maestro_application type string value 'MAESTRO' ##NO_TEXT.
-    constants mc_status type zekey value 'STATUS' ##NO_TEXT.
-    constants mc_stat type string value 'STAT' ##NO_TEXT.
-    constants mc_shipping type string value 'SHIP' ##NO_TEXT.
-    constants mc_pca type char3 value 'PCA' ##NO_TEXT.
-    constants mc_pcr type char3 value 'PCR' ##NO_TEXT.
-    constants mc_mag_prep type char4 value '3041' ##NO_TEXT.
-    constants mc_status_c type char1 value 'C' ##NO_TEXT.
-    constants mc_process_type_mod type char1 value 'M' ##NO_TEXT.
-    constants mc_update type char1 value 'U' ##NO_TEXT.
-    constants mc_first_item type char4 value '0001' ##NO_TEXT.
-    constants mc_hu_stat type char5 value 'IHU02' ##NO_TEXT.
-    constants mc_zdri type char4 value 'ZDRI' ##NO_TEXT.
-    constants mc_ztrs type char4 value 'ZTRS' ##NO_TEXT.
-    constants mc_zchr type char4 value 'ZCHR' ##NO_TEXT.
-    constants mc_bmfr type char3 value '014' ##NO_TEXT.
-    constants mc_include type char1 value 'I' ##NO_TEXT.
-    constants mc_equal type char2 value 'EQ' ##NO_TEXT.
-    constants mc_palette_material type char10 value '49000175' ##NO_TEXT.
-    constants mc_service_material type char4 value 'ZTAD' ##NO_TEXT.
-    constants mc_zero type char1 value '0' ##NO_TEXT.
-    constants mc_prefixe type char10 value 'PREFIXE' ##NO_TEXT.
-    constants mc_site type char10 value 'SITE' ##NO_TEXT.
-    constants mc_sens type char2 value 'LS' ##NO_TEXT.
-    constants mc_process_id type string value 'customer_order-change-status' ##NO_TEXT.
-    constants mc_process_id_reduction type string value 'customer_order-change-quantity' ##NO_TEXT.
-    constants mc_sd_cof type string value 'SD_COF_' ##NO_TEXT.
-    constants mc_underscore type char1 value '_' ##NO_TEXT.
-    constants mc_quantity_changed type string value 'QTY_CHANGED' ##NO_TEXT.
-    data mv_to_publish type abap_bool .
+  constants MC_CANCELLED type J_STATUS value 'E0011' ##NO_TEXT.
+  constants MC_COMPLETED type J_STATUS value 'E0012' ##NO_TEXT.
+  constants MC_IN_CONTROL type J_STATUS value 'E0004' ##NO_TEXT.
+  constants MC_IN_PREPARATION type J_STATUS value 'E0001' ##NO_TEXT.
+  constants MC_PREPARED type J_STATUS value 'E0002' ##NO_TEXT.
+  constants MC_READY type J_STATUS value 'E0006' ##NO_TEXT.
+  constants MC_SHIPPED type J_STATUS value 'E0010' ##NO_TEXT.
+  constants MC_TO_CONSOLIDATE type J_STATUS value 'E0005' ##NO_TEXT.
+  constants MC_TO_CONTROL type J_STATUS value 'E0003' ##NO_TEXT.
+  constants MC_TO_PREPARE type J_STATUS value 'E0013' ##NO_TEXT.
+  constants MC_TO_SEND type J_STATUS value 'E0007' ##NO_TEXT.
+  constants MC_CONSOLIDATED type J_STATUS value 'E0015' ##NO_TEXT.
+  constants MC_CONTROLLED type J_STATUS value 'E0014' ##NO_TEXT.
+  constants MC_SHELVED type J_STATUS value 'E0016' ##NO_TEXT.
+  constants MC_OBJECT_ITEM type TDOBJECT value 'VBBP' ##NO_TEXT.
+  constants MC_TDID_C1CODE type TDID value '0002' ##NO_TEXT.
+  constants MC_TDID_ADD_LABEL type TDID value '0007' ##NO_TEXT.
+  constants MC_DRIVE type CHAR20 value 'DRIVE' ##NO_TEXT.
+  constants MC_LOCAL type CHAR20 value 'LOCAL' ##NO_TEXT.
+  constants MC_NO_CARRIER type CHAR20 value 'NO_CARRIER' ##NO_TEXT.
+  constants MC_CHRONOPOST type CHAR20 value 'CHRONOPOST' ##NO_TEXT.
+  constants MC_BALOBJ type BALOBJ_D value 'ZSD_MOB_API' ##NO_TEXT.
+  constants MC_GET_CUSTOMER_ORDER type BALOBJ_D value '050' ##NO_TEXT.
+  constants MC_CHANGE_STATUS type BALOBJ_D value '051' ##NO_TEXT.
+  constants MC_ORDER_REDUCTION type BALOBJ_D value '051B' ##NO_TEXT.
+  constants MC_GET_CUSTOMER_ORDER_ITEMS type BALOBJ_D value '052' ##NO_TEXT.
+  constants MC_GET_LOG_MODIF_ORDER_STATUS type BALOBJ_D value '053' ##NO_TEXT.
+  constants MC_REJECT_REASON_FOR_SHIPPED type ABGRU value 'Z1' ##NO_TEXT.
+  constants MC_UPDATE_FLAG type CHAR1 value 'U' ##NO_TEXT.
+  constants MC_ERROR type CHAR1 value 'E' ##NO_TEXT.
+  constants MC_ABORT type CHAR1 value 'A' ##NO_TEXT.
+  constants MC_WARNING type CHAR1 value 'W' ##NO_TEXT.
+  constants MC_SUCCESS type CHAR1 value 'S' ##NO_TEXT.
+  constants MC_MAESTRO type ZEKEY value 'MAESTRO_ORDER' ##NO_TEXT.
+  constants MC_MAESTRO_APPLICATION type STRING value 'MAESTRO' ##NO_TEXT.
+  constants MC_STATUS type ZEKEY value 'STATUS' ##NO_TEXT.
+  constants MC_STAT type STRING value 'STAT' ##NO_TEXT.
+  constants MC_SHIPPING type STRING value 'SHIP' ##NO_TEXT.
+  constants MC_PCA type CHAR3 value 'PCA' ##NO_TEXT.
+  constants MC_PCR type CHAR3 value 'PCR' ##NO_TEXT.
+  constants MC_MAG_PREP type CHAR4 value '3041' ##NO_TEXT.
+  constants MC_STATUS_C type CHAR1 value 'C' ##NO_TEXT.
+  constants MC_PROCESS_TYPE_MOD type CHAR1 value 'M' ##NO_TEXT.
+  constants MC_UPDATE type CHAR1 value 'U' ##NO_TEXT.
+  constants MC_FIRST_ITEM type CHAR4 value '0001' ##NO_TEXT.
+  constants MC_HU_STAT type CHAR5 value 'IHU02' ##NO_TEXT.
+  constants MC_ZDRI type CHAR4 value 'ZDRI' ##NO_TEXT.
+  constants MC_ZTRS type CHAR4 value 'ZTRS' ##NO_TEXT.
+  constants MC_ZCHR type CHAR4 value 'ZCHR' ##NO_TEXT.
+  constants MC_BMFR type CHAR3 value '014' ##NO_TEXT.
+  constants MC_INCLUDE type CHAR1 value 'I' ##NO_TEXT.
+  constants MC_EQUAL type CHAR2 value 'EQ' ##NO_TEXT.
+  constants MC_PALETTE_MATERIAL type CHAR10 value '49000175' ##NO_TEXT.
+  constants MC_SERVICE_MATERIAL type CHAR4 value 'ZTAD' ##NO_TEXT.
+  constants MC_ZERO type CHAR1 value '0' ##NO_TEXT.
+  constants MC_PREFIXE type CHAR10 value 'PREFIXE' ##NO_TEXT.
+  constants MC_SITE type CHAR10 value 'SITE' ##NO_TEXT.
+  constants MC_SENS type CHAR2 value 'LS' ##NO_TEXT.
+  constants MC_PROCESS_ID type STRING value 'customer_order-change-status' ##NO_TEXT.
+  constants MC_PROCESS_ID_REDUCTION type STRING value 'customer_order-change-quantity' ##NO_TEXT.
+  constants MC_SD_COF type STRING value 'SD_COF_' ##NO_TEXT.
+  constants MC_UNDERSCORE type CHAR1 value '_' ##NO_TEXT.
+  constants MC_QUANTITY_CHANGED type STRING value 'QTY_CHANGED' ##NO_TEXT.
+  data MV_TO_PUBLISH type ABAP_BOOL .
 
-    methods constructor
-      importing
-        !iv_called_bu_code      type string optional
-        !iv_called_store_code   type string optional
-        !iv_user_bu_code        type string optional
-        !iv_user_store_code     type string optional
-        !iv_vbeln               type char10 optional
-        !iv_maestro_num         type bstnk optional
-        !iv_status              type string optional
-        !iv_quantity            type kwmeng optional
-        !iv_storewithdrawalzone type char10 optional
-        !iv_ldap_number         type zxubname_ldap optional .
-    methods get_bgrfc_unit
-      importing
-        !iv_vbeln      type vbeln_va
-      returning
-        value(rv_unit) type ref to if_qrfc_unit_inbound .
-    methods publish_status_to_kafka
-      importing
-        !iv_vbeln                type vbeln_va
-        !is_message_modif_status type zscusorder_modif_status_kafka .
-    methods publish_shipping_to_kafka
-      importing
-        !iv_vbeln                  type vbeln_va
-        !is_message_modif_shipping type zscusorder_modif_ship_kafka .
-    methods set_message_slg .
-    methods get_data_status returning value(rv_subrc) type syst-subrc.
-    methods modify_status
-      importing
-        !iv_order_line         type string optional
-        !iv_target_status_code type j_status
-        !iv_simulation         type abap_bool
-        !iv_is_api             type abap_bool default 'X'
-      returning
-        value(rv_error)        type abap_bool .
-    methods change_status
-      importing
-        !iv_objnr       type j_objnr
-        !iv_posnr       type posnr
-        !iv_status_from type j_status
-        !iv_status_to   type j_status
-      returning
-        value(rv_error) type abap_bool .
-    methods get_order_text
-      importing
-        !iv_tdname     type tdobname
-        !iv_object     type tdobject
-        !iv_tdid       type tdid
-      returning
-        value(rv_text) type string .
-    methods create_info_kafka
-      importing
-        !iv_status             type j_status optional
-        !iv_posnr              type posnr optional
-        !iv_is_order_reduction type abap_bool optional .
-    methods abap_timestamp_to_java
-      importing
-        !iv_timestamp       type timestamp optional
-        !iv_timestampl      type timestampl optional
-      returning
-        value(rv_timestamp) type string .
-    methods execute_order_reduction
-      importing
-        !iv_order_line         type string
-        !iv_quantity_to_reduce type kwmeng
-        !iv_simulation         type abap_bool default ''
-        !iv_is_api             type abap_bool default 'X'
-      returning
-        value(rv_error)        type abap_bool .
-    methods change_order_quantity_bgrfc
-      importing
-        !iv_vbeln             type vbeln_va
-        !iv_posnr             type posnr
-        !iv_quantity          type wmeng
-        !iv_called_bu_code    type string
-        !iv_called_store_code type string
-        !iv_user_bu_code      type string
-        !iv_user_store_code   type string
-        !iv_maestro_num       type bstnk
-        !iv_ldap_number       type zxubname_ldap
-      returning
-        value(rv_subrc)       type syst_subrc .
-    methods change_sales_order_quantity
-      importing
-        !iv_vbeln       type vbeln_va
-        !iv_posnr       type posnr
-        !iv_quantity    type wmeng
-        !iv_simulation  type abap_bool default ''
-      returning
-        value(rv_subrc) type syst_subrc .
-    methods check_status_change
-      importing
-        !iv_old_status             type j_status
-        !iv_new_status             type j_status
-      returning
-        value(rv_status_validated) type abap_bool .
-    methods do_reject_reason_order_items .
-    methods create_operation_report
-      importing
-        !iv_objnr         type j_objnr
-        !iv_posnr         type posnr
-        !iv_status_to     type j_status optional
-        !iv_status_from   type j_status optional
-        !iv_quantity_from type kwmeng optional
-        !iv_quantity_to   type kwmeng optional  .
-    methods get_messages
-      returning                                                        "tty_messages,
-        value(rt_messages) type tt_bapiret2 .
-    methods set_attributes
-      importing
-        !iv_called_bu_code      type string
-        !iv_called_store_code   type string
-        !iv_user_bu_code        type string
-        !iv_user_store_code     type string
-        !iv_vbeln               type char10
-        !iv_maestro_num         type bstnk
-        !iv_status              type string optional
-        !iv_quantity            type kwmeng optional
-        !iv_storewithdrawalzone type char10 optional
-        !iv_ldap_number         type zxubname_ldap optional .
-    methods cancel_order .
-    methods execute_cancel_order
-      returning
-        value(rv_subrc) type syst_subrc .
-    methods reduce_order_quantities
-      returning
-        value(rv_subrc) type syst_subrc .
-    methods get_log_messages
-      returning
-        value(rt_log_message) type tty_messages .
-    methods get_sales_order_number
-      returning
-        value(rv_vbeln) type vbeln .
-
-    methods execute_change_status_shipped
-      importing iv_order_line   type string
-                iv_status       type string
-      returning
-                value(rv_subrc) type syst_subrc .
-    class-methods mass_change_status_sales_order
-      importing
-        !ir_vbeln       type rt_vbeln
-        !ir_ref_maestro type rt_ref_maestro
-        !iv_status      type j_status
-      returning
-        value(rv_subrc) type syst-subrc .
+  methods CONSTRUCTOR
+    importing
+      !IV_CALLED_BU_CODE type STRING optional
+      !IV_CALLED_STORE_CODE type STRING optional
+      !IV_USER_BU_CODE type STRING optional
+      !IV_USER_STORE_CODE type STRING optional
+      !IV_VBELN type CHAR10 optional
+      !IV_MAESTRO_NUM type BSTNK optional
+      !IV_STATUS type STRING optional
+      !IV_QUANTITY type KWMENG optional
+      !IV_STOREWITHDRAWALZONE type CHAR10 optional
+      !IV_LDAP_NUMBER type ZXUBNAME_LDAP optional .
+  methods GET_BGRFC_UNIT
+    importing
+      !IV_VBELN type VBELN_VA
+    returning
+      value(RV_UNIT) type ref to IF_QRFC_UNIT_INBOUND .
+  methods PUBLISH_STATUS_TO_KAFKA
+    importing
+      !IV_VBELN type VBELN_VA
+      !IS_MESSAGE_MODIF_STATUS type ZSCUSORDER_MODIF_STATUS_KAFKA .
+  methods PUBLISH_SHIPPING_TO_KAFKA
+    importing
+      !IV_VBELN type VBELN_VA
+      !IS_MESSAGE_MODIF_SHIPPING type ZSCUSORDER_MODIF_SHIP_KAFKA .
+  methods SET_MESSAGE_SLG .
+  methods GET_DATA_STATUS
+    returning
+      value(RV_SUBRC) type SYST-SUBRC .
+  methods MODIFY_STATUS
+    importing
+      !IV_ORDER_LINE type STRING optional
+      !IV_TARGET_STATUS_CODE type J_STATUS
+      !IV_SIMULATION type ABAP_BOOL
+      !IV_IS_API type ABAP_BOOL default 'X'
+    returning
+      value(RV_ERROR) type ABAP_BOOL .
+  methods CHANGE_STATUS
+    importing
+      !IV_OBJNR type J_OBJNR
+      !IV_POSNR type POSNR
+      !IV_STATUS_FROM type J_STATUS
+      !IV_STATUS_TO type J_STATUS
+    returning
+      value(RV_ERROR) type ABAP_BOOL .
+  methods GET_ORDER_TEXT
+    importing
+      !IV_TDNAME type TDOBNAME
+      !IV_OBJECT type TDOBJECT
+      !IV_TDID type TDID
+    returning
+      value(RV_TEXT) type STRING .
+  methods CREATE_INFO_KAFKA
+    importing
+      !IV_STATUS type J_STATUS optional
+      !IV_POSNR type POSNR optional
+      !IV_IS_ORDER_REDUCTION type ABAP_BOOL optional .
+  methods ABAP_TIMESTAMP_TO_JAVA
+    importing
+      !IV_TIMESTAMP type TIMESTAMP optional
+      !IV_TIMESTAMPL type TIMESTAMPL optional
+    returning
+      value(RV_TIMESTAMP) type STRING .
+  methods EXECUTE_ORDER_REDUCTION
+    importing
+      !IV_ORDER_LINE type STRING
+      !IV_QUANTITY_TO_REDUCE type KWMENG
+      !IV_SIMULATION type ABAP_BOOL default ''
+      !IV_IS_API type ABAP_BOOL default 'X'
+    returning
+      value(RV_ERROR) type ABAP_BOOL .
+  methods CHANGE_ORDER_QUANTITY_BGRFC
+    importing
+      !IV_VBELN type VBELN_VA
+      !IV_POSNR type POSNR
+      !IV_QUANTITY type WMENG
+      !IV_CALLED_BU_CODE type STRING
+      !IV_CALLED_STORE_CODE type STRING
+      !IV_USER_BU_CODE type STRING
+      !IV_USER_STORE_CODE type STRING
+      !IV_MAESTRO_NUM type BSTNK
+      !IV_LDAP_NUMBER type ZXUBNAME_LDAP
+    returning
+      value(RV_SUBRC) type SYST_SUBRC .
+  methods CHANGE_SALES_ORDER_QUANTITY
+    importing
+      !IV_VBELN type VBELN_VA
+      !IV_POSNR type POSNR
+      !IV_QUANTITY type WMENG
+      !IV_SIMULATION type ABAP_BOOL default ''
+    returning
+      value(RV_SUBRC) type SYST_SUBRC .
+  methods CHECK_STATUS_CHANGE
+    importing
+      !IV_OLD_STATUS type J_STATUS
+      !IV_NEW_STATUS type J_STATUS
+    returning
+      value(RV_STATUS_VALIDATED) type ABAP_BOOL .
+  methods DO_REJECT_REASON_ORDER_ITEMS .
+  methods CREATE_OPERATION_REPORT
+    importing
+      !IV_OBJNR type J_OBJNR
+      !IV_POSNR type POSNR
+      !IV_STATUS_TO type J_STATUS optional
+      !IV_STATUS_FROM type J_STATUS optional
+      !IV_QUANTITY_FROM type KWMENG optional
+      !IV_QUANTITY_TO type KWMENG optional .
+  methods GET_MESSAGES
+    returning                                                              "tty_messages,
+      value(RT_MESSAGES) type TT_BAPIRET2 .
+  methods SET_ATTRIBUTES
+    importing
+      !IV_CALLED_BU_CODE type STRING
+      !IV_CALLED_STORE_CODE type STRING
+      !IV_USER_BU_CODE type STRING
+      !IV_USER_STORE_CODE type STRING
+      !IV_VBELN type CHAR10
+      !IV_MAESTRO_NUM type BSTNK
+      !IV_STATUS type STRING optional
+      !IV_QUANTITY type KWMENG optional
+      !IV_STOREWITHDRAWALZONE type CHAR10 optional
+      !IV_LDAP_NUMBER type ZXUBNAME_LDAP optional .
+  methods CANCEL_ORDER .
+  methods EXECUTE_CANCEL_ORDER
+    returning
+      value(RV_SUBRC) type SYST_SUBRC .
+  methods REDUCE_ORDER_QUANTITIES
+    returning
+      value(RV_SUBRC) type SYST_SUBRC .
+  methods GET_LOG_MESSAGES
+    returning
+      value(RT_LOG_MESSAGE) type TTY_MESSAGES .
+  methods GET_SALES_ORDER_NUMBER
+    returning
+      value(RV_VBELN) type VBELN .
+  methods EXECUTE_CHANGE_STATUS_SHIPPED
+    importing
+      !IV_ORDER_LINE type STRING
+      !IV_STATUS type STRING
+    returning
+      value(RV_SUBRC) type SYST_SUBRC .
+  class-methods MASS_CHANGE_STATUS_SALES_ORDER
+    importing
+      !IR_VBELN type RT_VBELN
+      !IR_REF_MAESTRO type RT_REF_MAESTRO
+      !IV_STATUS type J_STATUS
+    returning
+      value(RV_SUBRC) type SYST-SUBRC .
+  methods CHANGE_SALES_ORDER_RGPD
+    importing
+      !IV_VBELN type VBELN_VA
+      !IV_SIMULATION type ABAP_BOOL default ''
+    returning
+      value(RV_ERROR) type ABAP_BOOL .
+  class-methods MASS_CHANGE_SALES_ORDER_RGPD
+    importing
+      !IR_VBELN type RT_VBELN
+      !IR_REF_MAESTRO type RT_REF_MAESTRO
+    exporting
+      !ET_RESULT type TTY_RESULT_STATUS
+    returning
+      value(RV_ERROR) type ABAP_BOOL .
   protected section.
 
 
@@ -326,11 +353,11 @@ class zcl_cof_change_customer_order definition
     data mv_lgnum type werks_d .
     data mv_quantity type kwmeng .
     data mv_balsubobj type balsubobj .
-endclass.
+ENDCLASS.
 
 
 
-class zcl_cof_change_customer_order implementation.
+CLASS ZCL_COF_CHANGE_CUSTOMER_ORDER IMPLEMENTATION.
 
 
   method abap_timestamp_to_java.
@@ -367,148 +394,74 @@ class zcl_cof_change_customer_order implementation.
   endmethod.
 
 
-  method cancel_order.
+  METHOD cancel_order.
 
-    data : lv_prep_qty_not_null,
-           lv_subrc   type syst-subrc.
+    DATA : lv_prep_qty_not_null,
+           lv_subrc             TYPE syst-subrc,
+           lv_error             TYPE abap_bool.
 
     me->mv_balsubobj = mc_change_status.
 
-    loop at mt_commande_details into data(ls_delivery_detail). "#EC CI_LOOP_INTO_WA
+    LOOP AT mt_commande_details INTO DATA(ls_delivery_detail). "#EC CI_LOOP_INTO_WA
 
-      if lv_prep_qty_not_null eq abap_false.
+      IF lv_prep_qty_not_null EQ abap_false.
 
-        read table mt_item_current_status into data(ls_item_status)
-          with key posnr = ls_delivery_detail-posnr.
+        READ TABLE mt_item_current_status INTO DATA(ls_item_status)
+          WITH KEY posnr = ls_delivery_detail-posnr.
 
         " Vérification des quantités préparées
-        if ls_item_status-pick_qty gt 0.
+        IF ls_item_status-pick_qty GT 0.
           lv_prep_qty_not_null = abap_true.
-        endif.
+        ENDIF.
 
-      endif.
-    endloop.
+      ENDIF.
+    ENDLOOP.
 
     " Changement de statut des postes "SHELVED"
-    if lv_prep_qty_not_null eq abap_false.
+    IF lv_prep_qty_not_null EQ abap_false.
 
       " Mise à zéro des Qt
       lv_subrc =  me->reduce_order_quantities( ).
 
-      if lv_subrc = 0.
+      IF lv_subrc = 0.
 
-        loop at mt_commande_details into ls_delivery_detail. "#EC CI_LOOP_INTO_WA
-          read table mt_item_current_status into ls_item_status
-                    with key posnr = ls_delivery_detail-posnr.
+        LOOP AT mt_commande_details INTO ls_delivery_detail. "#EC CI_LOOP_INTO_WA
+          READ TABLE mt_item_current_status INTO ls_item_status
+                    WITH KEY posnr = ls_delivery_detail-posnr.
 
-          call method me->change_status(
-            exporting
+          CALL METHOD me->change_status(
+            EXPORTING
               iv_objnr       = ls_delivery_detail-objnr_item
               iv_posnr       = ls_delivery_detail-posnr
               iv_status_from = ls_item_status-stat
               iv_status_to   = mc_shelved ).
-        endloop.
+        ENDLOOP.
 
 *      Modification du statut de l'entête
-        call method me->change_status(
-          exporting
+        CALL METHOD me->change_status(
+          EXPORTING
             iv_objnr       = ls_delivery_detail-objnr_header
             iv_posnr       = '000000'
             iv_status_from = ms_order_status-stat
-            iv_status_to   = mc_shelved ).
-        clear: ls_delivery_detail.
+            iv_status_to   = mc_shelved
+          RECEIVING
+            rv_error       = lv_error ).
+        CLEAR: ls_delivery_detail.
 
+        IF lv_error NE abap_true.
+          CALL METHOD me->change_sales_order_rgpd
+            EXPORTING
+              iv_vbeln      = me->mv_vbeln
+              iv_simulation = abap_false
+            RECEIVING
+              rv_error      = lv_error.
+        ENDIF.
 *        WAIT UP TO 2 SECONDS.
         " Publication KAFKA
         me->create_info_kafka( iv_status = mc_shelved ).
-      endif.
-    endif.
-  endmethod.
-
-
-  method mass_change_status_sales_order.
-
-    data :
-     lv_stonr type j_stonr.
-
-    select distinct vbeln, objnr from vbak
-    where vbeln in @ir_vbeln
-    and bstnk in @ir_ref_maestro
-    into table @data(lt_vbak).
-
-    if sy-subrc = 0.
-
-      select vbeln, posnr, objnr from vbap
-        for all entries in @lt_vbak
-        where vbeln = @lt_vbak-vbeln
-        into table @data(lt_vbap).                 "#EC CI_NO_TRANSFORM
-
-      if sy-subrc = 0.
-      endif.
-
-
-      if lt_vbak is not initial.
-
-        loop at lt_vbak assigning field-symbol(<fs_vbak>).
-
-          " Changement de statut d'entête
-          call function 'STATUS_CHANGE_EXTERN'
-            exporting
-*             CHECK_ONLY          = ' '
-              client              = sy-mandt
-              objnr               = <fs_vbak>-objnr
-              user_status         = iv_status
-*             SET_INACT           = ' '
-*             SET_CHGKZ           =
-              no_check            = abap_true
-            importing
-              stonr               = lv_stonr
-            exceptions
-              object_not_found    = 1
-              status_inconsistent = 2
-              status_not_allowed  = 3
-              others              = 4.
-
-          if sy-subrc ne 0.
-            rv_subrc = sy-subrc.
-          endif.
-
-          loop at lt_vbap assigning field-symbol(<fs_vbap>)
-              where vbeln = <fs_vbak>-vbeln.
-
-            " Changement de statut des postes
-            call function 'STATUS_CHANGE_EXTERN'
-              exporting
-*               CHECK_ONLY          = ' '
-                client              = sy-mandt
-                objnr               = <fs_vbap>-objnr
-                user_status         = iv_status
-*               SET_INACT           = ' '
-*               SET_CHGKZ           =
-                no_check            = abap_true
-              importing
-                stonr               = lv_stonr
-              exceptions
-                object_not_found    = 1
-                status_inconsistent = 2
-                status_not_allowed  = 3
-                others              = 4.
-
-            if sy-subrc ne 0.
-              rv_subrc = sy-subrc.
-            endif.
-          endloop.
-
-          commit work and wait.
-        endloop.
-
-      endif.
-    endif.
-
-
-
-
-  endmethod.
+      ENDIF.
+    ENDIF.
+  ENDMETHOD.
 
 
   method change_order_quantity_bgrfc.
@@ -628,6 +581,47 @@ class zcl_cof_change_customer_order implementation.
 
     rv_subrc = lv_subrc.
   endmethod.
+
+
+  METHOD change_sales_order_rgpd.
+
+    DATA :
+      ls_order_header_in  TYPE bapisdh1,
+      ls_order_header_inx TYPE bapisdh1x,
+      lt_order_text       TYPE TABLE OF bapisdtext,
+      lt_return           TYPE TABLE OF bapiret2,
+      lv_subrc            TYPE syst-subrc.
+
+
+    rv_error = abap_false.
+* Change texte to be cleared
+    APPEND VALUE #( itm_number = '000000' text_id = 'Z001' langu = 'EN' text_line = '' ) TO lt_order_text.
+    APPEND VALUE #( itm_number = '000000' text_id = 'Z002' langu = 'EN' text_line = '' ) TO lt_order_text.
+    ls_order_header_inx-updateflag = 'U'.
+* clear Name and phone number
+    ls_order_header_inx-name = ls_order_header_inx-telephone = 'X'.
+    ls_order_header_in-name = ls_order_header_in-telephone = ''.
+
+
+    CALL FUNCTION 'BAPI_SALESORDER_CHANGE'
+      EXPORTING
+        salesdocument    = iv_vbeln
+        order_header_inx = ls_order_header_inx
+        order_header_in  = ls_order_header_in
+      TABLES
+        return           = lt_return
+        order_text       = lt_order_text.
+    IF sy-subrc = 0.
+      READ TABLE lt_return WITH KEY type = 'E' TRANSPORTING NO FIELDS.
+      IF sy-subrc NE 0.
+        COMMIT WORK AND WAIT.
+      ELSE.
+        rv_error = abap_true.
+        ROLLBACK WORK.
+      ENDIF.
+    ENDIF.
+
+  ENDMETHOD.
 
 
   method change_status.
@@ -1128,7 +1122,7 @@ class zcl_cof_change_customer_order implementation.
                                                                                  iv_tdid   = mc_tdid_add_label
                                                                                 ).
 
-              ls_listing_product-product_quantity = round( val = <fs_item>-quan dec = 2 ).
+              ls_listing_product-product_quantity = round( val = <fs_item>-quan dec = 3 ).
               append ls_listing_product to ls_unit_detail-listing_products.
               clear ls_listing_product.
 
@@ -1214,115 +1208,115 @@ class zcl_cof_change_customer_order implementation.
           case <fs_item_status>-stat.
             when mc_to_prepare.
               if ls_lips-pstyv = mc_service_material.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 2 ) ).
-                ls_customer_order_line-cancelled_quantity   = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 3 ) ).
+                ls_customer_order_line-cancelled_quantity   = conv string( round( val = ls_lips-ormng dec = 3 ) ).
               else.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 3 ) ).
                 if iv_is_order_reduction = abap_true and <fs_item_status>-posnr = iv_posnr.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 2 ) ).
-*                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity - <fs_item_status>-pick_qty ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 3 ) ).
+*                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity - <fs_item_status>-pick_qty ) ) dec = 3 ) ).
                 else.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 3 ) ).
                 endif.
               endif.
-              ls_customer_order_line-picked_quantity        = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 2 ) ).
-              ls_customer_order_line-controlled_quantity    = conv string( round( val = lv_vsolm dec = 2 ) ).
+              ls_customer_order_line-picked_quantity        = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 3 ) ).
+              ls_customer_order_line-controlled_quantity    = conv string( round( val = lv_vsolm dec = 3 ) ).
 
             when mc_in_preparation.
               if ls_lips-pstyv = mc_service_material.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 2 ) ).
-                ls_customer_order_line-cancelled_quantity   = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 3 ) ).
+                ls_customer_order_line-cancelled_quantity   = conv string( round( val = ls_lips-ormng dec = 3 ) ).
               else.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 3 ) ).
                 if iv_is_order_reduction = abap_true and <fs_item_status>-posnr = iv_posnr.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 2 ) ).
-*                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity - <fs_item_status>-pick_qty ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 3 ) ).
+*                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity - <fs_item_status>-pick_qty ) ) dec = 3 ) ).
                 else.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 3 ) ).
                 endif.
               endif.
 
               if <fs_item_status>-pick_qty is not initial.
-                ls_customer_order_line-picked_quantity      = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 2 ) ).
+                ls_customer_order_line-picked_quantity      = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 3 ) ).
               else.
                 ls_customer_order_line-picked_quantity      = mc_zero.
               endif.
-              ls_customer_order_line-controlled_quantity    = conv string( round( val = lv_vsolm dec = 2 ) ).
+              ls_customer_order_line-controlled_quantity    = conv string( round( val = lv_vsolm dec = 3 ) ).
 
 
 
             when mc_prepared  or mc_to_control or mc_in_control or mc_controlled or mc_to_consolidate.
               if ls_lips-pstyv = mc_service_material.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 2 ) ).
-                ls_customer_order_line-cancelled_quantity   = conv string( round( val = 0 dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 3 ) ).
+                ls_customer_order_line-cancelled_quantity   = conv string( round( val = 0 dec = 3 ) ).
               else.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 3 ) ).
                 if iv_is_order_reduction = abap_true and <fs_item_status>-posnr = iv_posnr.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 2 ) ).
-*                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity - <fs_item_status>-pick_qty ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 3 ) ).
+*                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity - <fs_item_status>-pick_qty ) ) dec = 3 ) ).
                 else.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 3 ) ).
                 endif.
               endif.
-              ls_customer_order_line-picked_quantity        = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 2 ) ).
+              ls_customer_order_line-picked_quantity        = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 3 ) ).
 
               if <fs_item_status>-stat = mc_to_consolidate.
 
                 if ls_lips-pstyv = mc_service_material.
 
-                  ls_customer_order_line-controlled_quantity = round( val = 0 dec = 2 ).
+                  ls_customer_order_line-controlled_quantity = round( val = 0 dec = 3 ).
                 else.
-                  ls_customer_order_line-controlled_quantity = round( val = <fs_item_status>-pick_qty dec = 2 ).
+                  ls_customer_order_line-controlled_quantity = round( val = <fs_item_status>-pick_qty dec = 3 ).
                 endif.
 
               else.
-                ls_customer_order_line-controlled_quantity    = conv string( round( val = lv_vsolm dec = 2 ) ).
+                ls_customer_order_line-controlled_quantity    = conv string( round( val = lv_vsolm dec = 3 ) ).
               endif.
 
 
             when mc_consolidated or mc_ready.
               if ls_lips-pstyv = mc_service_material.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 2 ) ).
-                ls_customer_order_line-cancelled_quantity   = conv string( round( val = 0 dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 3 ) ).
+                ls_customer_order_line-cancelled_quantity   = conv string( round( val = 0 dec = 3 ) ).
               else.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 3 ) ).
                 if iv_is_order_reduction = abap_true and <fs_item_status>-posnr = iv_posnr.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - me->mv_quantity ) ) dec = 3 ) ).
                 else.
-                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 2 ) ).
+                  ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( ls_lips-ormng - ls_commande_details-kwmeng ) ) dec = 3 ) ).
                 endif.
               endif.
 
 
               if lv_is_svc_material_pallette = abap_true.
-                ls_customer_order_line-picked_quantity      = conv string( round( val = lv_nb_hu dec = 2 ) ).
-                ls_customer_order_line-controlled_quantity  = conv string( round( val = lv_nb_hu dec = 2 ) ).
+                ls_customer_order_line-picked_quantity      = conv string( round( val = lv_nb_hu dec = 3 ) ).
+                ls_customer_order_line-controlled_quantity  = conv string( round( val = lv_nb_hu dec = 3 ) ).
                 if ( ls_commande_details-kwmeng - lv_nb_hu ) >= 0.
                   data(lv_diff) = ls_commande_details-kwmeng - lv_nb_hu.
                 else.
                   lv_diff = 0.
                 endif.
-                ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( lv_diff ) ) dec = 2 ) ).
+                ls_customer_order_line-cancelled_quantity   = conv string( round( val = ( abs( lv_diff ) ) dec = 3 ) ).
 
               else.
-                ls_customer_order_line-picked_quantity      = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 2 ) ).
+                ls_customer_order_line-picked_quantity      = conv string( round( val = conv decfloat34( <fs_item_status>-pick_qty ) dec = 3 ) ).
 
                 if ls_lips-pstyv = mc_service_material.
 
-                  ls_customer_order_line-controlled_quantity  = conv string( round( val = 0 dec = 2 ) ).
+                  ls_customer_order_line-controlled_quantity  = conv string( round( val = 0 dec = 3 ) ).
                 else.
-                  ls_customer_order_line-controlled_quantity  = conv string( round( val = <fs_item_status>-pick_qty dec = 2 ) ).
+                  ls_customer_order_line-controlled_quantity  = conv string( round( val = <fs_item_status>-pick_qty dec = 3 ) ).
                 endif.
               endif.
 
 
             when mc_cancelled.
               if ls_lips-pstyv = mc_service_material.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 2 ) ).
-                ls_customer_order_line-cancelled_quantity     = conv string( round( val = ls_commande_details-kwmeng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_commande_details-kwmeng dec = 3 ) ).
+                ls_customer_order_line-cancelled_quantity     = conv string( round( val = ls_commande_details-kwmeng dec = 3 ) ).
               else.
-                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 2 ) ).
-                ls_customer_order_line-cancelled_quantity     = conv string( round( val = ls_lips-ormng dec = 2 ) ).
+                ls_customer_order_line-expected_quantity    = conv string( round( val = ls_lips-ormng dec = 3 ) ).
+                ls_customer_order_line-cancelled_quantity     = conv string( round( val = ls_lips-ormng dec = 3 ) ).
               endif.
               ls_customer_order_line-picked_quantity        = mc_zero.
               ls_customer_order_line-controlled_quantity    = mc_zero.
@@ -1359,95 +1353,96 @@ class zcl_cof_change_customer_order implementation.
   endmethod.
 
 
-  method create_operation_report.
+  METHOD create_operation_report.
 
-    data:
-          lt_mob_or type standard table of ztewm_mob_or.
+    DATA:
+          lt_mob_or TYPE STANDARD TABLE OF ztewm_mob_or.
 
-    data:
-      ls_mob_or    type ztewm_mob_or,
-      ls_component type abap_componentdescr.
+    DATA:
+      ls_mob_or    TYPE ztewm_mob_or,
+      ls_component TYPE abap_componentdescr.
 
-    data:
-      lv_prefixe        type char1,
-      lv_lgnum          type /scwm/lgnum,
-      lv_user           type xubname,
-      lv_date           type datum,
-      lv_time           type uzeit,
-      lv_timezone       type tznzone,
-      lv_timestamp      type tzntstmps,
-      lv_guid_parent    type guid,
-      lv_timestampl     type timestampl,
-      lt_cof_hist_cusor type standard table of ztcof_hist_cusor.
+    DATA:
+      lv_prefixe        TYPE char1,
+      lv_lgnum          TYPE /scwm/lgnum,
+      lv_user           TYPE xubname,
+      lv_date           TYPE datum,
+      lv_time           TYPE uzeit,
+      lv_timezone       TYPE tznzone,
+      lv_timestamp      TYPE tzntstmps,
+      lv_guid_parent    TYPE guid,
+      lv_timestampl     TYPE timestampl,
+      lv_timestamp2(22) TYPE c,
+      lt_cof_hist_cusor TYPE STANDARD TABLE OF ztcof_hist_cusor.
 
-    field-symbols:
-      <lt_table>  type any table,
-      <ls_struct> type any,
-      <lv_elem>   type any.
+    FIELD-SYMBOLS:
+      <lt_table>  TYPE ANY TABLE,
+      <ls_struct> TYPE any,
+      <lv_elem>   TYPE any.
 
 
 *   Warehouse number
-    select single value_new
-      from ztca_conversion
-      where key1 = @mc_prefixe and key2 = @mc_site and sens = @mc_sens and value_old = @me->ms_header-called_bu_code
-      into @lv_prefixe.                                 "#EC CI_NOORDER
+    SELECT SINGLE value_new
+      FROM ztca_conversion
+      WHERE key1 = @mc_prefixe AND key2 = @mc_site AND sens = @mc_sens AND value_old = @me->ms_header-called_bu_code
+      INTO @lv_prefixe.                                 "#EC CI_NOORDER
 
-    if sy-subrc ne 0.
-      return.
-    else.
+    IF sy-subrc NE 0.
+      RETURN.
+    ELSE.
       lv_lgnum = |{ lv_prefixe }{ me->ms_header-called_store_code }|.
-    endif.
+    ENDIF.
 
 *   LDAP employee number
     lv_user = me->mv_ldap_number.
-    if lv_user is initial.
-      return.
-    endif.
+    IF lv_user IS INITIAL.
+      RETURN.
+    ENDIF.
 
 
 *   Warehouse time zone
-    call function '/SCWM/LGNUM_TZONE_READ'
-      exporting
+    CALL FUNCTION '/SCWM/LGNUM_TZONE_READ'
+      EXPORTING
         iv_lgnum        = lv_lgnum
-      importing
+      IMPORTING
         ev_tzone        = lv_timezone
-      exceptions
+      EXCEPTIONS
         interface_error = 1
         data_not_found  = 2
-        others          = 3.
-    if not sy-subrc is initial.
-      return.
-    endif.
+        OTHERS          = 3.
+    IF NOT sy-subrc IS INITIAL.
+      RETURN.
+    ENDIF.
 
 
 *   GUID parent
-    try.
+    TRY.
         lv_guid_parent = cl_system_uuid=>create_uuid_x16_static( ).
-      catch cx_uuid_error.
-        return.
-    endtry.
+      CATCH cx_uuid_error.
+        RETURN.
+    ENDTRY.
 
-    append initial line to lt_mob_or assigning field-symbol(<ls_mob_or>).
+    APPEND INITIAL LINE TO lt_mob_or ASSIGNING FIELD-SYMBOL(<ls_mob_or>).
 
     "Date & time
-    select jcds~objnr, jcds~stat, jcds~udate, jcds~utime
-          from jcds
-          where objnr = @iv_objnr and inact = @abap_false
-           and stat = @iv_status_to
-          order by udate descending, utime descending
-          into table @data(lt_change_status)
-          up to 1 rows.
+    SELECT jcds~objnr, jcds~stat, jcds~udate, jcds~utime
+          FROM jcds
+          WHERE objnr = @iv_objnr AND inact = @abap_false
+           AND stat = @iv_status_to
+          ORDER BY udate DESCENDING, utime DESCENDING
+          INTO TABLE @DATA(lt_change_status)
+          UP TO 1 ROWS.
 
-    if sy-subrc ne 0.
+    IF sy-subrc NE 0.
       lv_date = sy-datum.
       lv_time = sy-uzeit.
-      convert date lv_date time lv_time into time stamp lv_timestamp time zone lv_timezone.
-    else.
-      read table lt_change_status index 1 into data(ls_change_status).
+      CONVERT DATE lv_date TIME lv_time INTO TIME STAMP lv_timestamp TIME ZONE lv_timezone.
+    ELSE.
+      READ TABLE lt_change_status INDEX 1 INTO DATA(ls_change_status).
       lv_date = ls_change_status-udate.
       lv_time = ls_change_status-utime.
-      convert date lv_date time lv_time into time stamp lv_timestamp time zone lv_timezone.
-    endif.
+      CONVERT DATE lv_date TIME lv_time INTO TIME STAMP lv_timestamp TIME ZONE lv_timezone.
+    ENDIF.
 
 
     <ls_mob_or>-guid_parent          = lv_guid_parent.
@@ -1457,11 +1452,11 @@ class zcl_cof_change_customer_order implementation.
     <ls_mob_or>-creation_date        = lv_date.
     <ls_mob_or>-creation_time        = lv_time.
 
-    if iv_status_to = ''.
+    IF iv_status_to = ''.
       <ls_mob_or>-process_id           = mc_process_id_reduction."'customer_order-change-quantity'.
-    else.
+    ELSE.
       <ls_mob_or>-process_id           = mc_process_id.  "'customer_order-change-status'.
-    endif.
+    ENDIF.
     <ls_mob_or>-process_type         = mc_process_type_mod. "'M'. "Modification
     <ls_mob_or>-customer_order       = me->mv_vbeln.
     <ls_mob_or>-objnr                = iv_objnr.
@@ -1469,16 +1464,16 @@ class zcl_cof_change_customer_order implementation.
 *    append <ls_mob_or> to lt_mob_or.
 
 *     Store data into custom DB table
-    insert ztewm_mob_or from table @lt_mob_or.
+    INSERT ztewm_mob_or FROM TABLE @lt_mob_or.
 
-    if sy-subrc ne 0.
-    endif.
+    IF sy-subrc NE 0.
+    ENDIF.
 
     " On ajoute aussi une entrée sur la table spécifique ztcof_hist_cusor
-    append initial line to lt_cof_hist_cusor assigning field-symbol(<fs_cof_hist_cusor>).
+    APPEND INITIAL LINE TO lt_cof_hist_cusor ASSIGNING FIELD-SYMBOL(<fs_cof_hist_cusor>).
     <fs_cof_hist_cusor>-vbeln         = me->mv_vbeln.
     <fs_cof_hist_cusor>-posnr         = iv_posnr.
-    get time stamp field lv_timestampl.
+    GET TIME STAMP FIELD lv_timestampl.
     <fs_cof_hist_cusor>-timestamp     = lv_timestampl.
     <fs_cof_hist_cusor>-objnr         = iv_objnr.
     <fs_cof_hist_cusor>-creation_date = lv_date.
@@ -1489,12 +1484,12 @@ class zcl_cof_change_customer_order implementation.
     <fs_cof_hist_cusor>-quantity_from = iv_quantity_from.
     <fs_cof_hist_cusor>-quantity_to   = iv_quantity_to.
 
-    insert ztcof_hist_cusor from table @lt_cof_hist_cusor.
+    INSERT ztcof_hist_cusor FROM TABLE @lt_cof_hist_cusor.
 
-    if sy-subrc ne 0.
-    endif.
+    IF sy-subrc NE 0.
+    ENDIF.
 
-  endmethod.
+  ENDMETHOD.
 
 
   method do_reject_reason_order_items.
@@ -1561,383 +1556,476 @@ class zcl_cof_change_customer_order implementation.
   endmethod.
 
 
-  method execute_order_reduction.
+  method execute_cancel_order.
+
     data :
-      lt_order_status_temp    type tt_status,
-      lt_item_status_temp     type tt_status,
-      ls_message_modif_status type zscusorder_modif_status_kafka,
-      ls_customer_order_line  type zscustomer_order_line_product,
-      lv_quantity_cancel      type kwmeng,
-      lv_cancelled_all        type abap_bool value abap_true,
-      lv_is_order_cancelled   type abap_bool,
-      lv_is_qty_item          type abap_bool,
-      lv_is_prep_qty          type abap_bool,
-      lv_is_picked            type abap_bool,
-      lv_timestamp            type timestamp,
-      lv_message              type string,
-      lv_return               type abap_bool,
-      lv_error                type abap_bool,
-      ls_item                 type ty_status,
-      lv_rc404                type xfeld,
-      lv_str                  type string,
-      lv_subrc                type syst-subrc,
-      lv_item_str             type string,
-      lv_rel_qty              type /scwm/ltap_vsolm,
-      lv_is_not_shelved       type abap_bool.
-
-    field-symbols :
-       <fs_item> type vbep.
-
-    lv_item_str = |{ iv_order_line alpha = out }|.
+      lo_in_unit type ref to if_qrfc_unit_inbound,
+      lv_status  type string,
+      lv_queue   type string.
 
 
-    read table me->mt_commande_details with key posnr = iv_order_line into data(ls_order).
+    "on récupère l'objet de la file d'attente BgRFC
+    lv_queue = |{ mc_sd_cof }{ mv_vbeln }{ mc_underscore }{ 'CANCEL' }|.
+    lo_in_unit = zcl_api_call_kafka=>get_bgrfc_unit( lv_queue  ).
+
+    " Appel du module fonction RFC et mise dans la file d'attente BgRFC
+    call function 'ZFCUSORDER_CANCEL_ORDER'
+      in background unit lo_in_unit
+      exporting
+        iv_called_bu_code    = ms_header-called_bu_code
+        iv_called_store_code = ms_header-called_store_code
+        iv_user_bu_code      = ms_header-user_bu_code
+        iv_user_store_code   = ms_header-user_store_code
+        iv_maestro_num       = mv_maestro_num
+        iv_ldap_number       = mv_ldap_number
+        iv_status            = mv_status.
+
+
     if sy-subrc = 0.
+      commit work.
+      "file lancée.
+    else.
+      "erreur.
+      rv_subrc = 4.
+    endif.
+
+    rv_subrc         = sy-subrc .
+
+
+  endmethod.
+
+
+  method execute_change_status_shipped.
+
+    data :
+      lo_in_unit type ref to if_qrfc_unit_inbound,
+      lv_status  type string,
+      lv_queue   type string.
+
+
+    read table mt_ztca_conversion with key value_new = mc_shipped into data(ls_status).
+
+    lv_queue = |{ mc_sd_cof }{ mv_vbeln }{ mc_underscore }{ ls_status-value_old }|.
+
+    "on récupère l'objet de la file d'attente BgRFC
+    lo_in_unit = zcl_api_call_kafka=>get_bgrfc_unit( lv_queue  ).
+
+    " Appel du module fonction RFC et mise dans la file d'attente BgRFC
+    call function 'ZFCUSORDER_SHIPPED'
+      in background unit lo_in_unit
+      exporting
+*       iv_vbeln             = mv_vbeln
+        iv_order_line        = iv_order_line
+        iv_status            = iv_status
+        iv_called_bu_code    = ms_header-called_bu_code
+        iv_called_store_code = ms_header-called_store_code
+        iv_user_bu_code      = ms_header-user_bu_code
+        iv_user_store_code   = ms_header-user_store_code
+        iv_maestro_num       = mv_maestro_num
+        iv_ldap_number       = mv_ldap_number.
+
+    if sy-subrc = 0.
+      commit work.
+      "file lancée.
+    else.
+      "erreur.
+      rv_subrc = 4.
+    endif.
+
+    rv_subrc         = sy-subrc .
+
+  endmethod.
+
+
+  METHOD execute_order_reduction.
+    DATA :
+      lt_order_status_temp    TYPE tt_status,
+      lt_item_status_temp     TYPE tt_status,
+      ls_message_modif_status TYPE zscusorder_modif_status_kafka,
+      ls_customer_order_line  TYPE zscustomer_order_line_product,
+      lv_quantity_cancel      TYPE kwmeng,
+      lv_cancelled_all        TYPE abap_bool VALUE abap_true,
+      lv_is_order_cancelled   TYPE abap_bool,
+      lv_is_qty_item          TYPE abap_bool,
+      lv_is_prep_qty          TYPE abap_bool,
+      lv_is_picked            TYPE abap_bool,
+      lv_timestamp            TYPE timestamp,
+      lv_message              TYPE string,
+      lv_return               TYPE abap_bool,
+      lv_error                TYPE abap_bool,
+      ls_item                 TYPE ty_status,
+      lv_rc404                TYPE xfeld,
+      lv_str                  TYPE string,
+      lv_subrc                TYPE syst-subrc,
+      lv_item_str             TYPE string,
+      lv_rel_qty              TYPE /scwm/ltap_vsolm,
+      lv_is_not_shelved       TYPE abap_bool.
+
+    FIELD-SYMBOLS :
+       <fs_item> TYPE vbep.
+
+    lv_item_str = |{ iv_order_line ALPHA = OUT }|.
+
+
+    READ TABLE me->mt_commande_details WITH KEY posnr = iv_order_line INTO DATA(ls_order).
+    IF sy-subrc = 0.
       me->mv_vbeln = ls_order-vbeln.
 
 
       " On vérifie si le poste contient un article service
-      if ls_order-pstyv = mc_service_material.
-        message e043(zcl_cof_order)  into lv_message.
-        append value #( message = lv_message type = mc_error ) to me->mt_messages.
-        append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+      IF ls_order-pstyv = mc_service_material.
+        MESSAGE e043(zcl_cof_order)  INTO lv_message.
+        APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+        APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
         lv_error = abap_true.
-        clear : lv_message.
-      else.
+        CLEAR : lv_message.
+      ELSE.
 
-        if me->mt_item_current_status is not initial.
-          sort me->mt_item_current_status by objnr udate descending utime descending.
+        IF me->mt_item_current_status IS NOT INITIAL.
+          SORT me->mt_item_current_status BY objnr udate DESCENDING utime DESCENDING.
 
           " On vérifie si les postes sont au statut cancelled
-          loop at me->mt_item_current_status assigning field-symbol(<fs_item_status>).
+          LOOP AT me->mt_item_current_status ASSIGNING FIELD-SYMBOL(<fs_item_status>).
 
-            read table mt_commande_details with key posnr = <fs_item_status>-posnr into data(ls_item_order).
+            READ TABLE mt_commande_details WITH KEY posnr = <fs_item_status>-posnr INTO DATA(ls_item_order).
 
-            if ls_item_order-pstyv ne mc_service_material.
+            IF ls_item_order-pstyv NE mc_service_material.
 
-              if <fs_item_status>-posnr ne ls_order-posnr.
-                if <fs_item_status>-stat ne mc_cancelled.
+              IF <fs_item_status>-posnr NE ls_order-posnr.
+                IF <fs_item_status>-stat NE mc_cancelled.
                   lv_cancelled_all = abap_false.
-                endif.
+                ENDIF.
 
-                if ls_item_order-kwmeng > 0.
+                IF ls_item_order-kwmeng > 0.
                   lv_is_qty_item = abap_true.
-                endif.
-              endif.
-              if <fs_item_status>-pick_qty > 0.
+                ENDIF.
+              ENDIF.
+              IF <fs_item_status>-pick_qty > 0.
                 lv_is_prep_qty = abap_true.
-              endif.
-            endif.
-          endloop.
-        endif.
+              ENDIF.
+            ENDIF.
+          ENDLOOP.
+        ENDIF.
 
         " On vérifie le statut du poste
-        read table me->mt_item_current_status with key posnr = ls_order-posnr into data(ls_item_status).
-        if sy-subrc = 0.
+        READ TABLE me->mt_item_current_status WITH KEY posnr = ls_order-posnr INTO DATA(ls_item_status).
+        IF sy-subrc = 0.
 
-          if ls_item_status-stat = mc_shipped or ls_item_status-stat = mc_cancelled or ls_item_status-stat = mc_shelved or ms_order_status-stat = mc_cancelled.
+          IF ls_item_status-stat = mc_shipped OR ls_item_status-stat = mc_cancelled OR ls_item_status-stat = mc_shelved OR ms_order_status-stat = mc_cancelled.
 
-            if me->mv_quantity = 0 and ( ls_item_status-stat = mc_cancelled or ms_order_status-stat = mc_cancelled ).
+            IF me->mv_quantity = 0 AND ( ls_item_status-stat = mc_cancelled OR ms_order_status-stat = mc_cancelled ).
 
               " La réduction à 0 est autorisée ds le cadre d'un traitement post annulation de commande
 
-            else.
+            ELSE.
 
               " Impossible de modifier la quantité sur un poste au statut SHIPPED ou CANCELLED ou SHELVED
-              read table me->mt_ztca_conversion with key value_new = ls_item_status-stat into data(ls_new_status).
-              data(lv_posnr) = |{ ls_order-posnr alpha = out }|.
-              message e042(zcl_cof_order) with lv_posnr ls_new_status-value_old into lv_message.
-              append value #( message = lv_message type = mc_error ) to me->mt_messages.
-              append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+              READ TABLE me->mt_ztca_conversion WITH KEY value_new = ls_item_status-stat INTO DATA(ls_new_status).
+              DATA(lv_posnr) = |{ ls_order-posnr ALPHA = OUT }|.
+              MESSAGE e042(zcl_cof_order) WITH lv_posnr ls_new_status-value_old INTO lv_message.
+              APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+              APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
               lv_error = abap_true.
-              clear : lv_message.
-            endif.
-          endif.
-        endif.
+              CLEAR : lv_message.
+            ENDIF.
+          ENDIF.
+        ENDIF.
 
 
         " On vérifie si la réduction de quantitée est permise en fonction des quantitées préparées
-        data(lv_diff) = ls_order-kwmeng - ls_item_status-pick_qty.
+        DATA(lv_diff) = ls_order-kwmeng - ls_item_status-pick_qty.
 
-        if me->mv_quantity < ls_item_status-pick_qty.
+        IF me->mv_quantity < ls_item_status-pick_qty.
 
-          message e038(zcl_cof_order) into data(lv_message_temp).
-          message e039(zcl_cof_order) into lv_message.
-          concatenate lv_message_temp lv_message into lv_message.
-          append value #( message = lv_message type = mc_error ) to me->mt_messages.
-          append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+          MESSAGE e038(zcl_cof_order) INTO DATA(lv_message_temp).
+          MESSAGE e039(zcl_cof_order) INTO lv_message.
+          CONCATENATE lv_message_temp lv_message INTO lv_message.
+          APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+          APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
           lv_error = abap_true.
-          clear : lv_message.
+          CLEAR : lv_message.
 
           " La quantité ne peut pas être supérieur à la quantité du poste
-        elseif me->mv_quantity > ls_order-kwmeng.
-          message e034(zcl_cof_order) into lv_message.
-          concatenate lv_message_temp lv_message into lv_message.
-          append value #( message = lv_message type = mc_error ) to me->mt_messages.
-          append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+        ELSEIF me->mv_quantity > ls_order-kwmeng.
+          MESSAGE e034(zcl_cof_order) INTO lv_message.
+          CONCATENATE lv_message_temp lv_message INTO lv_message.
+          APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+          APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
           lv_error = abap_true.
-          clear : lv_message.
+          CLEAR : lv_message.
 
-        endif.
-      endif.
+        ENDIF.
+      ENDIF.
 
-    else.
+    ELSE.
       " La commande n'existe pas
-      message e033(zcl_cof_order) with lv_item_str into lv_message.
-      append value #( message = lv_message type = mc_error ) to me->mt_messages.
-      append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+      MESSAGE e033(zcl_cof_order) WITH lv_item_str INTO lv_message.
+      APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+      APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
       lv_error = abap_true.
-      clear : lv_message.
-    endif.
+      CLEAR : lv_message.
+    ENDIF.
 
 
 
-    if lv_error ne abap_true.
+    IF lv_error NE abap_true.
 
-      if iv_quantity_to_reduce  = 0. "RG2
+      IF iv_quantity_to_reduce  = 0. "RG2
 
-        if iv_is_api = abap_true.
+        IF iv_is_api = abap_true.
 
           " Mise à jour de la quantité RG1 via API
           lv_subrc = change_order_quantity_bgrfc(
-                        exporting
+                        EXPORTING
                            iv_vbeln             = ls_order-vbeln                 " Document de vente
                            iv_posnr             = ls_order-posnr                 " Numéro de poste du document commercial
-                           iv_quantity          = conv wmeng( iv_quantity_to_reduce  )      " Quantité
+                           iv_quantity          = CONV wmeng( iv_quantity_to_reduce  )      " Quantité
                            iv_called_bu_code    = ms_header-called_bu_code
                            iv_called_store_code = ms_header-called_store_code
                            iv_user_bu_code      = ms_header-user_bu_code
                            iv_user_store_code   = ms_header-user_store_code
-                           iv_maestro_num       = conv bstnk( mv_maestro_num )
+                           iv_maestro_num       = CONV bstnk( mv_maestro_num )
                            iv_ldap_number       = mv_ldap_number
                          ).
-        else.
+        ELSE.
           " Mise à jour de la quantité RG1 en transactionnel
           lv_subrc = change_sales_order_quantity(
-                                                  exporting
+                                                  EXPORTING
                                                     iv_vbeln    = ls_order-vbeln                 " Document de vente
                                                     iv_posnr    = ls_order-posnr                 " Numéro de poste du document commercial
-                                                    iv_quantity = conv wmeng( iv_quantity_to_reduce  ) " Quantité
+                                                    iv_quantity = CONV wmeng( iv_quantity_to_reduce  ) " Quantité
                                                     iv_simulation = iv_simulation
                                                 ).
 
-        endif.
-        if lv_subrc = 0.
+        ENDIF.
+        IF lv_subrc = 0.
 
-          commit work.
+          COMMIT WORK.
           " Mise à jour du poste
 
-          message s044(zcl_cof_order) with lv_item_str into lv_message.
-          append value #( message = lv_message type = mc_success ) to me->mt_messages.
-          append value #(  type = mc_success message = lv_message ) to me->mt_log_messages.
-          clear : lv_message.
+          MESSAGE s044(zcl_cof_order) WITH lv_item_str INTO lv_message.
+          APPEND VALUE #( message = lv_message type = mc_success ) TO me->mt_messages.
+          APPEND VALUE #(  type = mc_success message = lv_message ) TO me->mt_log_messages.
+          CLEAR : lv_message.
 
-          if iv_simulation ne abap_true.
+          IF iv_simulation NE abap_true.
             " Changement de statut du poste de commande
             lv_error = change_status( iv_objnr  = ls_item_status-objnr
                                       iv_posnr = ls_item_status-posnr
                                       iv_status_from = ls_item_status-stat
                                       iv_status_to = mc_cancelled
                                     ).
-            if lv_error ne abap_true.
-              read table me->mt_item_current_status with key objnr = ls_item_status-objnr assigning <fs_item_status>.
-              if sy-subrc = 0.
+            IF lv_error NE abap_true.
+              READ TABLE me->mt_item_current_status WITH KEY objnr = ls_item_status-objnr ASSIGNING <fs_item_status>.
+              IF sy-subrc = 0.
                 <fs_item_status>-stat = mc_cancelled.
-              endif.
-            endif.
-          endif.
+              ENDIF.
+            ENDIF.
+          ENDIF.
           " Si tous les postes sont au statut CANCELED, on modifie l'entête à CANCELLED
-          if lv_cancelled_all = abap_true.
+          IF lv_cancelled_all = abap_true.
 
             " On force le statut cancelled des postes avec un article service
-            loop at me->mt_item_current_status assigning <fs_item_status>.
+            LOOP AT me->mt_item_current_status ASSIGNING <fs_item_status>.
 
-              read table mt_commande_details with key posnr = <fs_item_status>-posnr into ls_item_order.
+              READ TABLE mt_commande_details WITH KEY posnr = <fs_item_status>-posnr INTO ls_item_order.
 
-              if ls_item_order-pstyv = mc_service_material.
-                if iv_simulation ne abap_true.
+              IF ls_item_order-pstyv = mc_service_material.
+                IF iv_simulation NE abap_true.
                   " Changement de statut du poste de commande
                   lv_error = change_status( iv_objnr  = <fs_item_status>-objnr
                                             iv_posnr = <fs_item_status>-posnr
                                             iv_status_from = <fs_item_status>-stat
                                             iv_status_to = mc_cancelled
                                           ).
-                endif.
+                ENDIF.
 
-              endif.
+              ENDIF.
               <fs_item_status>-stat = mc_cancelled.
-            endloop.
+            ENDLOOP.
 
-            if iv_simulation ne abap_true.
+            IF iv_simulation NE abap_true.
               " Changement de statut de l'entête de commande à CANCELLED
               lv_error = change_status( iv_objnr  = me->ms_order_status-objnr
                                         iv_posnr = '000000'
                                         iv_status_from = me->ms_order_status-stat
                                         iv_status_to = mc_cancelled
                                       ).
-            endif.
+            ENDIF.
 
-            if lv_error ne abap_true.
+            IF lv_error NE abap_true.
               lv_is_order_cancelled = abap_true.
               " Mise à jour du poste
-              message s036(zcl_cof_order) with me->mv_maestro_num into lv_message.
-              append value #( message = lv_message type = mc_success ) to me->mt_messages.
-              append value #(  type = mc_success message = lv_message ) to me->mt_log_messages.
-              clear : lv_message.
+              MESSAGE s036(zcl_cof_order) WITH me->mv_maestro_num INTO lv_message.
+              APPEND VALUE #( message = lv_message type = mc_success ) TO me->mt_messages.
+              APPEND VALUE #(  type = mc_success message = lv_message ) TO me->mt_log_messages.
+              CLEAR : lv_message.
 
-            endif.
-          endif.
+            ENDIF.
+          ENDIF.
 
-        else.
-          rollback work.
+        ELSE.
+          ROLLBACK WORK.
           " Erreur mise à jour de la quantité
           lv_message = 'Erreur mise à jour de la quantité'.
 *          message s031(zcl_cof_order) with iv_order_line into lv_message.
-          append value #( message = lv_message type = mc_error ) to me->mt_messages.
-          append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+          APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+          APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
           lv_error = abap_true.
-          clear : lv_message.
-        endif.
+          CLEAR : lv_message.
+        ENDIF.
 
-        if lv_error = abap_false.
+        IF lv_error = abap_false.
           mv_to_publish = abap_true.
-        endif.
+        ENDIF.
 
 
-      elseif iv_quantity_to_reduce  lt ls_order-kwmeng.  "RG1
+      ELSEIF iv_quantity_to_reduce  LT ls_order-kwmeng.  "RG1
 
-        if iv_is_api = abap_true.
+        IF iv_is_api = abap_true.
 
           " Mise à jour de la quantité RG1 via API
           lv_subrc = change_order_quantity_bgrfc(
-                        exporting
+                        EXPORTING
                            iv_vbeln             = ls_order-vbeln                 " Document de vente
                            iv_posnr             = ls_order-posnr                 " Numéro de poste du document commercial
-                           iv_quantity          = conv wmeng( iv_quantity_to_reduce  )      " Quantité
+                           iv_quantity          = CONV wmeng( iv_quantity_to_reduce  )      " Quantité
                            iv_called_bu_code    = ms_header-called_bu_code
                            iv_called_store_code = ms_header-called_store_code
                            iv_user_bu_code      = ms_header-user_bu_code
                            iv_user_store_code   = ms_header-user_store_code
-                           iv_maestro_num       = conv bstnk( mv_maestro_num )
+                           iv_maestro_num       = CONV bstnk( mv_maestro_num )
                            iv_ldap_number       = mv_ldap_number
                          ).
-        else.
+        ELSE.
           " Mise à jour de la quantité RG1 en transactionnel
           lv_subrc = change_sales_order_quantity(
-                                                  exporting
+                                                  EXPORTING
                                                     iv_vbeln    = ls_order-vbeln                 " Document de vente
                                                     iv_posnr    = ls_order-posnr                 " Numéro de poste du document commercial
-                                                    iv_quantity = conv wmeng( iv_quantity_to_reduce  ) " Quantité
+                                                    iv_quantity = CONV wmeng( iv_quantity_to_reduce  ) " Quantité
                                                     iv_simulation = iv_simulation
                                                 ).
 
-        endif.
-        if lv_subrc = 0.
-          commit work.
-          message s031(zcl_cof_order) with lv_item_str into lv_message.
-          append value #( message = lv_message type = mc_success ) to me->mt_messages.
-          append value #(  type = mc_success message = lv_message ) to me->mt_log_messages.
-          clear : lv_message.
-        else.
-          rollback work.
+        ENDIF.
+        IF lv_subrc = 0.
+          COMMIT WORK.
+          MESSAGE s031(zcl_cof_order) WITH lv_item_str INTO lv_message.
+          APPEND VALUE #( message = lv_message type = mc_success ) TO me->mt_messages.
+          APPEND VALUE #(  type = mc_success message = lv_message ) TO me->mt_log_messages.
+          CLEAR : lv_message.
+        ELSE.
+          ROLLBACK WORK.
           " Erreur mise à jour de la quantité
           lv_message = 'Erreur mise à jour de la quantité'.
-          append value #( message = lv_message type = mc_error ) to me->mt_messages.
-          append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+          APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+          APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
           lv_error = abap_true.
-          clear : lv_message.
-        endif.
+          CLEAR : lv_message.
+        ENDIF.
 *        endif.
 
-      elseif iv_quantity_to_reduce  gt  ls_order-kwmeng.  "RG3
+      ELSEIF iv_quantity_to_reduce  GT  ls_order-kwmeng.  "RG3
 
         " La quantité est supérieure à la quantité du poste
-        message e034(zcl_cof_order) with me->mv_maestro_num into lv_message.
-        append value #( message = lv_message type = mc_error ) to me->mt_messages.
-        append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+        MESSAGE e034(zcl_cof_order) WITH me->mv_maestro_num INTO lv_message.
+        APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+        APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
         lv_error = abap_true.
-        clear : lv_message.
+        CLEAR : lv_message.
 
-      elseif iv_quantity_to_reduce  =  ls_order-kwmeng.  "RG3
+      ELSEIF iv_quantity_to_reduce  =  ls_order-kwmeng.  "RG3
 
         " La quantité est identique à la quantité du poste
-        message e037(zcl_cof_order) with me->mv_maestro_num into lv_message.
-        append value #( message = lv_message type = mc_error ) to me->mt_messages.
-        append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+        MESSAGE e037(zcl_cof_order) WITH me->mv_maestro_num INTO lv_message.
+        APPEND VALUE #( message = lv_message type = mc_error ) TO me->mt_messages.
+        APPEND VALUE #(  type = mc_error message = lv_message ) TO me->mt_log_messages.
         lv_error = abap_true.
-        clear : lv_message.
-      endif.
-    endif.
+        CLEAR : lv_message.
+      ENDIF.
+    ENDIF.
 
-    if lv_error = abap_false.
+    IF lv_error = abap_false.
       lv_rc404 = abap_false.
-      if iv_simulation ne abap_true.
+      IF iv_simulation NE abap_true.
 *        WAIT UP TO 1 SECONDS.
         me->create_info_kafka( iv_is_order_reduction = abap_true iv_posnr = ls_order-posnr ).
-        wait up to 1 seconds.
-      endif.
+        WAIT UP TO 1 SECONDS.
+      ENDIF.
 
-*      if lv_is_order_cancelled = abap_true and lv_is_prep_qty = abap_false and lv_is_qty_item = abap_false.
-*
-*        select vbeln, posnr, kwmeng, pstyv from vbap
-*          for all entries in @mt_commande_details
-*          where vbeln = @mt_commande_details-vbeln and posnr = @mt_commande_details-posnr
-*          into table @data(lt_actual_quant).
-*
-*        if sy-subrc = 0.
-*
-*          loop at lt_actual_quant assigning field-symbol(<fs_quan>).
-*
-*            if <fs_quan>-kwmeng > 0 and <fs_quan>-pstyv ne mc_service_material .
-*              lv_is_not_shelved = abap_true.
-*            endif.
-*          endloop.
-*
-*        endif.
-*
-*        if lv_is_not_shelved = abap_false.
-*          " On force le statut shelved des postes avec un article service
-*          loop at me->mt_item_current_status assigning <fs_item_status>.
-*
-*            if iv_simulation ne abap_true.
-*              " Changement de statut du poste de commande
-*              lv_error = change_status( iv_objnr  = <fs_item_status>-objnr
-*                                        iv_status = mc_shelved
-*                                      ).
-*            endif.
-*            <fs_item_status>-stat = mc_shelved.
-*          endloop.
-*
-*          if iv_simulation ne abap_true.
-*            " Changement de statut de l'entête de commande à SHELVED
-*            lv_error = change_status( iv_objnr  = me->ms_order_status-objnr
-*                                      iv_status = mc_shelved
-*                                    ).
-*          endif.
-*
-*          if lv_error ne abap_true.
-*            if iv_simulation ne abap_true.
-*              read table me->mt_ztca_conversion with key value_new = mc_cancelled into data(ls_last_status).
-*              read table me->mt_ztca_conversion with key value_new = mc_shelved into ls_new_status.
-*              message s029(zcl_cof_order) with ls_last_status-value_old ls_new_status-value_old  into lv_message.
-*              append value #( message = lv_message type = mc_success ) to me->mt_messages.
-*              append value #( type = mc_success message = lv_message ) to me->mt_log_messages.
-*              clear lv_message.
-**            WAIT UP TO 1 SECONDS.
-*              me->create_info_kafka( iv_status = mc_shelved ).
-*            endif.
-*          endif.
-*        endif.
-*
-*
-*
-*      endif.
+
+      IF iv_is_api = abap_false.
+        IF lv_is_order_cancelled = abap_true AND lv_is_prep_qty = abap_false AND lv_is_qty_item = abap_false.
+
+          SELECT vbeln, posnr, kwmeng, pstyv FROM vbap "#EC CI_FAE_LINES_ENSURED
+            FOR ALL ENTRIES IN @mt_commande_details
+            WHERE vbeln = @mt_commande_details-vbeln AND posnr = @mt_commande_details-posnr
+            INTO TABLE @DATA(lt_actual_quant).
+
+          IF sy-subrc = 0.
+
+            LOOP AT lt_actual_quant ASSIGNING FIELD-SYMBOL(<fs_quan>).
+
+              IF <fs_quan>-kwmeng > 0 AND <fs_quan>-pstyv NE mc_service_material .
+                lv_is_not_shelved = abap_true.
+              ENDIF.
+            ENDLOOP.
+
+          ENDIF.
+
+          IF lv_is_not_shelved = abap_false.
+            " On force le statut shelved des postes avec un article service
+            LOOP AT me->mt_item_current_status ASSIGNING <fs_item_status>.
+
+              IF iv_simulation NE abap_true.
+                " Changement de statut du poste de commande
+                lv_error = change_status( iv_objnr  = <fs_item_status>-objnr
+                                          iv_posnr = <fs_item_status>-posnr
+                                          iv_status_from = <fs_item_status>-stat
+                                          iv_status_to = mc_shelved
+                                        ).
+              ENDIF.
+              <fs_item_status>-stat = mc_shelved.
+            ENDLOOP.
+
+            IF iv_simulation NE abap_true.
+              " Changement de statut de l'entête de commande à SHELVED
+              lv_error = change_status( iv_objnr  = me->ms_order_status-objnr
+                                        iv_posnr = '000000'
+                                        iv_status_from = me->ms_order_status-stat
+                                        iv_status_to = mc_shelved
+                                      ).
+              IF lv_error NE abap_true.
+                CALL METHOD me->change_sales_order_rgpd
+                  EXPORTING
+                    iv_vbeln      = me->mv_vbeln
+                    iv_simulation = abap_false
+                  RECEIVING
+                    rv_error      = lv_error.
+              ENDIF.
+            ENDIF.
+
+            IF lv_error NE abap_true.
+              IF iv_simulation NE abap_true.
+                READ TABLE me->mt_ztca_conversion WITH KEY value_new = mc_cancelled INTO DATA(ls_last_status).
+                READ TABLE me->mt_ztca_conversion WITH KEY value_new = mc_shelved INTO ls_new_status.
+                MESSAGE s029(zcl_cof_order) WITH ls_last_status-value_old ls_new_status-value_old  INTO lv_message.
+                APPEND VALUE #( message = lv_message type = mc_success ) TO me->mt_messages.
+                APPEND VALUE #( type = mc_success message = lv_message ) TO me->mt_log_messages.
+                CLEAR lv_message.
+*            WAIT UP TO 1 SECONDS.
+                me->create_info_kafka( iv_status = mc_shelved ).
+              ENDIF.
+            ENDIF.
+          ENDIF.
+        ENDIF.
+      ENDIF.
 
       me->mv_to_publish = abap_true.
-    else.
+    ELSE.
       lv_rc404 = abap_true.
       me->mv_to_publish = abap_false.
-    endif.
+    ENDIF.
 
 
 *    me->set_message_slg(  ).
@@ -1945,7 +2033,7 @@ class zcl_cof_change_customer_order implementation.
 
     rv_error = lv_error.
 
-  endmethod.
+  ENDMETHOD.
 
 
   method get_bgrfc_unit.
@@ -2197,6 +2285,203 @@ class zcl_cof_change_customer_order implementation.
   endmethod.
 
 
+  METHOD mass_change_sales_order_rgpd.
+
+    DATA :
+      ls_order_header_in  TYPE bapisdh1,
+      ls_order_header_inx TYPE bapisdh1x,
+      lt_order_text       TYPE TABLE OF bapisdtext,
+      lt_return           TYPE TABLE OF bapiret2,
+      ls_return           TYPE bapiret2,
+      lrt_stat            TYPE RANGE OF j_status,
+      lrs_stat            LIKE LINE OF lrt_stat,
+      ls_result	          TYPE ty_result_status,
+      lv_subrc            TYPE syst-subrc.
+
+
+* select status
+    SELECT *                                                "#EC WARNOK
+           FROM ztca_conversion
+           WHERE key1 = @mc_maestro
+           AND   key2 = @mc_status
+           AND  ( value_new = @mc_shipped OR value_new = @mc_shelved )
+           INTO TABLE @DATA(lt_ztca_conversion).
+    IF sy-subrc EQ 0.
+      lrs_stat-sign = 'I'.
+      lrs_stat-option = 'EQ'.
+      LOOP AT lt_ztca_conversion ASSIGNING FIELD-SYMBOL(<fs_conv>).
+        lrs_stat-low = <fs_conv>-value_new.
+        APPEND lrs_stat TO lrt_stat.
+      ENDLOOP.
+    ENDIF.
+
+* Change texte to be cleared
+    APPEND VALUE #( itm_number = '000000' text_id = 'Z001' langu = 'EN' text_line = '' ) TO lt_order_text.
+    APPEND VALUE #( itm_number = '000000' text_id = 'Z002' langu = 'EN' text_line = '' ) TO lt_order_text.
+    ls_order_header_inx-updateflag = 'U'.
+* clear Name and phone number
+    ls_order_header_inx-name = ls_order_header_inx-telephone = 'X'.
+    CLEAR : ls_order_header_in-name, ls_order_header_in-telephone.
+
+
+    IF ir_vbeln IS INITIAL AND ir_ref_maestro IS NOT INITIAL.
+      SELECT DISTINCT vbak~vbeln, bstnk, stat FROM vbak
+           INNER JOIN jest ON jest~objnr = vbak~objnr
+           WHERE bstnk IN @ir_ref_maestro
+             AND inact = @abap_false
+             AND stat IN @lrt_stat
+           INTO TABLE @DATA(lt_vbak).
+    ELSEIF ir_ref_maestro IS INITIAL AND ir_vbeln IS NOT INITIAL.
+      SELECT DISTINCT vbak~vbeln, bstnk, stat FROM vbak
+           INNER JOIN jest ON jest~objnr = vbak~objnr
+           WHERE vbeln IN @ir_vbeln
+             AND inact = @abap_false
+             AND stat IN @lrt_stat
+           INTO TABLE @lt_vbak.
+    ELSE.
+      SELECT DISTINCT vbak~vbeln, bstnk, stat FROM vbak
+         INNER JOIN jest ON jest~objnr = vbak~objnr
+         WHERE ( vbeln IN @ir_vbeln
+           OR bstnk IN @ir_ref_maestro )
+           AND inact = @abap_false
+           AND stat IN @lrt_stat
+         INTO TABLE @lt_vbak.
+    ENDIF.
+
+
+
+    IF sy-subrc = 0 AND lt_vbak IS NOT INITIAL.
+
+      LOOP AT lt_vbak ASSIGNING FIELD-SYMBOL(<fs_vbak>).
+
+        ls_result-sales_order = <fs_vbak>-vbeln.
+        ls_result-ref_maestro = <fs_vbak>-bstnk.
+        ls_result-status = <fs_vbak>-stat.
+
+        CALL FUNCTION 'BAPI_SALESORDER_CHANGE'
+          EXPORTING
+            salesdocument    = <fs_vbak>-vbeln
+            order_header_inx = ls_order_header_inx
+            order_header_in  = ls_order_header_in
+          TABLES
+            return           = lt_return
+            order_text       = lt_order_text.
+        IF sy-subrc = 0.
+          READ TABLE lt_return WITH KEY type = 'E' INTO ls_return.
+          IF sy-subrc NE 0.
+            READ TABLE lt_return INDEX 1 INTO ls_return.
+            ls_result-type = ls_return-type.
+            ls_result-message = ls_return-message.
+            COMMIT WORK AND WAIT.
+          ELSE.
+            ls_result-type = ls_return-type.
+            ls_result-message = ls_return-message.
+            ROLLBACK WORK.
+            "EXIT.
+          ENDIF.
+        ELSE.
+          ls_result-type = 'E'.
+          MESSAGE ID sy-msgid  TYPE sy-msgty NUMBER sy-msgno
+             WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4 INTO
+             ls_result-message.
+        ENDIF.
+        APPEND ls_result TO et_result.
+
+      ENDLOOP.
+
+    ENDIF.
+
+
+
+
+  ENDMETHOD.
+
+
+  method mass_change_status_sales_order.
+
+    data :
+     lv_stonr type j_stonr.
+
+    select distinct vbeln, objnr from vbak
+    where vbeln in @ir_vbeln
+    and bstnk in @ir_ref_maestro
+    into table @data(lt_vbak).
+
+    if sy-subrc = 0.
+
+      select vbeln, posnr, objnr from vbap
+        for all entries in @lt_vbak
+        where vbeln = @lt_vbak-vbeln
+        into table @data(lt_vbap).                 "#EC CI_NO_TRANSFORM
+
+      if sy-subrc = 0.
+      endif.
+
+
+      if lt_vbak is not initial.
+
+        loop at lt_vbak assigning field-symbol(<fs_vbak>).
+
+          " Changement de statut d'entête
+          call function 'STATUS_CHANGE_EXTERN'
+            exporting
+*             CHECK_ONLY          = ' '
+              client              = sy-mandt
+              objnr               = <fs_vbak>-objnr
+              user_status         = iv_status
+*             SET_INACT           = ' '
+*             SET_CHGKZ           =
+              no_check            = abap_true
+            importing
+              stonr               = lv_stonr
+            exceptions
+              object_not_found    = 1
+              status_inconsistent = 2
+              status_not_allowed  = 3
+              others              = 4.
+
+          if sy-subrc ne 0.
+            rv_subrc = sy-subrc.
+          endif.
+
+          loop at lt_vbap assigning field-symbol(<fs_vbap>)
+              where vbeln = <fs_vbak>-vbeln.
+
+            " Changement de statut des postes
+            call function 'STATUS_CHANGE_EXTERN'
+              exporting
+*               CHECK_ONLY          = ' '
+                client              = sy-mandt
+                objnr               = <fs_vbap>-objnr
+                user_status         = iv_status
+*               SET_INACT           = ' '
+*               SET_CHGKZ           =
+                no_check            = abap_true
+              importing
+                stonr               = lv_stonr
+              exceptions
+                object_not_found    = 1
+                status_inconsistent = 2
+                status_not_allowed  = 3
+                others              = 4.
+
+            if sy-subrc ne 0.
+              rv_subrc = sy-subrc.
+            endif.
+          endloop.
+
+          commit work and wait.
+        endloop.
+
+      endif.
+    endif.
+
+
+
+
+  endmethod.
+
+
   method modify_status.
     data :
       lv_error                    type abap_bool,
@@ -2268,13 +2553,24 @@ class zcl_cof_change_customer_order implementation.
           and target_status = @iv_target_status_code
         into @data(lv_item_target_status_allowed).
         if sy-subrc <> 0.
-          "Poste & de la commande n'a pas été mis à jour, statut du poste à &
-          lv_error = abap_true.
-          data(lv_posnr) = |{ ls_item_status-posnr alpha = out }|.
-          message e042(zcl_cof_order) with lv_posnr ls_item_status-txt30 into lv_message.
-          append value #( message = lv_message type = mc_error ) to me->mt_messages.
-          append value #( type = mc_error message = lv_message ) to me->mt_log_messages.
-          clear lv_message.
+
+          "Pas de message d'erreur si statut CANCELLED ou SHIPPED
+          if ls_item_status-stat ne mc_shelved and ls_item_status-stat ne mc_shipped.
+            lv_error = abap_true.
+            data(lv_posnr) = |{ ls_item_status-posnr alpha = out }|.
+            message w042(zcl_cof_order) with lv_posnr ls_item_status-txt30 into lv_message.
+            append value #( message = lv_message type = mc_warning ) to me->mt_messages.
+            append value #( type = mc_warning message = lv_message ) to me->mt_log_messages.
+            clear lv_message.
+          else.
+            "Poste & de la commande n'a pas été mis à jour, statut du poste à &
+            lv_error = abap_true.
+            lv_posnr = |{ ls_item_status-posnr alpha = out }|.
+            message e042(zcl_cof_order) with lv_posnr ls_item_status-txt30 into lv_message.
+            append value #( message = lv_message type = mc_error ) to me->mt_messages.
+            append value #( type = mc_error message = lv_message ) to me->mt_log_messages.
+            clear lv_message.
+          endif.
         endif.
       endif.
 
@@ -2321,10 +2617,22 @@ class zcl_cof_change_customer_order implementation.
         else.
           lv_error = abap_true.
           " Changement de statut du poste non effectué car statut CANCELED SHIPPED ou SHELVED`.
-          message e045(zcl_cof_order) with  iv_order_line ls_item_status-status  into lv_message.
-          append value #( message = lv_message type = mc_error ) to me->mt_messages.
-          append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
-          clear lv_message.
+
+
+          "Pas de message d'erreur si statut CANCELLED
+          if ls_item_status-status ne mc_shelved and ls_item_status-status ne mc_shipped.
+            message w045(zcl_cof_order) with  iv_order_line ls_item_status-status  into lv_message.
+            append value #( message = lv_message type = mc_warning ) to me->mt_messages.
+            append value #(  type = mc_warning message = lv_message ) to me->mt_log_messages.
+            clear lv_message.
+          else.
+            message e045(zcl_cof_order) with  iv_order_line ls_item_status-status  into lv_message.
+            append value #( message = lv_message type = mc_error ) to me->mt_messages.
+            append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+            clear lv_message.
+
+
+          endif.
         endif.    "ms_header_status-stat ne 'E0011'.
 
 
@@ -2574,11 +2882,19 @@ class zcl_cof_change_customer_order implementation.
                                                                                                      target_status = iv_target_status_code.
           if sy-subrc <> 0 and lv_need_to_check_status = abap_true.
             "Poste & de la commande n'a pas été mis à jour, statut du poste à &
-            lv_error = abap_true.
-            message e042(zcl_cof_order) with lv_posnr <fs_item_stat>-status into lv_message.
-            append value #( message = lv_message type = mc_error ) to me->mt_messages.
-            append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
-            clear lv_message.
+            if <fs_item_stat>-stat ne mc_shelved and <fs_item_stat>-stat ne mc_shipped.
+              lv_error = abap_true.
+              message w042(zcl_cof_order) with lv_posnr <fs_item_stat>-status into lv_message.
+              append value #( message = lv_message type = mc_warning ) to me->mt_messages.
+              append value #(  type = mc_warning message = lv_message ) to me->mt_log_messages.
+              clear lv_message.
+            else.
+              lv_error = abap_true.
+              message e042(zcl_cof_order) with lv_posnr <fs_item_stat>-status into lv_message.
+              append value #( message = lv_message type = mc_error ) to me->mt_messages.
+              append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+              clear lv_message.
+            endif.
 
           else.
 
@@ -2643,11 +2959,19 @@ class zcl_cof_change_customer_order implementation.
 
             else.
               "Changement de statut poste non effectué car statut CANCELLED ou SHIPPED ou SHELVED
-              lv_error = abap_true.
-              message e045(zcl_cof_order) with lv_posnr <fs_item_stat>-status into lv_message.
-              append value #( message = lv_message type = mc_error ) to me->mt_messages.
-              append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
-              clear lv_message.
+              if <fs_item_stat>-stat ne mc_shelved and <fs_item_stat>-stat ne mc_shipped.
+                lv_error = abap_true.
+                message w045(zcl_cof_order) with lv_posnr <fs_item_stat>-status into lv_message.
+                append value #( message = lv_message type = mc_warning ) to me->mt_messages.
+                append value #(  type = mc_warning message = lv_message ) to me->mt_log_messages.
+                clear lv_message.
+              else.
+                lv_error = abap_true.
+                message e045(zcl_cof_order) with lv_posnr <fs_item_stat>-status into lv_message.
+                append value #( message = lv_message type = mc_error ) to me->mt_messages.
+                append value #(  type = mc_error message = lv_message ) to me->mt_log_messages.
+                clear lv_message.
+              endif.
             endif.    "ls_item_stat-stat ne 'E0011'.
           endif.
         endif.
@@ -3056,83 +3380,4 @@ class zcl_cof_change_customer_order implementation.
     endif.
 
   endmethod.
-  method execute_cancel_order.
-
-    data :
-      lo_in_unit type ref to if_qrfc_unit_inbound,
-      lv_status  type string,
-      lv_queue   type string.
-
-
-    "on récupère l'objet de la file d'attente BgRFC
-    lv_queue = |{ mc_sd_cof }{ mv_vbeln }{ mc_underscore }{ 'CANCEL' }|.
-    lo_in_unit = zcl_api_call_kafka=>get_bgrfc_unit( lv_queue  ).
-
-    " Appel du module fonction RFC et mise dans la file d'attente BgRFC
-    call function 'ZFCUSORDER_CANCEL_ORDER'
-      in background unit lo_in_unit
-      exporting
-        iv_called_bu_code    = ms_header-called_bu_code
-        iv_called_store_code = ms_header-called_store_code
-        iv_user_bu_code      = ms_header-user_bu_code
-        iv_user_store_code   = ms_header-user_store_code
-        iv_maestro_num       = mv_maestro_num
-        iv_ldap_number       = mv_ldap_number
-        iv_status            = mv_status.
-
-
-    if sy-subrc = 0.
-      commit work.
-      "file lancée.
-    else.
-      "erreur.
-      rv_subrc = 4.
-    endif.
-
-    rv_subrc         = sy-subrc .
-
-
-  endmethod.
-
-  method execute_change_status_shipped.
-
-    data :
-      lo_in_unit type ref to if_qrfc_unit_inbound,
-      lv_status  type string,
-      lv_queue   type string.
-
-
-    read table mt_ztca_conversion with key value_new = mc_shipped into data(ls_status).
-
-    lv_queue = |{ mc_sd_cof }{ mv_vbeln }{ mc_underscore }{ ls_status-value_old }|.
-
-    "on récupère l'objet de la file d'attente BgRFC
-    lo_in_unit = zcl_api_call_kafka=>get_bgrfc_unit( lv_queue  ).
-
-    " Appel du module fonction RFC et mise dans la file d'attente BgRFC
-    call function 'ZFCUSORDER_SHIPPED'
-      in background unit lo_in_unit
-      exporting
-*       iv_vbeln             = mv_vbeln
-        iv_order_line        = iv_order_line
-        iv_status            = iv_status
-        iv_called_bu_code    = ms_header-called_bu_code
-        iv_called_store_code = ms_header-called_store_code
-        iv_user_bu_code      = ms_header-user_bu_code
-        iv_user_store_code   = ms_header-user_store_code
-        iv_maestro_num       = mv_maestro_num
-        iv_ldap_number       = mv_ldap_number.
-
-    if sy-subrc = 0.
-      commit work.
-      "file lancée.
-    else.
-      "erreur.
-      rv_subrc = 4.
-    endif.
-
-    rv_subrc         = sy-subrc .
-
-  endmethod.
-
-endclass.
+ENDCLASS.

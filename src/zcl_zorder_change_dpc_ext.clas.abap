@@ -112,11 +112,17 @@ class zcl_zorder_change_dpc_ext implementation.
 
       ls_request           type zcl_zorder_change_mpc=>ts_set_order_reduction,
       lt_response          type tt_bapiret2,
+      ls_response          type bapiret2,
       lo_message_container type ref to /iwbep/if_message_container,
       lv_prefixe           type char1,
       lv_store             type char3,
       lv_subrc             type syst-subrc,
-      lv_error             type abap_bool.
+      lv_error             type abap_bool,
+      lv_amount(16),  "define another field
+      lv_decimals(4),
+      lv_is_decimal        type abap_bool,
+      lv_no_reduction      type abap_bool value abap_false,
+      lv_message           type string.
 
     me->mo_context->get_message_container(
       receiving
@@ -149,13 +155,56 @@ class zcl_zorder_change_dpc_ext implementation.
 
     if lv_error ne abap_true and lv_subrc = 0.
 
-      lv_error = lo_change_customer_order->execute_order_reduction(
-                            exporting
-                              iv_order_line         = conv string( ls_request-item_line_number ) "'20'
-                              iv_quantity_to_reduce = ls_request-item_new_quantity "'1'
-                              iv_simulation         = ls_request-test_run
-                              iv_is_api             = abap_false
-                          ).
+      select single vbap~matnr
+            from vbak
+            inner join vbap on vbap~vbeln = vbak~vbeln
+            where vbak~bstnk = @ls_request-maestro_customer_order
+              and vbap~posnr = @ls_request-item_line_number
+            into @data(lv_matnr).
+
+      if sy-subrc = 0.
+        lv_amount = ls_request-item_new_quantity.
+
+        split lv_amount at '.' into lv_amount lv_decimals.
+        if lv_decimals gt 0.
+          lv_is_decimal = abap_true. "amount field with decimals
+        endif.
+
+        select single meins from mara
+            where matnr = @lv_matnr
+            into @data(lv_meins).
+
+        if sy-subrc = 0.
+
+          if lv_meins = 'ST' and lv_is_decimal = abap_true.
+            lv_no_reduction = abap_true.
+          endif.
+        endif.
+      endif.
+
+      if lv_no_reduction = abap_false.
+        lv_error = lo_change_customer_order->execute_order_reduction(
+                              exporting
+                                iv_order_line         = conv string( ls_request-item_line_number ) "'20'
+                                iv_quantity_to_reduce = ls_request-item_new_quantity "'1'
+                                iv_simulation         = ls_request-test_run
+                                iv_is_api             = abap_false
+                            ).
+
+      else.
+        "Erreur conversion magasin
+        message e052(zcl_cof_order) into ls_response-message.
+        ls_response-type       = zcl_cof_change_customer_order=>mc_error .
+        ls_response-id         = 'ZCl_COF_ORDER'   .
+        ls_response-number     = '052'  .
+        ls_response-message_v1 = lv_message   .
+        ls_response-message_v2 = ''   .
+        ls_response-message_v3 = ''   .
+        ls_response-message_v4 = ''   .
+        clear lv_message.
+        lv_error = abap_true.
+
+      endif.
 
 *    if lo_change_customer_order->mv_to_publish = abap_true and ls_request-test_run ne abap_true.
 *      lo_change_customer_order->create_info_kafka( iv_is_order_reduction = abap_true iv_posnr = ls_request-item_line_number ).
@@ -167,6 +216,9 @@ class zcl_zorder_change_dpc_ext implementation.
     if lv_error = abap_true.
 
       lt_response = value #( (   type = zcl_cof_change_customer_order=>mc_error message = mc_error_text ) ).
+      if ls_response is not initial.
+        append ls_response to lt_response.
+      endif.
       append lines of lo_change_customer_order->get_messages(  ) to lt_response.
 
     else.

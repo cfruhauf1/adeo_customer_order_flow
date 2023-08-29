@@ -12,250 +12,264 @@
 *&               republication de message KAFKA
 *&               modification en masse de statuts de commande
 *&---------------------------------------------------------------------*
-report zcof_run_tools.
-tables : vbak, jcds, sscrfields.
+REPORT zcof_run_tools.
+TABLES : vbak, jcds, sscrfields.
 
-data :
-  go_hist       type ref to zcl_cof_kafka_historic,
-  gt_hist_kafka type table of ztcof_hist_kafka,
-  gv_row        type salv_de_row,
-  gr_bu         type range of char3.
+TYPES : BEGIN OF ty_result_status,
+          sales_order TYPE vbeln,
+          ref_maestro TYPE  bstnk,
+          status      TYPE  j_txt30,
+          type        TYPE  bapi_mtype,
+          message     TYPE  bapi_msg,
+        END OF ty_result_status.
+
+DATA :
+  go_hist       TYPE REF TO zcl_cof_kafka_historic,
+  gt_hist_kafka TYPE TABLE OF ztcof_hist_kafka,
+  gv_row        TYPE salv_de_row,
+  gr_bu         TYPE RANGE OF char3.
 
 *&---------------------------------------------------------------------*
 
 "  Selection Screen
 *&---------------------------------------------------------------------*
 
-selection-screen begin of block part00 with frame title text-015.
-selection-screen begin of line.
-selection-screen comment 1(43) text-001 .
-parameters :
-  p_rad1 radiobutton group sel1 default 'X' user-command rcommand.      " Republication de message KAKFA
-selection-screen end of line.
+SELECTION-SCREEN BEGIN OF BLOCK part00 WITH FRAME TITLE TEXT-015.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(53) TEXT-001 .
+PARAMETERS :
+  p_rad1 RADIOBUTTON GROUP sel1 DEFAULT 'X' USER-COMMAND rcommand.      " Republication de message KAKFA
+SELECTION-SCREEN END OF LINE.
 
-selection-screen begin of line.
-selection-screen comment 1(43) text-007.
-parameters :
-  p_rad2 radiobutton group sel1.                                        " Modification en masse de statut
-selection-screen end of line.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(53) TEXT-007.
+PARAMETERS :
+  p_rad2 RADIOBUTTON GROUP sel1.                                        " Modification en masse de statut
+SELECTION-SCREEN END OF LINE.
 
-selection-screen begin of line.
-selection-screen comment 1(43) text-016.
-parameters :
-  p_rad3 radiobutton group sel1.                                        " Purge de l'historique de publication
-selection-screen end of line.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(53) TEXT-016.
+PARAMETERS :
+  p_rad3 RADIOBUTTON GROUP sel1.                                        " Purge de l'historique de publication
+SELECTION-SCREEN END OF LINE.
 
-selection-screen end of block part00.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(53) TEXT-020.
+PARAMETERS :
+  p_rad4 RADIOBUTTON GROUP sel1.                                        " Modification cde pour statut Shelved & Shipped
+SELECTION-SCREEN END OF LINE.
 
-selection-screen begin of block b1 with frame title text-001.
+SELECTION-SCREEN END OF BLOCK part00.
 
-selection-screen begin of line.
-selection-screen comment 1(50) text-002  modif id g1.
-parameters :
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
 
-  p_store type werks_d  modif id g1.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(50) TEXT-002  MODIF ID g1.
+PARAMETERS :
 
-selection-screen end of line.
-selection-screen begin of line.
-selection-screen comment 1(47) text-003  modif id g1.
-select-options :
+  p_store TYPE werks_d  MODIF ID g1.
 
-  s_date for sy-datum  modif id g1.
-selection-screen end of line.
-selection-screen begin of line.
-selection-screen comment 1(47) text-004  modif id g1.
-select-options :
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(47) TEXT-003  MODIF ID g1.
+SELECT-OPTIONS :
 
-  s_time for sy-uzeit  modif id g1.
-selection-screen end of line.
-selection-screen begin of line.
-selection-screen comment 1(50) text-005  modif id g1.
-parameters :
+  s_date FOR sy-datum  MODIF ID g1.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(47) TEXT-004  MODIF ID g1.
+SELECT-OPTIONS :
 
-  p_vbeln type vbak-vbeln  modif id g1 .
+  s_time FOR sy-uzeit  MODIF ID g1.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(50) TEXT-005  MODIF ID g1.
+PARAMETERS :
 
-selection-screen end of line.
-selection-screen begin of line.
-selection-screen comment 1(50) text-006  modif id g1.
-parameters :
+  p_vbeln TYPE vbak-vbeln  MODIF ID g1 .
 
-  p_ref type vbak-bstnk   modif id g1.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(50) TEXT-006  MODIF ID g1.
+PARAMETERS :
 
-selection-screen end of line.
-selection-screen end of block b1.
+  p_ref TYPE vbak-bstnk   MODIF ID g1.
 
-selection-screen begin of block b2 with frame title text-007.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN END OF BLOCK b1.
 
-selection-screen begin of line.
-selection-screen comment 1(47) text-005  modif id g2.
-select-options :
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE TEXT-007.
 
-  s_sales for vbak-vbeln   modif id g2.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(47) TEXT-005  MODIF ID g4.
+SELECT-OPTIONS :
 
-selection-screen end of line.
-selection-screen begin of line.
-selection-screen comment 1(47) text-006  modif id g2.
-select-options :
+  s_sales FOR vbak-vbeln   MODIF ID g4.
 
-  s_refs for vbak-bstnk   modif id g2.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(47) TEXT-006  MODIF ID g4.
+SELECT-OPTIONS :
 
-selection-screen end of line.
-selection-screen begin of line.
-selection-screen comment 1(50) text-010  modif id g2.
-parameters :
+  s_refs FOR vbak-bstnk   MODIF ID g4.
 
-  p_stat like jcds-stat  modif id g2.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(50) TEXT-010  MODIF ID g2.
+PARAMETERS :
 
-selection-screen end of line.
-selection-screen end of block b2.
+  p_stat LIKE jcds-stat  MODIF ID g2.
 
-
-selection-screen begin of block b3 with frame title text-016.
-
-selection-screen begin of line.
-selection-screen comment 1(47) text-003  modif id g3.
-select-options :
-
-  s_hdate for sy-datum   modif id g3.
-
-selection-screen end of line.
-selection-screen end of block b3.
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN END OF BLOCK b2.
 
 
+SELECTION-SCREEN BEGIN OF BLOCK b3 WITH FRAME TITLE TEXT-016.
 
-class lcl_handle_events definition.
-  public section.
-    methods:
-      on_user_command for event added_function of cl_salv_events
-        importing e_salv_function,
+SELECTION-SCREEN BEGIN OF LINE.
+SELECTION-SCREEN COMMENT 1(47) TEXT-003  MODIF ID g3.
+SELECT-OPTIONS :
 
-      on_before_salv_function for event before_salv_function of cl_salv_events
-        importing e_salv_function,
+  s_hdate FOR sy-datum   MODIF ID g3.
 
-      on_after_salv_function for event after_salv_function of cl_salv_events
-        importing e_salv_function,
+SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN END OF BLOCK b3.
 
-      on_double_click for event double_click of cl_salv_events_table
-        importing row column,
 
-      on_link_click for event link_click of cl_salv_events_table
-        importing row column.
-endclass.                    "lcl_handle_events DEFINITION
 
-class lcl_handle_events implementation.
-  method on_user_command.
+CLASS lcl_handle_events DEFINITION.
+  PUBLIC SECTION.
+    METHODS:
+      on_user_command FOR EVENT added_function OF cl_salv_events
+        IMPORTING e_salv_function,
+
+      on_before_salv_function FOR EVENT before_salv_function OF cl_salv_events
+        IMPORTING e_salv_function,
+
+      on_after_salv_function FOR EVENT after_salv_function OF cl_salv_events
+        IMPORTING e_salv_function,
+
+      on_double_click FOR EVENT double_click OF cl_salv_events_table
+        IMPORTING row column,
+
+      on_link_click FOR EVENT link_click OF cl_salv_events_table
+        IMPORTING row column.
+ENDCLASS.                    "lcl_handle_events DEFINITION
+
+CLASS lcl_handle_events IMPLEMENTATION.
+  METHOD on_user_command.
 *    perform handle_user_command using e_salv_function.
-    data :
-      ls_hist       type ztcof_hist_kafka,
-      lv_subrc      type syst-subrc,
-      lo_selections type ref to cl_salv_selections,
-      lt_rows       type salv_t_row.
+    DATA :
+      ls_hist       TYPE ztcof_hist_kafka,
+      lv_subrc      TYPE syst-subrc,
+      lo_selections TYPE REF TO cl_salv_selections,
+      lt_rows       TYPE salv_t_row.
 
 *lo_selections = lcl_report=>get_instance()->mo_alv->get_selections( ).
 
-    read table gt_hist_kafka into ls_hist index gv_row.
+    READ TABLE gt_hist_kafka INTO ls_hist INDEX gv_row.
 
-    if sy-subrc = 0.
-      if ls_hist-message is not initial.
+    IF sy-subrc = 0.
+      IF ls_hist-message IS NOT INITIAL.
 
-        try.
+        TRY.
 
-            call transformation sjson2html  source xml ls_hist-message
-                               result xml data(xml).
+            CALL TRANSFORMATION sjson2html  SOURCE XML ls_hist-message
+                               RESULT XML DATA(xml).
             cl_abap_browser=>show_html( html_string = cl_abap_codepage=>convert_from( xml )
                                          size = cl_abap_browser=>xlarge  ).
 
-          catch cx_st_error.
+          CATCH cx_st_error.
 
-            message text-009 type 'W'.
+            MESSAGE TEXT-009 TYPE 'W'.
 
-        endtry.
+        ENDTRY.
 
-      endif.
-    endif.
-  endmethod.                    "on_user_command
+      ENDIF.
+    ENDIF.
+  ENDMETHOD.                    "on_user_command
 
-  method on_before_salv_function.
+  METHOD on_before_salv_function.
 *    perform show_function_info using e_salv_function text-i09.
-  endmethod.                    "on_before_salv_function
+  ENDMETHOD.                    "on_before_salv_function
 
-  method on_after_salv_function.
+  METHOD on_after_salv_function.
 *    perform show_function_info using e_salv_function text-i10.
-  endmethod.                    "on_after_salv_function
+  ENDMETHOD.                    "on_after_salv_function
 
-  method on_double_click.
+  METHOD on_double_click.
 
-    data :
-      ls_hist       type ztcof_hist_kafka,
-      lv_subrc      type syst-subrc.
+    DATA :
+      ls_hist  TYPE ztcof_hist_kafka,
+      lv_subrc TYPE syst-subrc.
 
-    read table gt_hist_kafka into ls_hist index row.
+    READ TABLE gt_hist_kafka INTO ls_hist INDEX row.
 
-    if sy-subrc = 0.
+    IF sy-subrc = 0.
       lv_subrc = go_hist->publish_record( ls_hist-entry_key ).
 
-      if lv_subrc = 0.
-        message text-011 type 'S'.
+      IF lv_subrc = 0.
+        MESSAGE TEXT-011 TYPE 'S'.
 
-      else.
+      ELSE.
 
-        message text-012 type 'E'.
-      endif.
-    endif.
+        MESSAGE TEXT-012 TYPE 'E'.
+      ENDIF.
+    ENDIF.
 
-  endmethod.                    "on_double_click
+  ENDMETHOD.                    "on_double_click
 
-  method on_link_click.
+  METHOD on_link_click.
 *    perform show_cell_info using row column text-i06.
     gv_row = row.
-  endmethod.                    "on_single_click
-endclass.                    "lcl_handle_events IMPLEMENTATION
+  ENDMETHOD.                    "on_single_click
+ENDCLASS.                    "lcl_handle_events IMPLEMENTATION
 
-class lcl_report definition.
+CLASS lcl_report DEFINITION.
 
-  public section.
+  PUBLIC SECTION.
 
-    types :
-      rt_store type range of werks_d,
-      rt_date  type range of sy-datum,
-      rt_time  type range of tims,
-      rt_vbeln type range of vbak-vbeln,
-      rt_ref   type range of vbak-bstnk.
+    TYPES :
+      rt_store TYPE RANGE OF werks_d,
+      rt_date  TYPE RANGE OF sy-datum,
+      rt_time  TYPE RANGE OF tims,
+      rt_vbeln TYPE RANGE OF vbak-vbeln,
+      rt_ref   TYPE RANGE OF vbak-bstnk.
 
 
-    data :
-      mr_store type rt_store,
-      mr_date  type rt_date,
-      mr_time  type rt_time,
-      mr_vbeln type rt_vbeln,
-      mr_ref   type rt_ref.
+    DATA :
+      mr_store TYPE rt_store,
+      mr_date  TYPE rt_date,
+      mr_time  TYPE rt_time,
+      mr_vbeln TYPE rt_vbeln,
+      mr_ref   TYPE rt_ref.
 
-    class-methods :
+    CLASS-METHODS :
       "! <p class="shorttext synchronized"> Display JSON offers in interactive format </p>
-      display_message importing iv_json type string.
+      display_message IMPORTING iv_json TYPE string.
 
-    methods :
+    METHODS :
 
       constructor,
 
-      main importing ir_store type rt_store
-                     ir_date  type rt_date
-                     ir_time  type rt_time
-                     ir_vbeln type rt_vbeln
-                     ir_ref   type rt_ref .
+      main IMPORTING ir_store TYPE rt_store
+                     ir_date  TYPE rt_date
+                     ir_time  TYPE rt_time
+                     ir_vbeln TYPE rt_vbeln
+                     ir_ref   TYPE rt_ref .
 
-  protected section.
+  PROTECTED SECTION.
 
-    data :
-      mo_container        type ref to cl_gui_docking_container,
-      mo_split            type ref to cl_gui_splitter_container,
-      mo_top_container    type ref to cl_gui_container,
-      mo_center_container type ref to cl_gui_container,
-      mo_bottom_container type ref to cl_gui_container,
-      mo_alv              type ref to cl_salv_table.
+    DATA :
+      mo_container        TYPE REF TO cl_gui_docking_container,
+      mo_split            TYPE REF TO cl_gui_splitter_container,
+      mo_top_container    TYPE REF TO cl_gui_container,
+      mo_center_container TYPE REF TO cl_gui_container,
+      mo_bottom_container TYPE REF TO cl_gui_container,
+      mo_alv              TYPE REF TO cl_salv_table.
 
 
-    methods :
+    METHODS :
 
       get_data,
 
@@ -265,16 +279,16 @@ class lcl_report definition.
       "! Method to configure and display ALV
       display .
 
-  private section.
-endclass.
+  PRIVATE SECTION.
+ENDCLASS.
 
-class lcl_report implementation.
+CLASS lcl_report IMPLEMENTATION.
 
-  method constructor.
+  METHOD constructor.
 
-  endmethod.
+  ENDMETHOD.
 
-  method main.
+  METHOD main.
 
     mr_store = ir_store.
     mr_date = ir_date.
@@ -289,29 +303,29 @@ class lcl_report implementation.
     display(  ).
 
 
-  endmethod.
+  ENDMETHOD.
 
-  method get_data.
+  METHOD get_data.
 
 
-    select * from ztcof_hist_kafka
-        where bu_code in @gr_bu
-          and store in @mr_store
-          and sales_order in @mr_vbeln
-          and ref_maestro in @mr_ref
-          and publish_date in @mr_date
-          and publish_hour in @mr_time
-        into table @gt_hist_kafka.                      "#EC CI_NOFIELD
+    SELECT * FROM ztcof_hist_kafka
+        WHERE bu_code IN @gr_bu
+          AND store IN @mr_store
+          AND sales_order IN @mr_vbeln
+          AND ref_maestro IN @mr_ref
+          AND publish_date IN @mr_date
+          AND publish_hour IN @mr_time
+        INTO TABLE @gt_hist_kafka.                      "#EC CI_NOFIELD
 
-    if sy-subrc ne 0.
+    IF sy-subrc NE 0.
 
-      message text-019 type 'E'.
-    endif.
-  endmethod.
+      MESSAGE TEXT-019 TYPE 'E'.
+    ENDIF.
+  ENDMETHOD.
 
-  method split.
+  METHOD split.
 
-    mo_split = new cl_gui_splitter_container(
+    mo_split = NEW cl_gui_splitter_container(
                parent                  = cl_gui_container=>screen0  "cl_gui_container=>default_screen
                no_autodef_progid_dynnr = abap_true
                rows                    = 1
@@ -319,45 +333,45 @@ class lcl_report implementation.
             ).
 
     mo_split->get_container(
-      exporting
+      EXPORTING
             row       = 1
             column    = 1
-          receiving
+          RECEIVING
             container = mo_top_container
       ).
 
 
     mo_split->get_container(
-      exporting
+      EXPORTING
             row       = 2
             column    = 1
-          receiving
+          RECEIVING
             container = mo_bottom_container
       ).
 
 
-  endmethod.
+  ENDMETHOD.
 
 
-  method display.
+  METHOD display.
 
-    data :
-      lo_columns    type ref to cl_salv_columns_table,
-      lo_column     type ref to cl_salv_column_table,
-      lo_events     type ref to lcl_handle_events,
-      lr_events     type ref to cl_salv_events_table,
-      lo_selections type ref to cl_salv_selections,
-      lo_cols_tab   type ref to cl_salv_columns_table,
-      lo_col_tab    type ref to cl_salv_column_table.
+    DATA :
+      lo_columns    TYPE REF TO cl_salv_columns_table,
+      lo_column     TYPE REF TO cl_salv_column_table,
+      lo_events     TYPE REF TO lcl_handle_events,
+      lr_events     TYPE REF TO cl_salv_events_table,
+      lo_selections TYPE REF TO cl_salv_selections,
+      lo_cols_tab   TYPE REF TO cl_salv_columns_table,
+      lo_col_tab    TYPE REF TO cl_salv_column_table.
 
 *... §2 create an ALV table
-    try.
+    TRY.
         cl_salv_table=>factory(
-            exporting
+            EXPORTING
              r_container = mo_top_container
-          importing
+          IMPORTING
             r_salv_table = mo_alv
-          changing
+          CHANGING
             t_table      = gt_hist_kafka ).             "#EC CI_NOORDER
 
 
@@ -365,272 +379,442 @@ class lcl_report implementation.
         lo_columns->set_optimize( abap_true ).
 
         lr_events = mo_alv->get_event( ).
-        create object lo_events.
-        set handler lo_events->on_double_click for lr_events.
-        set handler lo_events->on_user_command for lr_events.
-        set handler lo_events->on_link_click for lr_events.
+        CREATE OBJECT lo_events.
+        SET HANDLER lo_events->on_double_click FOR lr_events.
+        SET HANDLER lo_events->on_user_command FOR lr_events.
+        SET HANDLER lo_events->on_link_click FOR lr_events.
 
-        data(lo_functions) = mo_alv->get_functions(  ).
+        DATA(lo_functions) = mo_alv->get_functions(  ).
         lo_functions->set_all( if_salv_c_bool_sap=>true ).
 
         lo_functions->add_function(
-          exporting
+          EXPORTING
             name     = 'SHOW'
             icon     = ''                       "'ICON_VIEWER_OPTICAL_ARCHIVE'
-            text     = conv string( text-013 )                 "'Afficher message'
+            text     = CONV string( TEXT-013 )                 "'Afficher message'
             tooltip  = ''
             position = if_salv_c_function_position=>right_of_salv_functions
         ).
 
         " get Columns object
         lo_cols_tab = mo_alv->get_columns( ).
-        try.
+        TRY.
             lo_col_tab ?= lo_cols_tab->get_column( 'ENTRY_KEY' ).
-          catch cx_salv_not_found.
-        endtry.
+          CATCH cx_salv_not_found.
+        ENDTRY.
 
         lo_col_tab->set_cell_type( if_salv_c_cell_type=>hotspot ).
 
-        try.
+        TRY.
             lo_col_tab ?= lo_cols_tab->get_column( 'BU_CODE' ).
-          catch cx_salv_not_found.
-        endtry.
+          CATCH cx_salv_not_found.
+        ENDTRY.
 
         lo_col_tab->set_cell_type( if_salv_c_cell_type=>hotspot ).
 
-        try.
+        TRY.
             lo_col_tab ?= lo_cols_tab->get_column( 'STORE' ).
-          catch cx_salv_not_found.
-        endtry.
+          CATCH cx_salv_not_found.
+        ENDTRY.
 
         lo_col_tab->set_cell_type( if_salv_c_cell_type=>hotspot ).
 
-        try.
+        TRY.
             lo_col_tab ?= lo_cols_tab->get_column( 'SALES_ORDER' ).
-          catch cx_salv_not_found.
-        endtry.
+          CATCH cx_salv_not_found.
+        ENDTRY.
 
         lo_col_tab->set_cell_type( if_salv_c_cell_type=>hotspot ).
 
-        try.
+        TRY.
             lo_col_tab ?= lo_cols_tab->get_column( 'REF_MAESTRO' ).
-          catch cx_salv_not_found.
-        endtry.
+          CATCH cx_salv_not_found.
+        ENDTRY.
 
         lo_col_tab->set_cell_type( if_salv_c_cell_type=>hotspot ).
 
         mo_alv->display(  ).
-      catch cx_salv_msg.                                "#EC NO_HANDLER
-      catch cx_salv_existing cx_salv_wrong_call.
-    endtry.
-  endmethod.
+      CATCH cx_salv_msg.                                "#EC NO_HANDLER
+      CATCH cx_salv_existing cx_salv_wrong_call.
+    ENDTRY.
+  ENDMETHOD.
 
-  method display_message.
+  METHOD display_message.
 
-    if iv_json is not initial.
+    IF iv_json IS NOT INITIAL.
 
-      try.
+      TRY.
 
-          call transformation sjson2html  source xml iv_json
-                             result xml data(xml).
+          CALL TRANSFORMATION sjson2html  SOURCE XML iv_json
+                             RESULT XML DATA(xml).
           cl_abap_browser=>show_html( html_string = cl_abap_codepage=>convert_from( xml ) ).
 
-        catch cx_st_error.
+        CATCH cx_st_error.
 
-          message text-009 type 'W'.
+          MESSAGE TEXT-009 TYPE 'W'.
 
-      endtry.
+      ENDTRY.
 
-    endif.
-  endmethod.
+    ENDIF.
+  ENDMETHOD.
 
-endclass.
+ENDCLASS.
+
+CLASS lcl_report_status DEFINITION.
+
+  PUBLIC SECTION.
 
 
-at selection-screen on value-request for p_stat.
-  select distinct ztca~value_new as status, tj30t~txt30
-        from ztca_conversion as ztca
-          inner join tj30t on tj30t~estat = ztca~value_new
-          where ztca~key1 = 'MAESTRO_ORDER' and ztca~key2 = 'STATUS'
-            and tj30t~stsma = 'ZSTATUS' and tj30t~spras = @sy-langu
-      into table @data(lt_f4_status).                  "#EC CI_BUFFJOIN
+    TYPES: tty_result_status TYPE TABLE OF ty_result_status.
 
-  if sy-subrc ne 0.
-  endif.
+    DATA :
+      mt_result_status TYPE TABLE OF ty_result_status.
 
-  call function 'F4IF_INT_TABLE_VALUE_REQUEST'
-    exporting
+    METHODS :
+
+      constructor,
+
+      main IMPORTING it_result_status TYPE tty_result_status.
+
+  PROTECTED SECTION.
+
+    DATA :
+      mo_container_status        TYPE REF TO cl_gui_docking_container,
+      mo_split_status            TYPE REF TO cl_gui_splitter_container,
+      mo_top_container_status    TYPE REF TO cl_gui_container,
+      mo_center_container_status TYPE REF TO cl_gui_container,
+      mo_bottom_container_status TYPE REF TO cl_gui_container,
+      mo_alv_status              TYPE REF TO cl_salv_table.
+
+
+    METHODS :
+
+      split,
+
+      display.
+
+  PRIVATE SECTION.
+ENDCLASS.
+
+CLASS lcl_report_status IMPLEMENTATION.
+
+  METHOD constructor.
+
+  ENDMETHOD.
+
+  METHOD main.
+
+    mt_result_status = it_result_status.
+
+    split(  ).
+
+    display( ).
+
+  ENDMETHOD.
+
+  METHOD split.
+
+    mo_split_status = NEW cl_gui_splitter_container(
+               parent                  = cl_gui_container=>screen0  "cl_gui_container=>default_screen
+               no_autodef_progid_dynnr = abap_true
+               rows                    = 1
+               columns                 = 1
+            ).
+
+    mo_split_status->get_container(
+      EXPORTING
+            row       = 1
+            column    = 1
+          RECEIVING
+            container = mo_top_container_status
+      ).
+
+
+    mo_split_status->get_container(
+      EXPORTING
+            row       = 2
+            column    = 1
+          RECEIVING
+            container = mo_bottom_container_status
+      ).
+
+
+  ENDMETHOD.
+
+
+  METHOD display.
+
+    DATA :
+      lo_columns    TYPE REF TO cl_salv_columns_table,
+      lo_column     TYPE REF TO cl_salv_column_table,
+      lo_events     TYPE REF TO lcl_handle_events,
+      lr_events     TYPE REF TO cl_salv_events_table,
+      lo_selections TYPE REF TO cl_salv_selections,
+      lo_cols_tab   TYPE REF TO cl_salv_columns_table,
+      lo_col_tab    TYPE REF TO cl_salv_column_table.
+
+*... §2 create an ALV table
+    TRY.
+        cl_salv_table=>factory(
+            EXPORTING
+             r_container = mo_top_container_status
+          IMPORTING
+            r_salv_table = mo_alv_status
+          CHANGING
+            t_table      = mt_result_status ).          "#EC CI_NOORDER
+
+        lo_columns = mo_alv_status->get_columns( ).
+        lo_columns->set_optimize( abap_true ).
+
+        mo_alv_status->display(  ).
+      CATCH cx_salv_msg.                                "#EC NO_HANDLER
+      CATCH cx_salv_existing cx_salv_wrong_call.
+    ENDTRY.
+  ENDMETHOD.
+
+ENDCLASS.
+
+
+AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_stat.
+  SELECT DISTINCT ztca~value_new AS status, tj30t~txt30
+        FROM ztca_conversion AS ztca
+          INNER JOIN tj30t ON tj30t~estat = ztca~value_new
+          WHERE ztca~key1 = 'MAESTRO_ORDER' AND ztca~key2 = 'STATUS'
+            AND tj30t~stsma = 'ZSTATUS' AND tj30t~spras = @sy-langu
+      INTO TABLE @DATA(lt_f4_status).                  "#EC CI_BUFFJOIN
+
+  IF sy-subrc NE 0.
+  ENDIF.
+
+  CALL FUNCTION 'F4IF_INT_TABLE_VALUE_REQUEST'
+    EXPORTING
       dynprofield  = 'P_STAT'
       retfield     = 'STATUS'
       dynpprog     = sy-repid
       dynpnr       = sy-dynnr
       value_org    = 'S'
       window_title = 'Status'
-    tables
+    TABLES
       value_tab    = lt_f4_status.
 
 
 
-at selection-screen output.
-  if p_rad1 = 'X'.
-    loop at screen.
-      if screen-group1 = 'G1'.
+AT SELECTION-SCREEN OUTPUT.
+  IF p_rad1 = 'X'.
+    LOOP AT SCREEN.
+      IF screen-group1 = 'G1'.
         screen-active = '1'.
         screen-input = 1.
-      elseif screen-group1 = 'G2'.
+      ELSEIF screen-group1 = 'G2' OR screen-group1 = 'G4'.
         screen-active = '0'.
         screen-input = 0.
-      elseif screen-group1 = 'G3'.
+      ELSEIF screen-group1 = 'G3'.
         screen-active = '0'.
         screen-input = 0.
-      endif.
-      modify screen.
-    endloop.
+      ENDIF.
+      MODIFY SCREEN.
+    ENDLOOP.
 
-  elseif p_rad2 = 'X'.
-    loop at screen.
-      if screen-group1 = 'G1'.
+  ELSEIF p_rad2 = 'X'.
+    LOOP AT SCREEN.
+      IF screen-group1 = 'G1'.
         screen-active = '0'.
         screen-input = 0.
-      elseif screen-group1 = 'G2'.
+      ELSEIF screen-group1 = 'G2' OR screen-group1 = 'G4'.
         screen-active = '1'.
         screen-input = 1.
-      elseif screen-group1 = 'G3'.
+      ELSEIF screen-group1 = 'G3'.
         screen-active = '0'.
         screen-input = 0.
 
-      endif.
-      modify screen.
-    endloop.
-  elseif p_rad3 = 'X'.
-    loop at screen.
-      if screen-group1 = 'G1'.
+      ENDIF.
+      MODIFY SCREEN.
+    ENDLOOP.
+  ELSEIF p_rad3 = 'X'.
+    LOOP AT SCREEN.
+      IF screen-group1 = 'G1'.
         screen-active = '0'.
         screen-input = 0.
-      elseif screen-group1 = 'G2'.
+      ELSEIF screen-group1 = 'G2' OR screen-group1 = 'G4'..
         screen-active = '0'.
         screen-input = 0.
-      elseif screen-group1 = 'G3'.
+      ELSEIF screen-group1 = 'G3'.
         screen-active = '1'.
         screen-input = 1.
 
-      endif.
-      modify screen.
-    endloop.
-  endif.
+      ENDIF.
+      MODIFY SCREEN.
+    ENDLOOP.
+  ELSEIF p_rad4 = 'X'.
+    LOOP AT SCREEN.
+      IF screen-group1 = 'G1' OR screen-group1 = 'G2'.
+        screen-active = '0'.
+        screen-input = 0.
+      ELSEIF screen-group1 = 'G4'.
+        screen-active = '1'.
+        screen-input = 1.
+      ELSEIF screen-group1 = 'G3'.
+        screen-active = '0'.
+        screen-input = 0.
+      ENDIF.
+      MODIFY SCREEN.
+    ENDLOOP.
+  ENDIF.
 
-at selection-screen on radiobutton group sel1.
-  if sscrfields-ucomm = 'RCOMMAND'.
-    if p_rad1 = 'X'.
-      loop at screen.
-        if screen-group1 = 'G1'.
+AT SELECTION-SCREEN ON RADIOBUTTON GROUP sel1.
+  IF sscrfields-ucomm = 'RCOMMAND'.
+    IF p_rad1 = 'X'.
+      LOOP AT SCREEN.
+        IF screen-group1 = 'G1'.
           screen-active = '1'.
           screen-input = 1.
-        elseif screen-group1 = 'G2'.
+        ELSEIF screen-group1 = 'G2' OR screen-group1 = 'G4'.
           screen-active = '0'.
           screen-input = 0.
-        endif.
-        modify screen.
-      endloop.
+        ENDIF.
+        MODIFY SCREEN.
+      ENDLOOP.
 
-      clear : s_sales, s_refs, p_stat.
+      CLEAR : s_sales, s_refs, p_stat.
 
-    elseif p_rad2 = 'X'.
-      loop at screen.
-        if screen-group1 = 'G1'.
+    ELSEIF p_rad2 = 'X'.
+      LOOP AT SCREEN.
+        IF screen-group1 = 'G1'.
           screen-active = '0'.
           screen-input = 0.
-        elseif screen-group1 = 'G2'.
+        ELSEIF screen-group1 = 'G2' OR screen-group1 = 'G4'.
           screen-active = '1'.
           screen-input = 1.
 
-        endif.
-        modify screen.
-      endloop.
+        ENDIF.
+        MODIFY SCREEN.
+      ENDLOOP.
 
-      clear : p_store, p_vbeln, p_ref, s_date, s_time.
-    endif.
+      CLEAR : p_store, p_vbeln, p_ref, s_date, s_time.
 
-  endif.
+    ELSEIF p_rad4 = 'X'.
+      LOOP AT SCREEN.
+        IF screen-group1 = 'G1' OR screen-group1 = 'G2'.
+          screen-active = '0'.
+          screen-input = 0.
+        ELSEIF screen-group1 = 'G4'.
+          screen-active = '1'.
+          screen-input = 1.
+        ENDIF.
+        MODIFY SCREEN.
+      ENDLOOP.
+      CLEAR : p_store, p_vbeln, p_ref, s_date, s_time.
+    ENDIF.
 
-
-
-start-of-selection.
-
-  data :
-    lo_report   type ref to lcl_report,
-    lrt_store     type lcl_report=>rt_store,
-    lrt_vbeln     type lcl_report=>rt_vbeln,
-    lrt_ref       type lcl_report=>rt_ref,
-    lv_subrc    type syst-subrc,
-    lv_prefixe  type char1,
-    lv_mag      type werks_d,
-    lv_bu       type char3,
-    lv_is_error type flag.
+  ENDIF.
 
 
 
-  if p_store is not initial.
+START-OF-SELECTION.
+
+  DATA :
+    lo_report        TYPE REF TO lcl_report,
+    lo_report_status TYPE REF TO lcl_report_status,
+    lrt_store        TYPE lcl_report=>rt_store,
+    lrt_vbeln        TYPE lcl_report=>rt_vbeln,
+    lrt_ref          TYPE lcl_report=>rt_ref,
+    lv_subrc         TYPE syst-subrc,
+    lv_prefixe       TYPE char1,
+    lv_mag           TYPE werks_d,
+    lv_bu            TYPE char3,
+    lt_result_status TYPE TABLE OF ty_result_status,
+    lv_is_error      TYPE flag.
+
+
+
+  IF p_store IS NOT INITIAL.
     lv_prefixe = p_store.
     lv_mag = p_store+1(3).
 
-    select single value_old from ztca_conversion
-      where key1 = 'PREFIXE' and key2 = 'SITE'
-        and value_new = @lv_prefixe
-        into @lv_bu.                                "#EC WARNOK
+    SELECT SINGLE value_old FROM ztca_conversion
+      WHERE key1 = 'PREFIXE' AND key2 = 'SITE'
+        AND value_new = @lv_prefixe
+        INTO @lv_bu.                                        "#EC WARNOK
 
-    if sy-subrc = 0.
-      append value #( sign = 'I' option = 'EQ' low = lv_bu ) to gr_bu.
-      append value #( sign = 'I' option = 'EQ' low = lv_mag ) to lrt_store.
-    else.
+    IF sy-subrc = 0.
+      APPEND VALUE #( sign = 'I' option = 'EQ' low = lv_bu ) TO gr_bu.
+      APPEND VALUE #( sign = 'I' option = 'EQ' low = lv_mag ) TO lrt_store.
+    ELSE.
       lv_is_error = abap_true.
       "erreur conversion bu
-    endif.
-  endif.
+    ENDIF.
+  ENDIF.
 
-  if p_vbeln is not initial.
-    append value #( sign = 'I' option = 'EQ' low = p_vbeln ) to lrt_vbeln.
-  endif.
+  IF p_vbeln IS NOT INITIAL.
+    APPEND VALUE #( sign = 'I' option = 'EQ' low = p_vbeln ) TO lrt_vbeln.
+  ENDIF.
 
-  if p_ref is not initial.
-    append value #( sign = 'I' option = 'EQ' low = p_ref ) to lrt_ref.
-  endif.
+  IF p_ref IS NOT INITIAL.
+    APPEND VALUE #( sign = 'I' option = 'EQ' low = p_ref ) TO lrt_ref.
+  ENDIF.
 
-  go_hist = new #(  ).
+  go_hist = NEW #(  ).
 
-  lo_report = new #(  ).
+  lo_report = NEW #(  ).
 
-  if s_sales is not initial or s_refs is not initial.
+  lo_report_status = NEW #(  ).
 
-    lv_subrc = zcl_cof_change_customer_order=>mass_change_status_sales_order(
-      exporting
-        ir_vbeln       = s_sales[]
-        ir_ref_maestro = s_refs[]
-        iv_status      = p_stat
-    ).
+  IF s_sales IS NOT INITIAL OR s_refs IS NOT INITIAL.
 
-    if lv_subrc = 0.
-      message text-014 type 'S'.
-    else.
+    IF p_rad2 IS NOT INITIAL. " Modification en masse de statut
 
-      message text-008 type 'E'.
-    endif.
+      lv_subrc = zcl_cof_change_customer_order=>mass_change_status_sales_order(
+        EXPORTING
+          ir_vbeln       = s_sales[]
+          ir_ref_maestro = s_refs[]
+          iv_status      = p_stat
+      ).
 
-  elseif s_hdate is not initial.
+      IF lv_subrc = 0.
+        MESSAGE TEXT-014 TYPE 'S'.
+      ELSE.
 
-    delete from ztcof_hist_kafka where publish_date in @s_hdate. "#EC CI_NOFIELD
+        MESSAGE TEXT-008 TYPE 'E'.
+      ENDIF.
 
-    if sy-subrc = 0.
-      message text-017 type 'S'.
-    else.
+    ELSEIF p_rad4 IS NOT INITIAL. " Modification cde pour statut Shelved & Shipped
 
-      message text-018 type 'E'.
-    endif.
+      zcl_cof_change_customer_order=>mass_change_sales_order_rgpd(
+         EXPORTING
+           ir_vbeln       = s_sales[]
+           ir_ref_maestro = s_refs[]
+         IMPORTING
+           et_result = lt_result_status
+       ).
 
-  else.
-    if lv_is_error ne abap_true.
+      lo_report_status->main(
+        EXPORTING
+          it_result_status = lt_result_status
+        ).
+      WRITE space.
+
+    ENDIF.
+
+  ELSEIF s_hdate IS NOT INITIAL.
+
+    SELECT COUNT(*) UP TO 1 ROWS FROM ztcof_hist_kafka "#EC CI_NOFIELD
+       WHERE publish_date IN @s_hdate.
+    IF sy-subrc IS NOT INITIAL.
+      MESSAGE TEXT-021 TYPE 'S'.
+    ELSE.
+      DELETE FROM ztcof_hist_kafka WHERE publish_date IN @s_hdate. "#EC CI_NOFIELD
+
+      IF sy-subrc = 0.
+        MESSAGE TEXT-017 TYPE 'S'.
+      ELSE.
+
+        MESSAGE TEXT-018 TYPE 'E'.
+      ENDIF.
+    ENDIF.
+  ELSE.
+    IF lv_is_error NE abap_true.
       lo_report->main(
-        exporting
+        EXPORTING
           ir_store = lrt_store[]
           ir_date  = s_date[]
           ir_time  = s_time[]
@@ -638,8 +822,8 @@ start-of-selection.
           ir_ref   = lrt_ref[]
         ).
 
-    endif.
+    ENDIF.
 
-    write space.
+    WRITE space.
 
-  endif.
+  ENDIF.

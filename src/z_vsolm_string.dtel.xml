@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>Z_VSOLM_STRING</ROLLNAME>
+    <DDLANGUAGE>F</DDLANGUAGE>
+    <HEADLEN>13</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Quantité théorique en unité de quantité de base</DDTEXT>
+    <REPTEXT>QtéThéor. UQB</REPTEXT>
+    <SCRTEXT_S>Qté th.UQB</SCRTEXT_S>
+    <SCRTEXT_M>Qté théor. UQB</SCRTEXT_M>
+    <SCRTEXT_L>Qté théorique UQB</SCRTEXT_L>
+    <APPLCLASS>LVS</APPLCLASS>
+    <DTELMASTER>E</DTELMASTER>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000031</LENG>
+    <OUTPUTLEN>000031</OUTPUTLEN>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>E</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>P</LANGU>
+    <LANGU>S</LANGU>
+    <LANGU>느</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Sollmenge in Basismengeneinheit</DDTEXT>
+     <REPTEXT>Sollmenge BME</REPTEXT>
+     <SCRTEXT_S>SMng BME</SCRTEXT_S>
+     <SCRTEXT_M>Sollmenge BME</SCRTEXT_M>
+     <SCRTEXT_L>Sollmenge BME</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Target Quantity in Base Unit of Measure</DDTEXT>
+     <REPTEXT>Target Qty Bs</REPTEXT>
+     <SCRTEXT_S>TgtQtyB</SCRTEXT_S>
+     <SCRTEXT_M>Target Qty Bs</SCRTEXT_M>
+     <SCRTEXT_L>Target Quantity Base</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>I</DDLANGUAGE>
+     <DDTEXT>Quantità teorica in unità di misura di base</DDTEXT>
+     <REPTEXT>Qtà teor. UMB</REPTEXT>
+     <SCRTEXT_S>QtàTeorUMB</SCRTEXT_S>
+     <SCRTEXT_M>Qtà teor. UMB</SCRTEXT_M>
+     <SCRTEXT_L>Qtà teor. UMB</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Ilość postulowana w podstawowej jednostce miary</DDTEXT>
+     <REPTEXT>Il. post. PJM</REPTEXT>
+     <SCRTEXT_S>Il.pos.PJM</SCRTEXT_S>
+     <SCRTEXT_M>Il. post. PJM</SCRTEXT_M>
+     <SCRTEXT_L>Il. post. PJM</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DDTEXT>Quantidade teórica em unidade de medida básica</DDTEXT>
+     <REPTEXT>Qtd.teór.UMB</REPTEXT>
+     <SCRTEXT_S>QtdTeórUMB</SCRTEXT_S>
+     <SCRTEXT_M>Qtd.teórica UMB</SCRTEXT_M>
+     <SCRTEXT_L>Qtd.teórica UMB</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Cantidad teórica en unidad de medida base</DDTEXT>
+     <REPTEXT>CtdTeórUMBase</REPTEXT>
+     <SCRTEXT_S>CtdTeórUMB</SCRTEXT_S>
+     <SCRTEXT_M>CtdTeórUMBase</SCRTEXT_M>
+     <SCRTEXT_L>CtdTeórUMBase</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>느</DDLANGUAGE>
+     <DDTEXT>Quantidade teórica em unidade de medida básica</DDTEXT>
+     <REPTEXT>Qtd.teór.UMB</REPTEXT>
+     <SCRTEXT_S>QtdTeórUMB</SCRTEXT_S>
+     <SCRTEXT_M>Qtd.teórica UMB</SCRTEXT_M>
+     <SCRTEXT_L>Qtd.teórica UMB</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

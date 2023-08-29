@@ -1,4 +1,4 @@
-FUNCTION ZFCUSORDER_ORDER_REDUCTION.
+FUNCTION zfcusorder_order_reduction.
 *"----------------------------------------------------------------------
 *"*"Local Interface:
 *"  IMPORTING
@@ -14,90 +14,91 @@ FUNCTION ZFCUSORDER_ORDER_REDUCTION.
 *"  EXCEPTIONS
 *"      ORDER_BLOCKED
 *"----------------------------------------------------------------------
-  data :
-    lo_slg1                 type ref to zcl_ca_slg1,
-    lc_balobj               type balobj_d  value 'ZSD_MOB_API',
-    lc_balsubobj            type balsubobj value '051',
-    lv_extnumber            type balnrext,
-    ls_order_header_in      type bapisdhd1,
-    ls_order_header_inx     type bapisdh1x,
-    lt_order_partners       type table of bapiparnr,
-    i_item                  type table of bapisditm,
-    i_itemx                 type table of bapisditmx,
-    lt_order_schedules_in   type table of bapischdl,
-    lt_order_schedules_inx  type table of bapischdlx,
-    lt_order_conditions_in  type table of bapicond,
-    lt_order_conditions_inx type table of bapicondx,
-    lt_order_text           type table of bapisdtext,
-    lt_return               type table of bapiret2,
-    lt_messages             type table of bapiret2,
-    lt_order_keys           type table of bapisdkey,
-    lt_extensionex          type table of bapiparex,
-    lt_partnerchanges       type standard table of bapiparnrc,
-    lv_salesdocument        type vbeln_va,
-    lv_subrc                type syst-subrc,
-    lv_message              type string,
-    lv_msg                  type string,
-    lv_is_order_shelved     type abap_bool value abap_true,
-    lv_error                type abap_bool,
-    lt_mob_or               type standard table of ztewm_mob_or,
-    ls_mob_or               type ztewm_mob_or,
-    ls_component            type abap_componentdescr,
-    lv_prefixe              type char1,
-    lv_lgnum                type /scwm/lgnum,
-    lv_user                 type xubname,
-    lv_date                 type datum,
-    lv_time                 type uzeit,
-    lv_timezone             type tznzone,
-    lv_timestamp            type tzntstmps,
-    lv_timestampl           type timestampl,
-    lv_guid_parent          type guid,
-    lt_cof_hist_cusor       type standard table of ztcof_hist_cusor.
+  DATA :
+    lo_slg1                 TYPE REF TO zcl_ca_slg1,
+    lc_balobj               TYPE balobj_d  VALUE 'ZSD_MOB_API',
+    lc_balsubobj            TYPE balsubobj VALUE '051',
+    lv_extnumber            TYPE balnrext,
+    ls_order_header_in      TYPE bapisdhd1,
+    ls_order_header_inx     TYPE bapisdh1x,
+    lt_order_partners       TYPE TABLE OF bapiparnr,
+    i_item                  TYPE TABLE OF bapisditm,
+    i_itemx                 TYPE TABLE OF bapisditmx,
+    lt_order_schedules_in   TYPE TABLE OF bapischdl,
+    lt_order_schedules_inx  TYPE TABLE OF bapischdlx,
+    lt_order_conditions_in  TYPE TABLE OF bapicond,
+    lt_order_conditions_inx TYPE TABLE OF bapicondx,
+    lt_order_text           TYPE TABLE OF bapisdtext,
+    lt_return               TYPE TABLE OF bapiret2,
+    lt_messages             TYPE TABLE OF bapiret2,
+    lt_order_keys           TYPE TABLE OF bapisdkey,
+    lt_extensionex          TYPE TABLE OF bapiparex,
+    lt_partnerchanges       TYPE STANDARD TABLE OF bapiparnrc,
+    lv_salesdocument        TYPE vbeln_va,
+    lv_subrc                TYPE syst-subrc,
+    lv_message              TYPE string,
+    lv_msg                  TYPE string,
+    lv_is_order_shelved     TYPE abap_bool VALUE abap_true,
+    lv_error                TYPE abap_bool,
+    lt_mob_or               TYPE STANDARD TABLE OF ztewm_mob_or,
+    ls_mob_or               TYPE ztewm_mob_or,
+    ls_component            TYPE abap_componentdescr,
+    lv_prefixe              TYPE char1,
+    lv_lgnum                TYPE /scwm/lgnum,
+    lv_user                 TYPE xubname,
+    lv_date                 TYPE datum,
+    lv_time                 TYPE uzeit,
+    lv_timezone             TYPE tznzone,
+    lv_timestamp            TYPE tzntstmps,
+    lv_timestampl           TYPE timestampl,
+    lv_timestamp2(22)       TYPE c,
+    lv_guid_parent          TYPE guid,
+    lt_cof_hist_cusor       TYPE STANDARD TABLE OF ztcof_hist_cusor.
 
-  field-symbols:
-    <lt_table>  type any table,
-    <ls_struct> type any,
-    <lv_elem>   type any.
+  FIELD-SYMBOLS:
+    <lt_table>  TYPE ANY TABLE,
+    <ls_struct> TYPE any,
+    <lv_elem>   TYPE any.
 
-  data(lo_change_customer_order) = new zcl_cof_change_customer_order(
+  DATA(lo_change_customer_order) = NEW zcl_cof_change_customer_order(
                                                    iv_called_bu_code      = iv_called_bu_code
                                                    iv_called_store_code   = iv_called_store_code
                                                    iv_user_bu_code        = iv_user_bu_code
                                                    iv_user_store_code     = iv_user_store_code
                                                    iv_maestro_num         = iv_maestro_num
-                                                   iv_quantity            = conv kwmeng( iv_quantity )
+                                                   iv_quantity            = CONV kwmeng( iv_quantity )
                                                    iv_ldap_number         = iv_ldap_number
                                                  ).
 
-  select single posnr, kwmeng, objnr from vbap
-          where vbeln = @iv_vbeln and posnr = @iv_posnr
-          into @data(ls_vbap).
+  SELECT SINGLE posnr, kwmeng, objnr FROM vbap
+          WHERE vbeln = @iv_vbeln AND posnr = @iv_posnr
+          INTO @DATA(ls_vbap).
 
 
-  if sy-subrc = 0.
-  endif.
+  IF sy-subrc = 0.
+  ENDIF.
 
   " On récupère les infos de statut de la commande et des postes
   lv_subrc =  lo_change_customer_order->get_data_status( ).
 
 
-  if lv_subrc = 0.
+  IF lv_subrc = 0.
 
-    if ls_vbap-kwmeng > 0.
+    IF ls_vbap-kwmeng > 0.
 
       lv_salesdocument = iv_vbeln.
       ls_order_header_inx-updateflag = 'U'.
 
-      append value #( itm_number = iv_posnr target_qty = conv dzmeng( iv_quantity ) ) to i_item.
-      append value #( itm_number = iv_posnr updateflag = 'U' target_qty = 'X' ) to i_itemx.
-      append value #( itm_number = iv_posnr sched_line = '0001' req_qty = conv wmeng( iv_quantity ) ) to lt_order_schedules_in.
-      append value #( itm_number = iv_posnr sched_line = '0001' req_qty = 'X' updateflag = 'U' ) to lt_order_schedules_inx.
+      APPEND VALUE #( itm_number = iv_posnr target_qty = CONV dzmeng( iv_quantity ) ) TO i_item.
+      APPEND VALUE #( itm_number = iv_posnr updateflag = 'U' target_qty = 'X' ) TO i_itemx.
+      APPEND VALUE #( itm_number = iv_posnr sched_line = '0001' req_qty = CONV wmeng( iv_quantity ) ) TO lt_order_schedules_in.
+      APPEND VALUE #( itm_number = iv_posnr sched_line = '0001' req_qty = 'X' updateflag = 'U' ) TO lt_order_schedules_inx.
 
-      call function 'BAPI_SALESORDER_CHANGE'
-        exporting
+      CALL FUNCTION 'BAPI_SALESORDER_CHANGE'
+        EXPORTING
           salesdocument    = iv_vbeln
           order_header_inx = ls_order_header_inx
-        tables
+        TABLES
           return           = lt_return
           order_item_in    = i_item
           order_item_inx   = i_itemx
@@ -105,62 +106,62 @@ FUNCTION ZFCUSORDER_ORDER_REDUCTION.
           schedule_lines   = lt_order_schedules_in
           schedule_linesx  = lt_order_schedules_inx.
 
-      if sy-subrc = 0.
+      IF sy-subrc = 0.
 
-        read table lt_return with key type = 'E' transporting no fields.
+        READ TABLE lt_return WITH KEY type = 'E' TRANSPORTING NO FIELDS.
 
-        if sy-subrc ne 0.
+        IF sy-subrc NE 0.
 
-          commit work and wait.
+          COMMIT WORK AND WAIT.
 
           " On ajoute une entrée sur la table d'historique de modification de commande ztewm_mob_or
-          select single value_new
-            from ztca_conversion
-            where key1 = 'PREFIXE' and key2 = 'SITE' and sens = 'LS' and value_old = @iv_called_bu_code
-            into @lv_prefixe.                           "#EC CI_NOORDER
+          SELECT SINGLE value_new
+            FROM ztca_conversion
+            WHERE key1 = 'PREFIXE' AND key2 = 'SITE' AND sens = 'LS' AND value_old = @iv_called_bu_code
+            INTO @lv_prefixe.                           "#EC CI_NOORDER
 
-          if sy-subrc ne 0.
-            return.
-          else.
+          IF sy-subrc NE 0.
+            RETURN.
+          ELSE.
             lv_lgnum = |{ lv_prefixe }{ iv_called_store_code }|.
-          endif.
+          ENDIF.
 
 *   LDAP employee number
           lv_user = iv_ldap_number.
-          if lv_user is initial.
-            return.
-          endif.
+          IF lv_user IS INITIAL.
+            RETURN.
+          ENDIF.
 
 
 *   Warehouse time zone
-          call function '/SCWM/LGNUM_TZONE_READ'
-            exporting
+          CALL FUNCTION '/SCWM/LGNUM_TZONE_READ'
+            EXPORTING
               iv_lgnum        = lv_lgnum
-            importing
+            IMPORTING
               ev_tzone        = lv_timezone
-            exceptions
+            EXCEPTIONS
               interface_error = 1
               data_not_found  = 2
-              others          = 3.
-          if not sy-subrc is initial.
-            return.
-          endif.
+              OTHERS          = 3.
+          IF NOT sy-subrc IS INITIAL.
+            RETURN.
+          ENDIF.
 
 
 *   GUID parent
-          try.
+          TRY.
               lv_guid_parent = cl_system_uuid=>create_uuid_x16_static( ).
-            catch cx_uuid_error.
-              return.
-          endtry.
+            CATCH cx_uuid_error.
+              RETURN.
+          ENDTRY.
 
-          append initial line to lt_mob_or assigning field-symbol(<ls_mob_or>).
+          APPEND INITIAL LINE TO lt_mob_or ASSIGNING FIELD-SYMBOL(<ls_mob_or>).
 
           "Date & time
 
           lv_date = sy-datum.
           lv_time = sy-uzeit.
-          convert date lv_date time lv_time into time stamp lv_timestamp time zone lv_timezone.
+          CONVERT DATE lv_date TIME lv_time INTO TIME STAMP lv_timestamp TIME ZONE lv_timezone.
 
 
           <ls_mob_or>-guid_parent          = lv_guid_parent.
@@ -174,17 +175,17 @@ FUNCTION ZFCUSORDER_ORDER_REDUCTION.
           <ls_mob_or>-customer_order       = iv_vbeln.
           <ls_mob_or>-objnr                = ls_vbap-objnr.
 
-          insert ztewm_mob_or from table @lt_mob_or.
+          INSERT ztewm_mob_or FROM TABLE @lt_mob_or.
 
-          if sy-subrc ne 0.
-          endif.
+          IF sy-subrc NE 0.
+          ENDIF.
 
 
           " On ajoute aussi une entrée sur la table spécifique ztcof_hist_cusor
-          append initial line to lt_cof_hist_cusor assigning field-symbol(<fs_cof_hist_cusor>).
+          APPEND INITIAL LINE TO lt_cof_hist_cusor ASSIGNING FIELD-SYMBOL(<fs_cof_hist_cusor>).
           <fs_cof_hist_cusor>-vbeln = iv_vbeln.
           <fs_cof_hist_cusor>-posnr = ls_vbap-posnr.
-          get time stamp field lv_timestampl.
+          GET TIME STAMP FIELD lv_timestampl.
           <fs_cof_hist_cusor>-timestamp = lv_timestampl.
           <fs_cof_hist_cusor>-objnr = ls_vbap-objnr.
           <fs_cof_hist_cusor>-creation_date = lv_date.
@@ -193,41 +194,41 @@ FUNCTION ZFCUSORDER_ORDER_REDUCTION.
           <fs_cof_hist_cusor>-quantity_from = ls_vbap-kwmeng.
           <fs_cof_hist_cusor>-quantity_to = iv_quantity.
 
-          insert ztcof_hist_cusor from table @lt_cof_hist_cusor.
+          INSERT ztcof_hist_cusor FROM TABLE @lt_cof_hist_cusor.
 
-          if sy-subrc ne 0.
-          endif.
+          IF sy-subrc NE 0.
+          ENDIF.
 
-        else.
-          rollback work.
-        endif.
+        ELSE.
+          ROLLBACK WORK.
+        ENDIF.
 
 
-        select single objnr from vbak where vbeln = @iv_vbeln
-            into @data(lv_objnr_header).
-        if sy-subrc = 0.
-        endif.
+        SELECT SINGLE objnr FROM vbak WHERE vbeln = @iv_vbeln
+            INTO @DATA(lv_objnr_header).
+        IF sy-subrc = 0.
+        ENDIF.
 
-        select vbeln, posnr, kwmeng, objnr, pstyv
-            from vbap
-            where vbeln = @iv_vbeln
-            into table @data(lt_actual_quantities).
+        SELECT vbeln, posnr, kwmeng, objnr, pstyv
+            FROM vbap
+            WHERE vbeln = @iv_vbeln
+            INTO TABLE @DATA(lt_actual_quantities).
 
-        if sy-subrc = 0.
+        IF sy-subrc = 0.
 
-          loop at lt_actual_quantities assigning field-symbol(<fs_quant>).
+          LOOP AT lt_actual_quantities ASSIGNING FIELD-SYMBOL(<fs_quant>).
 
             " on contrôle si un poste a encore des quantités en dehors des articles service
-            if <fs_quant>-kwmeng > 0 and <fs_quant>-pstyv ne 'ZTAD'.
+            IF <fs_quant>-kwmeng > 0 AND <fs_quant>-pstyv NE 'ZTAD'.
               lv_is_order_shelved = abap_false.
-            endif.
-          endloop.
+            ENDIF.
+          ENDLOOP.
 
-        endif.
+        ENDIF.
 
-        if lv_is_order_shelved = abap_true.
+        IF lv_is_order_shelved = abap_true.
           " On force le statut shelved des postes avec un article service
-          loop at lt_actual_quantities assigning field-symbol(<fs_item>).
+          LOOP AT lt_actual_quantities ASSIGNING FIELD-SYMBOL(<fs_item>).
 
 
             " Changement de statut du poste de commande
@@ -236,7 +237,7 @@ FUNCTION ZFCUSORDER_ORDER_REDUCTION.
                                                                 iv_status_from = 'E0011' "cancelled
                                                                 iv_status_to = 'E0016'  "mc_shelved
                                                              ).
-          endloop.
+          ENDLOOP.
 
 
           " Changement de statut de l'entête de commande à SHELVED
@@ -246,56 +247,63 @@ FUNCTION ZFCUSORDER_ORDER_REDUCTION.
                                                               iv_status_to = 'E0016'  "mc_shelved
                                                              ).
 
-
-          if lv_error ne abap_true.
-            message s029(zcl_cof_order) with 'CANCELLED' 'SHELVED'  into lv_message.
-            clear lv_message.
+          IF lv_error NE abap_true.
+            CALL METHOD lo_change_customer_order->change_sales_order_rgpd
+              EXPORTING
+                iv_vbeln      = iv_vbeln
+                iv_simulation = abap_false
+              RECEIVING
+                rv_error      = lv_error.
+          ENDIF.
+          IF lv_error NE abap_true.
+            MESSAGE s029(zcl_cof_order) WITH 'CANCELLED' 'SHELVED'  INTO lv_message.
+            CLEAR lv_message.
 
             lo_change_customer_order->create_info_kafka( iv_status = 'E0016' ).
-          endif.
-        endif.
-      endif.
+          ENDIF.
+        ENDIF.
+      ENDIF.
 
       " Récupération des messages d'erreur lors de la modification de commande
-      create object lo_slg1.
+      CREATE OBJECT lo_slg1.
 
       lv_extnumber = iv_vbeln.
-      call method lo_slg1->open
-        exporting
+      CALL METHOD lo_slg1->open
+        EXPORTING
           iv_object    = lc_balobj
           iv_subobject = lc_balsubobj
           iv_extnumber = lv_extnumber.
 
-      if lo_slg1 is bound.
+      IF lo_slg1 IS BOUND.
 
-        loop at lt_return assigning field-symbol(<fs_message>)
-          where type = 'E' or type = 'A'.
+        LOOP AT lt_return ASSIGNING FIELD-SYMBOL(<fs_message>)
+          WHERE type = 'E' OR type = 'A'.
           lv_subrc = 4.
           " On récupère le texte du message dans la langue de connexion
-          message id <fs_message>-id type <fs_message>-type number <fs_message>-number into lv_msg
-                with <fs_message>-message_v1 <fs_message>-message_v2 <fs_message>-message_v3 <fs_message>-message_v4.
+          MESSAGE ID <fs_message>-id TYPE <fs_message>-type NUMBER <fs_message>-number INTO lv_msg
+                WITH <fs_message>-message_v1 <fs_message>-message_v2 <fs_message>-message_v3 <fs_message>-message_v4.
 
-          message lv_msg type 'E'.
+          MESSAGE lv_msg TYPE 'E'.
 
-          call method lo_slg1->add
-            exporting
+          CALL METHOD lo_slg1->add
+            EXPORTING
               iv_message = lv_msg
               iv_msgty   = <fs_message>-type.
 
-        endloop.
+        ENDLOOP.
 
-        if lv_message is not initial.
-          call method lo_slg1->add
-            exporting
+        IF lv_message IS NOT INITIAL.
+          CALL METHOD lo_slg1->add
+            EXPORTING
               iv_message = lv_message
               iv_msgty   = 'S'.
-        endif.
+        ENDIF.
 
-        unassign <fs_message>.
-        call method lo_slg1->close.
-      endif.  "lo_slg1 is bound.
-    endif.  "lv_quantity > 0.
+        UNASSIGN <fs_message>.
+        CALL METHOD lo_slg1->close.
+      ENDIF.  "lo_slg1 is bound.
+    ENDIF.  "lv_quantity > 0.
 
-  endif.  "lv_subrc ne 0.
+  ENDIF.  "lv_subrc ne 0.
 
-endfunction.
+ENDFUNCTION.

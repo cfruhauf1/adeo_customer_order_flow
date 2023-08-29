@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SPRX" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PROXY_HEADER>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZERROR</OBJ_NAME>
+     <OBJECT_M>TABL</OBJECT_M>
+     <OBJ_NAME_M>ZERROR</OBJ_NAME_M>
+     <HASH_ID>AEC3ED74DC15A1912D4DEB417466F2AED75E0FB9</HASH_ID>
+     <ID>&lt;type&gt; error http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_GLOBAL>X</IFR_GLOBAL>
+     <IFR_TYPE>type</IFR_TYPE>
+     <IFR_NAME>error</IFR_NAME>
+     <IFR_NSPCE>http://cxf.shipping.soap.chronopost.fr/</IFR_NSPCE>
+     <IFR_GNSPCE>http://cxf.shipping.soap.chronopost.fr/</IFR_GNSPCE>
+     <GEN_VERS>0005</GEN_VERS>
+     <CATEGORY>ifmtypedef</CATEGORY>
+     <GEN_APPL>WEBSERVICES</GEN_APPL>
+     <X-ML_NSPCE>http://cxf.shipping.soap.chronopost.fr/</X-ML_NSPCE>
+     <X-ML_NAME>error</X-ML_NAME>
+    </item>
+   </PROXY_HEADER>
+   <PROXY_DATA>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZERROR</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>DETAIL</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>DETAIL</OBJ_NAME2>
+     <OBJECT_R>TABL</OBJECT_R>
+     <OBJ_NAME_R>ZDETAIL</OBJ_NAME_R>
+     <ID>&lt;element&gt; detail &lt;type&gt; error http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>detail</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_OPTNL>X</IFR_OPTNL>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>DETAIL</R3_NAME>
+     <R3_SEQNUM>000001</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZERROR</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>ERROR_CODE</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>ERROR_CODE</OBJ_NAME2>
+     <ID>&lt;element&gt; errorCode &lt;type&gt; error http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>errorCode</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MINOCC>1</IFR_MINOCC>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_XSDTYP>int</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>ERROR_CODE</R3_NAME>
+     <R3_DATATYP>INT4</R3_DATATYP>
+     <R3_SEQNUM>000002</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZERROR</OBJ_NAME>
+     <OBJECT1>FIEL</OBJECT1>
+     <OBJ_NAME1>ERROR_MESSAGE</OBJ_NAME1>
+     <OBJECT2>FIEL</OBJECT2>
+     <OBJ_NAME2>ERROR_MESSAGE</OBJ_NAME2>
+     <ID>&lt;element&gt; errorMessage &lt;type&gt; error http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>element</IFR_TYPE>
+     <IFR_NAME>errorMessage</IFR_NAME>
+     <IFR_TAGTYP>E</IFR_TAGTYP>
+     <IFR_MAXOCC>1</IFR_MAXOCC>
+     <IFR_OPTNL>X</IFR_OPTNL>
+     <IFR_XSDTYP>string</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>FIEL</R3_TYPE>
+     <R3_NAME>ERROR_MESSAGE</R3_NAME>
+     <R3_DATATYP>STRG</R3_DATATYP>
+     <R3_SEQNUM>000003</R3_SEQNUM>
+    </item>
+    <item>
+     <OBJECT>TABL</OBJECT>
+     <OBJ_NAME>ZERROR</OBJ_NAME>
+     <OBJECT1>TABL</OBJECT1>
+     <OBJ_NAME1>ZERROR</OBJ_NAME1>
+     <OBJECT2>TABL</OBJECT2>
+     <OBJ_NAME2>ZERROR</OBJ_NAME2>
+     <ID>&lt;type&gt; error http://cxf.shipping.soap.chronopost.fr/ http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>type</IFR_TYPE>
+     <IFR_NAME>error</IFR_NAME>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>TABL</R3_TYPE>
+     <R3_NAME>ZERROR</R3_NAME>
+     <R3_TEXT>Proxy Structure (generated)</R3_TEXT>
+     <CATEGORY>ifmtypedef</CATEGORY>
+    </item>
+   </PROXY_DATA>
+  </asx:values>
+ </asx:abap>
+</abapGit>

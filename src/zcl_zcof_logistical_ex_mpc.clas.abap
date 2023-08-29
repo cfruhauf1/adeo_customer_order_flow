@@ -96,21 +96,20 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
-lo_property->set_filterable( abap_false ).
+lo_property->set_filterable( abap_true ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
         iv_key      = 'unicode'
         iv_value    = 'false' ).
 lo_property = lo_entity_type->create_property( iv_property_name = 'Vbeln' iv_abap_fieldname = 'VBELN' ). "#EC NOTEXT
-lo_property->set_is_key( ).
 lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 10 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'ALPHA' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -123,33 +122,35 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 6 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
-lo_property->set_filterable( abap_false ).
+lo_property->set_filterable( abap_true ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
         iv_key      = 'unicode'
         iv_value    = 'false' ).
 lo_property = lo_entity_type->create_property( iv_property_name = 'Bstnk' iv_abap_fieldname = 'BSTNK' ). "#EC NOTEXT
+lo_property->set_is_key( ).
 lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 20 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
-lo_property->set_filterable( abap_false ).
+lo_property->set_filterable( abap_true ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
         iv_key      = 'unicode'
         iv_value    = 'false' ).
 lo_property = lo_entity_type->create_property( iv_property_name = 'LineType' iv_abap_fieldname = 'LINE_TYPE' ). "#EC NOTEXT
+lo_property->set_is_key( ).
 lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 73 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
-lo_property->set_filterable( abap_false ).
+lo_property->set_filterable( abap_true ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
         iv_key      = 'unicode'
@@ -159,7 +160,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 6 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -171,7 +172,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 5 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -183,7 +184,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 30 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -195,7 +196,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 5 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -207,7 +208,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 30 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -215,12 +216,13 @@ lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
         iv_key      = 'unicode'
         iv_value    = 'false' ).
 lo_property = lo_entity_type->create_property( iv_property_name = 'Who' iv_abap_fieldname = 'WHO' ). "#EC NOTEXT
+lo_property->set_is_key( ).
 lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 10 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'ALPH0' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -228,12 +230,13 @@ lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
         iv_key      = 'unicode'
         iv_value    = 'false' ).
 lo_property = lo_entity_type->create_property( iv_property_name = 'Tanum' iv_abap_fieldname = 'TANUM' ). "#EC NOTEXT
+lo_property->set_is_key( ).
 lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 12 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'ALPH0' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -245,8 +248,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -257,8 +260,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 40 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -269,8 +272,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 1 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -281,8 +284,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 60 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -293,8 +296,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -306,7 +309,7 @@ lo_property->set_maxlength( iv_max_length = 40 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'MATN1' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -318,7 +321,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 40 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -331,8 +334,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 255 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -343,7 +346,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -356,7 +359,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 40 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -368,8 +371,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 10 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -380,8 +383,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -392,8 +395,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -404,8 +407,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 18 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -417,8 +420,8 @@ lo_property->set_maxlength( iv_max_length = 20 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'HUID' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -429,8 +432,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -441,8 +444,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -453,8 +456,22 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 18 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
+lo_property->set_filterable( abap_false ).
+lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
+      EXPORTING
+        iv_key      = 'unicode'
+        iv_value    = 'false' ).
+lo_property = lo_entity_type->create_property( iv_property_name = 'Nlenr' iv_abap_fieldname = 'NLENR' ). "#EC NOTEXT
+lo_property->set_label_from_text_element( iv_text_element_symbol = '003' iv_text_element_container = gc_incl_name ).  "#EC NOTEXT
+lo_property->set_type_edm_string( ).
+lo_property->set_maxlength( iv_max_length = 20 ). "#EC NOTEXT
+lo_property->set_conversion_exit( 'HUID' ). "#EC NOTEXT
+lo_property->set_creatable( abap_false ).
+lo_property->set_updatable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -466,7 +483,19 @@ lo_property->set_precison( iv_precision = 14 ). "#EC NOTEXT
 lo_property->set_maxlength( iv_max_length = 31 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_false ).
+lo_property->set_filterable( abap_false ).
+lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
+      EXPORTING
+        iv_key      = 'unicode'
+        iv_value    = 'false' ).
+lo_property = lo_entity_type->create_property( iv_property_name = 'Quantity_string' iv_abap_fieldname = 'QUANTITY_STRING' ). "#EC NOTEXT
+lo_property->set_type_edm_string( ).
+lo_property->set_maxlength( iv_max_length = 31 ). "#EC NOTEXT
+lo_property->set_creatable( abap_false ).
+lo_property->set_updatable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -479,7 +508,19 @@ lo_property->set_maxlength( iv_max_length = 3 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'CUNIT' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_false ).
+lo_property->set_filterable( abap_false ).
+lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
+      EXPORTING
+        iv_key      = 'unicode'
+        iv_value    = 'false' ).
+lo_property = lo_entity_type->create_property( iv_property_name = 'Meins_string' iv_abap_fieldname = 'MEINS_STRING' ). "#EC NOTEXT
+lo_property->set_type_edm_string( ).
+lo_property->set_conversion_exit( 'CUNIT' ). "#EC NOTEXT
+lo_property->set_creatable( abap_false ).
+lo_property->set_updatable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -491,8 +532,8 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 12 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
-lo_property->set_nullable( abap_false ).
+lo_property->set_sortable( abap_true ).
+lo_property->set_nullable( abap_true ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
@@ -503,7 +544,7 @@ lo_property->set_type_edm_datetime( ).
 lo_property->set_precison( iv_precision = 7 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -514,20 +555,20 @@ lo_property = lo_entity_type->create_property( iv_property_name = 'Utime' iv_aba
 lo_property->set_type_edm_time( ).
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
       EXPORTING
         iv_key      = 'unicode'
         iv_value    = 'false' ).
-lo_property = lo_entity_type->create_property( iv_property_name = 'Timestamp15' iv_abap_fieldname = 'TIMESTAMP15' ). "#EC NOTEXT
-lo_property->set_type_edm_decimal( ).
-lo_property->set_maxlength( iv_max_length = 15 ). "#EC NOTEXT
-lo_property->set_conversion_exit( 'TSTWH' ). "#EC NOTEXT
+lo_property = lo_entity_type->create_property( iv_property_name = 'Timestamp14' iv_abap_fieldname = 'TIMESTAMP14' ). "#EC NOTEXT
+lo_property->set_is_key( ).
+lo_property->set_type_edm_string( ).
+lo_property->set_maxlength( iv_max_length = 14 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -540,7 +581,7 @@ lo_property->set_maxlength( iv_max_length = 35 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'ALPHA' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -553,7 +594,7 @@ lo_property->set_maxlength( iv_max_length = 4 ). "#EC NOTEXT
 lo_property->set_conversion_exit( 'AUART' ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -565,7 +606,7 @@ lo_property->set_type_edm_string( ).
 lo_property->set_maxlength( iv_max_length = 20 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -577,7 +618,7 @@ lo_property->set_type_edm_datetime( ).
 lo_property->set_precison( iv_precision = 7 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -588,7 +629,7 @@ lo_property = lo_entity_type->create_property( iv_property_name = 'Erzet' iv_aba
 lo_property->set_type_edm_time( ).
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -600,7 +641,7 @@ lo_property->set_type_edm_datetime( ).
 lo_property->set_precison( iv_precision = 7 ). "#EC NOTEXT
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -611,7 +652,7 @@ lo_property = lo_entity_type->create_property( iv_property_name = 'Lfuhr' iv_aba
 lo_property->set_type_edm_time( ).
 lo_property->set_creatable( abap_false ).
 lo_property->set_updatable( abap_false ).
-lo_property->set_sortable( abap_false ).
+lo_property->set_sortable( abap_true ).
 lo_property->set_nullable( abap_false ).
 lo_property->set_filterable( abap_false ).
 lo_property->/iwbep/if_mgw_odata_annotatabl~create_annotation( 'sap' )->add(
@@ -650,7 +691,7 @@ lo_entity_set->set_filter_required( abap_false ).
 *&---------------------------------------------------------------------*
 
 
-  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230630143752'.                  "#EC NOTEXT
+  CONSTANTS: lc_gen_date_time TYPE timestamp VALUE '20230810145410'.                  "#EC NOTEXT
   rv_last_modified = super->get_last_modified( ).
   IF rv_last_modified LT lc_gen_date_time.
     rv_last_modified = lc_gen_date_time.
@@ -685,6 +726,13 @@ ls_text_element-artifact_type          = 'PROP'.                                
 ls_text_element-parent_artifact_name   = 'get_custom_order_hist'.                            "#EC NOTEXT
 ls_text_element-parent_artifact_type   = 'ETYP'.                                       "#EC NOTEXT
 ls_text_element-text_symbol            = '002'.              "#EC NOTEXT
+APPEND ls_text_element TO rt_text_elements.
+clear ls_text_element.
+ls_text_element-artifact_name          = 'Nlenr'.                 "#EC NOTEXT
+ls_text_element-artifact_type          = 'PROP'.                                       "#EC NOTEXT
+ls_text_element-parent_artifact_name   = 'get_custom_order_hist'.                            "#EC NOTEXT
+ls_text_element-parent_artifact_type   = 'ETYP'.                                       "#EC NOTEXT
+ls_text_element-text_symbol            = '003'.              "#EC NOTEXT
 APPEND ls_text_element TO rt_text_elements.
   endmethod.
 ENDCLASS.

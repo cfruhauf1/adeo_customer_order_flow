@@ -125,6 +125,18 @@
      <LENGTH>58</LENGTH>
     </item>
     <item>
+     <ID>I</ID>
+     <KEY>020</KEY>
+     <ENTRY>Modification commande pour statut Shelved &amp; Shipped</ENTRY>
+     <LENGTH>92</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>021</KEY>
+     <ENTRY>Aucune donnée à supprimer</ENTRY>
+     <LENGTH>48</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Outils de Run pour la commande client</ENTRY>
      <LENGTH>37</LENGTH>
@@ -249,6 +261,18 @@
        <LENGTH>58</LENGTH>
       </item>
       <item>
+       <ID>I</ID>
+       <KEY>020</KEY>
+       <ENTRY>Change Order for statut Shelved &amp; Shipped</ENTRY>
+       <LENGTH>92</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>021</KEY>
+       <ENTRY>No data to delete</ENTRY>
+       <LENGTH>48</LENGTH>
+      </item>
+      <item>
        <ID>R</ID>
        <ENTRY>Run tools for sales order</ENTRY>
        <LENGTH>70</LENGTH>
@@ -365,6 +389,24 @@
        <KEY>018</KEY>
        <ENTRY>Erreur sur la suppression de données</ENTRY>
        <LENGTH>72</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>019</KEY>
+       <ENTRY>Aucun résultat de publication</ENTRY>
+       <LENGTH>58</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>020</KEY>
+       <ENTRY>Modification commande pour statut Shelved &amp; Shipped</ENTRY>
+       <LENGTH>92</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>021</KEY>
+       <ENTRY>Aucune donnée à supprimer</ENTRY>
+       <LENGTH>48</LENGTH>
       </item>
       <item>
        <ID>R</ID>
@@ -485,8 +527,162 @@
        <LENGTH>72</LENGTH>
       </item>
       <item>
+       <ID>I</ID>
+       <KEY>019</KEY>
+       <ENTRY>Aucun résultat de publication</ENTRY>
+       <LENGTH>58</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>020</KEY>
+       <ENTRY>Modification commande pour statut Shelved &amp; Shipped</ENTRY>
+       <LENGTH>92</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>021</KEY>
+       <ENTRY>Aucune donnée à supprimer</ENTRY>
+       <LENGTH>48</LENGTH>
+      </item>
+      <item>
        <ID>R</ID>
        <ENTRY>Outil de Run pour la commande client</ENTRY>
+       <LENGTH>70</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
+     <LANGUAGE>P</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>Republication de message KAFKA</ENTRY>
+       <LENGTH>60</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Magasin</ENTRY>
+       <LENGTH>17</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>003</KEY>
+       <ENTRY>Date</ENTRY>
+       <LENGTH>14</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>004</KEY>
+       <ENTRY>Heure</ENTRY>
+       <LENGTH>15</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>005</KEY>
+       <ENTRY>Commande SD</ENTRY>
+       <LENGTH>21</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>006</KEY>
+       <ENTRY>Référence Maestro</ENTRY>
+       <LENGTH>27</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>007</KEY>
+       <ENTRY>Changement de statut de commande en masse</ENTRY>
+       <LENGTH>44</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>008</KEY>
+       <ENTRY>Erreur au changement de statut</ENTRY>
+       <LENGTH>66</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>009</KEY>
+       <ENTRY>Impossible d&apos;afficher le message</ENTRY>
+       <LENGTH>64</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>010</KEY>
+       <ENTRY>Nouveau statut</ENTRY>
+       <LENGTH>24</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>011</KEY>
+       <ENTRY>Le message a été republié</ENTRY>
+       <LENGTH>50</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>012</KEY>
+       <ENTRY>Erreur de republication</ENTRY>
+       <LENGTH>46</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>013</KEY>
+       <ENTRY>Afficher le message</ENTRY>
+       <LENGTH>29</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>014</KEY>
+       <ENTRY>Toutes les commandes ont été mise à jour</ENTRY>
+       <LENGTH>80</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>015</KEY>
+       <ENTRY>Outils</ENTRY>
+       <LENGTH>16</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>016</KEY>
+       <ENTRY>Purge de l&apos;historique de publication KAFKA</ENTRY>
+       <LENGTH>84</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>017</KEY>
+       <ENTRY>La purge de la table ztcof_hist_kafka est faite</ENTRY>
+       <LENGTH>94</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>018</KEY>
+       <ENTRY>Erreur sur la suppression de données</ENTRY>
+       <LENGTH>72</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>019</KEY>
+       <ENTRY>Aucun résultat de publication</ENTRY>
+       <LENGTH>58</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>020</KEY>
+       <ENTRY>Modification commande pour statut Shelved &amp; Shipped</ENTRY>
+       <LENGTH>92</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>021</KEY>
+       <ENTRY>Aucune donnée à supprimer</ENTRY>
+       <LENGTH>48</LENGTH>
+      </item>
+      <item>
+       <ID>R</ID>
+       <ENTRY>Outils de Run pour la commande client</ENTRY>
        <LENGTH>70</LENGTH>
       </item>
      </TEXTPOOL>
@@ -601,6 +797,24 @@
        <KEY>018</KEY>
        <ENTRY>Erreur sur la suppression de données</ENTRY>
        <LENGTH>72</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>019</KEY>
+       <ENTRY>Aucun résultat de publication</ENTRY>
+       <LENGTH>58</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>020</KEY>
+       <ENTRY>Modification commande pour statut Shelved &amp; Shipped</ENTRY>
+       <LENGTH>92</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>021</KEY>
+       <ENTRY>Aucune donnée à supprimer</ENTRY>
+       <LENGTH>48</LENGTH>
       </item>
       <item>
        <ID>R</ID>

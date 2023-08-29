@@ -24,8 +24,91 @@
      <ENTRY>Texte de hiérarchie des produits</ENTRY>
      <LENGTH>132</LENGTH>
     </item>
+    <item>
+     <ID>I</ID>
+     <KEY>003</KEY>
+     <ENTRY>UM. prenant</ENTRY>
+     <LENGTH>132</LENGTH>
+    </item>
    </TPOOL>
+   <I18N_TPOOL>
+    <item>
+     <LANGUAGE>S</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>char255</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Texte de hiérarchie des produits</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>003</KEY>
+       <ENTRY>Zone numérique sur 15 caractères</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
+     <LANGUAGE>I</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>char255</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Texte de hiérarchie des produits</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>003</KEY>
+       <ENTRY>Zone numérique sur 15 caractères</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+    <item>
+     <LANGUAGE>L</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>char255</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Texte de hiérarchie des produits</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>003</KEY>
+       <ENTRY>Zone numérique sur 15 caractères</ENTRY>
+       <LENGTH>132</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+   </I18N_TPOOL>
    <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>DEFINE_GET_CUSTOM_ORDER_HIST</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>DEFINE_GET_CUSTOM_ORDER_HIST</DESCRIPT>
+    </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
      <CMPNAME>DEFINE_GET_CUSTOM_ORDER_HIST</CMPNAME>
@@ -34,8 +117,50 @@
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>DEFINE_GET_CUSTOM_ORDER_HIST</CMPNAME>
+     <LANGU>I</LANGU>
+     <DESCRIPT>DEFINE_GET_CUSTOM_ORDER_HIST</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>DEFINE_GET_CUSTOM_ORDER_HIST</CMPNAME>
+     <LANGU>L</LANGU>
+     <DESCRIPT>DEFINE_GET_CUSTOM_ORDER_HIST</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>DEFINE_GET_CUSTOM_ORDER_HIST</CMPNAME>
+     <LANGU>S</LANGU>
+     <DESCRIPT>DEFINE_GET_CUSTOM_ORDER_HIST</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>LOAD_TEXT_ELEMENTS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>LOAD_TEXT_ELEMENTS</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
      <CMPNAME>LOAD_TEXT_ELEMENTS</CMPNAME>
      <LANGU>F</LANGU>
+     <DESCRIPT>LOAD_TEXT_ELEMENTS</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>LOAD_TEXT_ELEMENTS</CMPNAME>
+     <LANGU>I</LANGU>
+     <DESCRIPT>LOAD_TEXT_ELEMENTS</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>LOAD_TEXT_ELEMENTS</CMPNAME>
+     <LANGU>L</LANGU>
+     <DESCRIPT>LOAD_TEXT_ELEMENTS</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ZCOF_LOGISTICAL_EX_MPC</CLSNAME>
+     <CMPNAME>LOAD_TEXT_ELEMENTS</CMPNAME>
+     <LANGU>S</LANGU>
      <DESCRIPT>LOAD_TEXT_ELEMENTS</DESCRIPT>
     </SEOCOMPOTX>
    </DESCRIPTIONS>

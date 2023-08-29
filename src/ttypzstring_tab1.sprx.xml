@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SPRX" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <PROXY_HEADER>
+    <item>
+     <OBJECT>TTYP</OBJECT>
+     <OBJ_NAME>ZSTRING_TAB1</OBJ_NAME>
+     <OBJECT_M>TTYP</OBJECT_M>
+     <OBJ_NAME_M>ZSTRING_TAB1</OBJ_NAME_M>
+     <HASH_ID>C372413770FBF5FCE70F5A96A79A4706E3C4B82B</HASH_ID>
+     <ID>TableOf&lt;type&gt; string http://www.w3.org/2001/XMLSchema http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_GLOBAL>X</IFR_GLOBAL>
+     <IFR_TYPE>TableOftype</IFR_TYPE>
+     <IFR_NAME>string</IFR_NAME>
+     <IFR_NSPCE>http://www.w3.org/2001/XMLSchema</IFR_NSPCE>
+     <IFR_GNSPCE>http://cxf.shipping.soap.chronopost.fr/</IFR_GNSPCE>
+     <GEN_VERS>0005</GEN_VERS>
+     <CATEGORY>ifmtypedef</CATEGORY>
+     <GEN_APPL>WEBSERVICES</GEN_APPL>
+    </item>
+   </PROXY_HEADER>
+   <PROXY_DATA>
+    <item>
+     <OBJECT>TTYP</OBJECT>
+     <OBJ_NAME>ZSTRING_TAB1</OBJ_NAME>
+     <OBJECT1>TTYP</OBJECT1>
+     <OBJ_NAME1>ZSTRING_TAB1</OBJ_NAME1>
+     <OBJECT2>TTYP</OBJECT2>
+     <OBJ_NAME2>ZSTRING_TAB1</OBJ_NAME2>
+     <ID>TableOf&lt;type&gt; string http://www.w3.org/2001/XMLSchema http://cxf.shipping.soap.chronopost.fr/</ID>
+     <IFR_TYPE>TableOftype</IFR_TYPE>
+     <IFR_NAME>string</IFR_NAME>
+     <IFR_XSDTYP>string</IFR_XSDTYP>
+     <IFR_SCALE>-2</IFR_SCALE>
+     <R3_TYPE>TTYP</R3_TYPE>
+     <R3_NAME>ZSTRING_TAB1</R3_NAME>
+     <R3_TEXT>Proxy Table Type (generated)</R3_TEXT>
+     <R3_DATATYP>STRG</R3_DATATYP>
+     <CATEGORY>ifmtypedef</CATEGORY>
+    </item>
+   </PROXY_DATA>
+  </asx:values>
+ </asx:abap>
+</abapGit>

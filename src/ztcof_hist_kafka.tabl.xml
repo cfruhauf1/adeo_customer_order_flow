@@ -92,6 +92,7 @@
     <LANGU>E</LANGU>
     <LANGU>I</LANGU>
     <LANGU>L</LANGU>
+    <LANGU>P</LANGU>
     <LANGU>S</LANGU>
    </I18N_LANGS>
    <DD02_TEXTS>
@@ -105,6 +106,10 @@
     </item>
     <item>
      <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Table d&apos;historique de publication kafka</DDTEXT>
+    </item>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
      <DDTEXT>Table d&apos;historique de publication kafka</DDTEXT>
     </item>
     <item>

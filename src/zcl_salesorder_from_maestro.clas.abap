@@ -7,27 +7,15 @@
 *&              le JSON est déserialisé puis on récupère certaines valeurs
 *&              afin de créer ou modifier une commander SD
 *&---------------------------------------------------------------------*
-
-class zcl_salesorder_from_maestro definition
+class ZCL_SALESORDER_FROM_MAESTRO definition
   public
-  inheriting from zcl_interfaces
+  inheriting from ZCL_INTERFACES
   create public .
 
+public section.
 
-  public section.
-
-    constants:
-      mc_api_name         type zeapinom value 'KAFKA_CUSORDER_UPDATE' ##NO_TEXT,
-      mc_material         type string value 'ARTICLE' ##NO_TEXT,
-      mc_service          type string value 'SERVICE' ##NO_TEXT,
-      mc_var_date_go_live type string value 'ZVTE_CDE_DATE_GOLIVE_',
-      mc_shipped          type j_status value 'E0010' ##NO_TEXT,
-      mc_cancelled        type j_status value 'E0011' ##NO_TEXT,
-      mc_shelved          type j_status value 'E0016' ##NO_TEXT.
-
-    types :
-
-      begin of ty_delivery_contact,
+  types:
+    begin of ty_delivery_contact,
         title           type string,
         first_name      type string,
         last_name       type string,
@@ -43,14 +31,14 @@ class zcl_salesorder_from_maestro definition
         country_code    type string,
         loyalty_id      type string,
         customer_number type string,
-      end of ty_delivery_contact,
-
-      begin of ty_tracking_list,
+      end of ty_delivery_contact .
+  types:
+    begin of ty_tracking_list,
         tracking_type   type string,
         tracking_number type string,
-      end of ty_tracking_list,
-
-      begin of ty_delivery_lines,
+      end of ty_tracking_list .
+  types:
+    begin of ty_delivery_lines,
         line_number                type i,
         ref_bu                     type int4,
         label                      type string,
@@ -77,11 +65,11 @@ class zcl_salesorder_from_maestro definition
         tracking_list              type standard table of ty_tracking_list with empty key,
         custom_product             type abap_bool,
         provider_order             type abap_bool,
-      end of ty_delivery_lines,
-
-      tt_delivery_lines type standard table of ty_delivery_lines with empty key,
-
-      begin of ty_logistical_information,
+      end of ty_delivery_lines .
+  types:
+    tt_delivery_lines type standard table of ty_delivery_lines with empty key .
+  types:
+    begin of ty_logistical_information,
         weight_creation          type string,
         weight_unit              type string,
         pallet_number_creation   type i,
@@ -93,9 +81,9 @@ class zcl_salesorder_from_maestro definition
         volume_expedition        type string,
         pallet_slots_expedition  type string,
         store_zone               type string,
-      end of ty_logistical_information,
-
-      begin of ty_topic_maestro,
+      end of ty_logistical_information .
+  types:
+    begin of ty_topic_maestro,
         id                             type int4,
         order_id                       type string,
         order_number                   type string,
@@ -113,9 +101,16 @@ class zcl_salesorder_from_maestro definition
         delivery_mode                  type string,
         delivery_lines                 type standard table of ty_delivery_lines with empty key,
         logistical_information         type ty_logistical_information,
-      end of ty_topic_maestro.
+      end of ty_topic_maestro .
 
-
+  constants MC_API_NAME type ZEAPINOM value 'KAFKA_CUSORDER_UPDATE' ##NO_TEXT.
+  constants MC_MATERIAL type STRING value 'ARTICLE' ##NO_TEXT.
+  constants MC_SERVICE type STRING value 'SERVICE' ##NO_TEXT.
+  constants MC_VAR_DATE_GO_LIVE type STRING value 'ZVTE_CDE_DATE_GOLIVE_' ##NO_TEXT.
+  constants MC_SHIPPED type J_STATUS value 'E0010' ##NO_TEXT.
+  constants MC_CANCELLED type J_STATUS value 'E0011' ##NO_TEXT.
+  constants MC_SHELVED type J_STATUS value 'E0016' ##NO_TEXT.
+  constants MC_TOPREPARE type J_STATUS value 'E0013' ##NO_TEXT.
   protected             section.
 
     data :
@@ -175,11 +170,11 @@ class zcl_salesorder_from_maestro definition
         value(rv_text) type string .
 
 
-endclass.
+ENDCLASS.
 
 
 
-class zcl_salesorder_from_maestro implementation.
+CLASS ZCL_SALESORDER_FROM_MAESTRO IMPLEMENTATION.
 
 
   method abap_timestamp_to_java.
@@ -263,96 +258,98 @@ class zcl_salesorder_from_maestro implementation.
   endmethod.
 
 
-  method creation_documents.
+  METHOD creation_documents.
 
-    types :
-      begin of ty_material_type,
-        type type string,
-      end of ty_material_type,
+    TYPES :
+      BEGIN OF ty_material_type,
+        type TYPE string,
+      END OF ty_material_type,
 
-      tt_material_type type table of ty_material_type.
+      tt_material_type TYPE TABLE OF ty_material_type.
 
-    data:
-      lv_created                type abap_bool,
-      lv_msg                    type string,
-      lv_value_kafka            type string,
-      lv_done                   type abap_bool,
-      lt_material_type          type tt_material_type,
-      lt_sort_delivery_lines    type tt_delivery_lines,
-      ls_order_header_in        type bapisdhd1,
-      ls_order_header_inx       type bapisdhd1x,
-      ls_order_partners         type bapiparnr,
-      lt_order_partners         type table of bapiparnr,
-      ls_order_items_in         type bapisditm,
-      lt_order_items_in         type table of bapisditm,
-      ls_order_items_inx        type bapisditmx,
-      lt_order_items_inx        type table of bapisditmx,
-      ls_order_schedules_in     type bapischdl,
-      lt_order_schedules_in     type table of bapischdl,
-      ls_order_schedules_inx    type bapischdlx,
-      lt_order_schedules_inx    type table of bapischdlx,
-      ls_order_conditions_in    type bapicond,
-      lt_order_conditions_in    type table of bapicond,
-      ls_order_conditions_inx   type bapicondx,
-      lt_order_conditions_inx   type table of bapicondx,
-      lt_order_text             type table of bapisdtext,
-      lt_return                 type table of bapiret2,
-      lt_order_keys             type table of bapisdkey,
-      lt_extensionex            type table of bapiparex,
-      lr_date_interval          type range of dats,
-      lr_date_golive            type range of dats,
-      lv_date_3_month           type dats,
-      lv_salesorder             type bstnk,
-      lv_customernumber         type bstnk,
-      lv_str_matnr              type string,
-      lv_sales_org              type vkorg,
-      lv_plant_number           type numc3,
-      lv_str_plant              type string,
-      lv_plant                  type werks_d,
-      lv_code_bu                type char3,
-      lv_currency               type waers,
-      lv_purch_date             type dats,
-      lv_name                   type bname_v,
-      lv_telephone              type telf1_vp,
-      lv_dlv_time               type delco,
-      lv_top_drive              type char10,
-      lv_store_loc              type rvari_val_255,
-      lv_partner_number         type rvari_val_255,
-      lv_salesdocument          type vbeln_va,
-      lv_order                  type bapivbeln-vbeln,
-      lv_item_number            type posnr_va,
-      lv_date                   type dats,
-      lv_date_modifed           type edatu,
-      lv_time_modified          type ezeit_vbep,
-      lv_time                   type tims,
-      lv_line_type              type string,
-      lv_email                  type tdline,
-      lv_address                type string,
-      lv_zip_code               type string,
-      lv_city                   type string,
-      lv_additional_label       type string,
-      lv_c1code                 type string,
-      lv_msg_slg1               type string,
-      lv_error                  type abap_bool,
-      lv_prefixe                type char1,
-      lv_modified               type abap_bool,
-      lv_date_golive_vari       type rvari_val_255,
-      lv_date_golive            type dats,
-      lv_tvarvc_date_go_live_bu type  rvari_vnam,
-      lv_posex                  type posex.
+    DATA:
+      lv_created                TYPE abap_bool,
+      lv_msg                    TYPE string,
+      lv_value_kafka            TYPE string VALUE 'KAFKA',
+      lv_done                   TYPE abap_bool,
+      lt_material_type          TYPE tt_material_type,
+      lt_sort_delivery_lines    TYPE tt_delivery_lines,
+      ls_order_header_in        TYPE bapisdhd1,
+      ls_order_header_inx       TYPE bapisdhd1x,
+      ls_order_partners         TYPE bapiparnr,
+      lt_order_partners         TYPE TABLE OF bapiparnr,
+      ls_order_items_in         TYPE bapisditm,
+      lt_order_items_in         TYPE TABLE OF bapisditm,
+      ls_order_items_inx        TYPE bapisditmx,
+      lt_order_items_inx        TYPE TABLE OF bapisditmx,
+      ls_order_schedules_in     TYPE bapischdl,
+      lt_order_schedules_in     TYPE TABLE OF bapischdl,
+      ls_order_schedules_inx    TYPE bapischdlx,
+      lt_order_schedules_inx    TYPE TABLE OF bapischdlx,
+      ls_order_conditions_in    TYPE bapicond,
+      lt_order_conditions_in    TYPE TABLE OF bapicond,
+      ls_order_conditions_inx   TYPE bapicondx,
+      lt_order_conditions_inx   TYPE TABLE OF bapicondx,
+      lt_order_text             TYPE TABLE OF bapisdtext,
+      lt_return                 TYPE TABLE OF bapiret2,
+      lt_order_keys             TYPE TABLE OF bapisdkey,
+      lt_extensionex            TYPE TABLE OF bapiparex,
+      lr_date_interval          TYPE RANGE OF dats,
+      lr_date_golive            TYPE RANGE OF dats,
+      lv_date_3_month           TYPE dats,
+      lv_salesorder             TYPE bstnk,
+      lv_customernumber         TYPE bstnk,
+      lv_str_matnr              TYPE string,
+      lv_sales_org              TYPE vkorg,
+      lv_plant_number           TYPE numc3,
+      lv_str_plant              TYPE string,
+      lv_plant                  TYPE werks_d,
+      lv_code_bu                TYPE char3,
+      lv_currency               TYPE waers,
+      lv_purch_date             TYPE dats,
+      lv_name                   TYPE bname_v,
+      lv_telephone              TYPE telf1_vp,
+      lv_dlv_time               TYPE delco,
+      lv_top_drive              TYPE char10,
+      lv_store_loc              TYPE rvari_val_255,
+      lv_partner_number         TYPE rvari_val_255,
+      lv_salesdocument          TYPE vbeln_va,
+      lv_order                  TYPE bapivbeln-vbeln,
+      lv_item_number            TYPE posnr_va,
+      lv_date                   TYPE dats,
+      lv_date_modifed           TYPE edatu,
+      lv_time_modified          TYPE ezeit_vbep,
+      lv_time                   TYPE tims,
+      lv_timestampl             TYPE timestampl,
+      lv_line_type              TYPE string,
+      lv_email                  TYPE tdline,
+      lv_address                TYPE string,
+      lv_zip_code               TYPE string,
+      lv_city                   TYPE string,
+      lv_additional_label       TYPE string,
+      lv_c1code                 TYPE string,
+      lv_msg_slg1               TYPE string,
+      lv_error                  TYPE abap_bool,
+      lv_prefixe                TYPE char1,
+      lv_modified               TYPE abap_bool,
+      lv_date_golive_vari       TYPE rvari_val_255,
+      lv_date_golive            TYPE dats,
+      lv_tvarvc_date_go_live_bu TYPE  rvari_vnam,
+      lv_posex                  TYPE posex,
+      lt_cof_hist_cusor         TYPE STANDARD TABLE OF ztcof_hist_cusor.
 
-    break-point id zlco.
+    BREAK-POINT ID zlco.
 
     " On choisit l'ordre sur les types d'article
-    lt_material_type = value #( ( type = mc_material ) ( type = mc_service ) ).
-    loop at lt_material_type assigning field-symbol(<fs_type>).
-      loop at ms_message-delivery_lines assigning field-symbol(<fs_line>)
-      where line_type cp <fs_type>-type.
+    lt_material_type = VALUE #( ( type = mc_material ) ( type = mc_service ) ).
+    LOOP AT lt_material_type ASSIGNING FIELD-SYMBOL(<fs_type>).
+      LOOP AT ms_message-delivery_lines ASSIGNING FIELD-SYMBOL(<fs_line>)
+      WHERE line_type CP <fs_type>-type.
 
-        append <fs_line> to lt_sort_delivery_lines.
+        APPEND <fs_line> TO lt_sort_delivery_lines.
 
-      endloop.
-    endloop.
+      ENDLOOP.
+    ENDLOOP.
 
     " RG5 Conversion du magasin
     lv_plant_number = ms_message-shop_id.
@@ -360,182 +357,182 @@ class zcl_salesorder_from_maestro implementation.
     lv_prefixe = me->gs_ztint_p-land1.
 
 
-    if lv_prefixe is initial.
+    IF lv_prefixe IS INITIAL.
       "Erreur conversion sur le magasin
-      message e006(zcl_cof_order) into lv_msg.
+      MESSAGE e006(zcl_cof_order) INTO lv_msg.
       gs_ztint_p-arbgb = lc_message_class.
-      call method me->add_message_slg1
-        exporting
+      CALL METHOD me->add_message_slg1
+        EXPORTING
           iv_rc      = 4
           iv_message = lv_msg
           iv_arbgb   = gs_ztint_p-arbgb
           iv_msgnr   = '006'
           iv_langu   = sy-langu.
-      clear lv_msg.
+      CLEAR lv_msg.
 
-    else.
-      concatenate lv_prefixe lv_str_plant into lv_plant.
-    endif.
+    ELSE.
+      CONCATENATE lv_prefixe lv_str_plant INTO lv_plant.
+    ENDIF.
 
 *    " RG12 Ne pas créer les commandes avant la date du Go Live
-    select single date_golive from ztcusordergolive
-        where land1 = @gs_ztint_p-land1 and werks = @lv_plant into @lv_date_golive.
-    if sy-subrc = 0.
-    endif.
+    SELECT SINGLE date_golive FROM ztcusordergolive
+        WHERE land1 = @gs_ztint_p-land1 AND werks = @lv_plant INTO @lv_date_golive.
+    IF sy-subrc = 0.
+    ENDIF.
 
-    append value #(  sign = 'I'
+    APPEND VALUE #(  sign = 'I'
                      option = 'GE'
-                     low =  lv_date_golive )  to lr_date_golive.
+                     low =  lv_date_golive )  TO lr_date_golive.
 *
     " Si la date de traitement est supérieure à la date du Go Live, on crée la commande
-    if gs_ztint_h-credat in lr_date_golive.
+    IF gs_ztint_h-credat IN lr_date_golive.
 
-      if ms_message is not initial.
+      IF ms_message IS NOT INITIAL.
 
-        read table ms_message-delivery_lines index 1 into data(ls_line).
+        READ TABLE ms_message-delivery_lines INDEX 1 INTO DATA(ls_line).
 
-        if sy-subrc ne 0.
-        endif.
+        IF sy-subrc NE 0.
+        ENDIF.
 
 
 
 
 *Restriction du traitement aux magasins EWM ET en plus du lot 2.2 du projet smart (éligibles à la commande client)
-        data lt_stores_2_2 type table of werks_ext.
+        DATA lt_stores_2_2 TYPE TABLE OF werks_ext.
 
         "Selection dans la table de custo des magasins définis comme appartenant au lot 2.2
-        select
+        SELECT
             plant
-        from ztmm_mag_lot
-        where lot = '2'
-          and sous_lot = '2'
-        into table @lt_stores_2_2.
-        if sy-subrc <> 0.
-          clear lt_stores_2_2.
+        FROM ztmm_mag_lot
+        WHERE lot = '2'
+          AND sous_lot = '2'
+        INTO TABLE @lt_stores_2_2.
+        IF sy-subrc <> 0.
+          CLEAR lt_stores_2_2.
           cv_rc = 0.
           "Aucun magasin trouvé dans la table ztmm_mag_lot pour le lot 2.2
-          message e002(zcl_cof_order) into lv_msg.
+          MESSAGE e002(zcl_cof_order) INTO lv_msg.
           gs_ztint_p-arbgb = lc_message_class.
-          call method me->add_message_slg1
-            exporting
+          CALL METHOD me->add_message_slg1
+            EXPORTING
               iv_rc      = 0
               iv_message = lv_msg
               iv_arbgb   = gs_ztint_p-arbgb
               iv_msgnr   = '002'
               iv_langu   = sy-langu.
-          exit.
+          EXIT.
 
-        else.
+        ELSE.
           "Création d'un range des magasins lot 2.2 (éligibles)
-          data lr_stores_2_2 type range of werks_ext.
-          lr_stores_2_2 = value #( for ls_stores_2_2 in lt_stores_2_2
+          DATA lr_stores_2_2 TYPE RANGE OF werks_ext.
+          lr_stores_2_2 = VALUE #( FOR ls_stores_2_2 IN lt_stores_2_2
                                                      ( sign   = 'I'
                                                        option = 'EQ'
                                                        low    = ls_stores_2_2 )
                                  ).
 
           "Si le magasin n'est pas éligible on sort tout de suite et on alimente la log avec le message d'erreur
-          if lv_plant not in lr_stores_2_2.
+          IF lv_plant NOT IN lr_stores_2_2.
             cv_rc = 0.
             "Le magasin & n'est pas éligible à la création/modification de commande client
-            message e001(zcl_cof_order) with lv_plant into lv_msg.
+            MESSAGE e001(zcl_cof_order) WITH lv_plant INTO lv_msg.
             gs_ztint_p-arbgb = lc_message_class.
-            call method me->add_message_slg1
-              exporting
+            CALL METHOD me->add_message_slg1
+              EXPORTING
                 iv_rc      = 0
                 iv_message = lv_msg
                 iv_arbgb   = gs_ztint_p-arbgb
                 iv_msgnr   = '001'
                 iv_langu   = sy-langu.
-            exit.
-          endif.
+            EXIT.
+          ENDIF.
 
-        endif.
+        ENDIF.
 
         " Récupération du code BU
-        select single value_old from ztca_conversion
-            where key1 = 'PREFIXE' and key2 = 'SITE' and sens = 'LS' and value_new = @lv_prefixe into @lv_code_bu. "#EC CI_NOORDER
+        SELECT SINGLE value_old FROM ztca_conversion
+            WHERE key1 = 'PREFIXE' AND key2 = 'SITE' AND sens = 'LS' AND value_new = @lv_prefixe INTO @lv_code_bu. "#EC CI_NOORDER
 
-        if sy-subrc ne 0.
-        endif.
+        IF sy-subrc NE 0.
+        ENDIF.
 
         " RG2 Organisation commerciale
-        select single value_old from ztca_conversion
-            where key1 = 'CODEBU' and key2 = 'VENTE' and sens = 'SL' and value_new = @lv_code_bu
-            into @lv_sales_org.                         "#EC CI_NOORDER
+        SELECT SINGLE value_old FROM ztca_conversion
+            WHERE key1 = 'CODEBU' AND key2 = 'VENTE' AND sens = 'SL' AND value_new = @lv_code_bu
+            INTO @lv_sales_org.                         "#EC CI_NOORDER
 
-        if sy-subrc ne 0.
+        IF sy-subrc NE 0.
           "Erreur sur la récupération de l'organisation commerciale
-          message e007(zcl_cof_order) into lv_msg.
+          MESSAGE e007(zcl_cof_order) INTO lv_msg.
           gs_ztint_p-arbgb = lc_message_class.
-          call method me->add_message_slg1
-            exporting
+          CALL METHOD me->add_message_slg1
+            EXPORTING
               iv_rc      = 4
               iv_message = lv_msg
               iv_arbgb   = gs_ztint_p-arbgb
               iv_msgnr   = '007'
               iv_langu   = sy-langu.
-          clear lv_msg.
+          CLEAR lv_msg.
 
-        endif.
+        ENDIF.
 
         " RG6 Devise
-        select single waers from knvv where kunnr = @lv_plant and vtweg = '10' into @lv_currency. "#EC CI_NOORDER
+        SELECT SINGLE waers FROM knvv WHERE kunnr = @lv_plant AND vtweg = '10' INTO @lv_currency. "#EC CI_NOORDER
 
-        if sy-subrc ne 0.
+        IF sy-subrc NE 0.
           "Erreur sur la récupération de la devise
-          message e008(zcl_cof_order) into lv_msg.
+          MESSAGE e008(zcl_cof_order) INTO lv_msg.
           gs_ztint_p-arbgb = lc_message_class.
-          call method me->add_message_slg1
-            exporting
+          CALL METHOD me->add_message_slg1
+            EXPORTING
               iv_rc      = 4
               iv_message = lv_msg
               iv_arbgb   = gs_ztint_p-arbgb
               iv_msgnr   = '008'
               iv_langu   = sy-langu.
-          clear lv_msg.
+          CLEAR lv_msg.
 
-        endif.
+        ENDIF.
 
         " RG11 Canal de vente
-        select single value_new from ztca_conversion
-          where key1 = 'MAESTRO_ORDER' and key2 = 'CHANNEL' and value_old = @ms_message-channel
-          into @data(lv_channel).                       "#EC CI_NOORDER
+        SELECT SINGLE value_new FROM ztca_conversion
+          WHERE key1 = 'MAESTRO_ORDER' AND key2 = 'CHANNEL' AND value_old = @ms_message-channel
+          INTO @DATA(lv_channel).                       "#EC CI_NOORDER
 
-        if sy-subrc ne 0.
-        endif.
+        IF sy-subrc NE 0.
+        ENDIF.
 
         " RG1 Type de commande
-        read table ms_message-delivery_lines index 1 into data(ls_del).
-        if sy-subrc ne 0.
-        endif.
-        select single value_new from ztca_conversion
-            where key1 = 'MAESTRO_ORDER' and key2 = 'ORDER_SD_TYPE'
-             and key3 = @ms_message-delivery_type
-             and key4 = @ls_del-tracking_type
-             and value_old = @lv_sales_org into @data(lv_doc_type). "#EC CI_NOORDER
+        READ TABLE ms_message-delivery_lines INDEX 1 INTO DATA(ls_del).
+        IF sy-subrc NE 0.
+        ENDIF.
+        SELECT SINGLE value_new FROM ztca_conversion
+            WHERE key1 = 'MAESTRO_ORDER' AND key2 = 'ORDER_SD_TYPE'
+             AND key3 = @ms_message-delivery_type
+             AND key4 = @ls_del-tracking_type
+             AND value_old = @lv_sales_org INTO @DATA(lv_doc_type). "#EC CI_NOORDER
 
 
-        if sy-subrc ne 0.
+        IF sy-subrc NE 0.
           lv_doc_type = 'ZDRI'.
           cv_rc = 4.
           "Erreur conversion sur le type de document
-          message e005(zcl_cof_order) into lv_msg.
+          MESSAGE e005(zcl_cof_order) INTO lv_msg.
           gs_ztint_p-arbgb = lc_message_class.
-          call method me->add_message_slg1
-            exporting
+          CALL METHOD me->add_message_slg1
+            EXPORTING
               iv_rc      = 4
               iv_message = lv_msg_slg1
               iv_arbgb   = gs_ztint_p-arbgb
               iv_msgnr   = '005'
               iv_langu   = sy-langu.
-          clear lv_msg.
-          exit.
+          CLEAR lv_msg.
+          EXIT.
 
-        endif.
+        ENDIF.
 
         " Vérification si la commande est déjà créée
-        lv_salesorder = conv bstnk( ms_message-order_number ).
+        lv_salesorder = CONV bstnk( ms_message-order_number ).
 
 *        "Récupération de la plage de date sur laquelle on attaque VBAK (depuis la TVARVC) pour améliorer les perf de la selection suivante
 *        DATA : lv_number_days_from_rvari TYPE rvari_val_255,
@@ -560,47 +557,47 @@ class zcl_salesorder_from_maestro implementation.
 *                           high = lv_date_to )  TO lr_date_interval.
 *        ENDIF.
 
-        constants: lc_cof_doc_cat type vbak-vbtyp value 'C'.
-        constants: lc_maestro_price_cond type vbak-kalsm value 'ZB15'.
+        CONSTANTS: lc_cof_doc_cat TYPE vbak-vbtyp VALUE 'C'.
+        CONSTANTS: lc_maestro_price_cond TYPE vbak-kalsm VALUE 'ZB15'.
         "On cherche ici à savoir si la commande SAP existe déjà ou non(i.e il existe au moins une ligne dans VBAK ayant une référence à la commande Maestro que l'on reçoit)
         "-> si elle existe on va aiguiller vers une modification,
         "-> si elle n'existe pas on doit la créer (sous condition supplémentaire quelle soit cohérente (voir les premiers check dans l'étape de création))
-        select single
+        SELECT SINGLE
             vbeln,
             bstnk,
             auart
-          from vbak
-          where bstnk = @lv_salesorder
-            and vbtyp = @lc_cof_doc_cat
-            and kalsm = @lc_maestro_price_cond
+          FROM vbak
+          WHERE bstnk = @lv_salesorder
+            AND vbtyp = @lc_cof_doc_cat
+            AND kalsm = @lc_maestro_price_cond
 *            AND erdat IN @lr_date_interval
-          into @data(ls_vbak_ref).                      "#EC CI_NOORDER
-        if sy-subrc = 0.
-          select distinct vbeln, posnr, posex, kwmeng from vbap
-            where vbeln = @ls_vbak_ref-vbeln
-            into table @data(lt_items).
+          INTO @DATA(ls_vbak_ref).                      "#EC CI_NOORDER
+        IF sy-subrc = 0.
+          SELECT DISTINCT vbeln, posnr, posex, kwmeng FROM vbap
+            WHERE vbeln = @ls_vbak_ref-vbeln
+            INTO TABLE @DATA(lt_items).
 
-          if sy-subrc = 0.
+          IF sy-subrc = 0.
 
-            sort lt_items by vbeln posnr.
+            SORT lt_items BY vbeln posnr.
             lv_modified = abap_true.
 
-            select  vbeln, posnr, etenr from vbep
-              where vbeln = @ls_vbak_ref-vbeln
-              into table @data(lt_vbep).
-            if sy-subrc = 0.
-              sort lt_vbep by vbeln posnr etenr.
-            endif.
+            SELECT  vbeln, posnr, etenr FROM vbep
+              WHERE vbeln = @ls_vbak_ref-vbeln
+              INTO TABLE @DATA(lt_vbep).
+            IF sy-subrc = 0.
+              SORT lt_vbep BY vbeln posnr etenr.
+            ENDIF.
 
-          endif.
-        endif.
+          ENDIF.
+        ENDIF.
 
         " Récupération du storage location
         zcl_ca_variables=>get_value_parameter(
-          exporting
+          EXPORTING
             iv_name    = 'ZVTE_CDE_LGORT'
 *              iv_default =
-          importing
+          IMPORTING
             ev_value   = lv_store_loc
         ).
 
@@ -608,78 +605,79 @@ class zcl_salesorder_from_maestro implementation.
 *Extension automatique de la vue MARD pour tous les articles ZAWA (consommables) sur 0001 si MARD n'est pas définie que sur ROD1 pour cette article (au moment de la création de commande)
 
         "Création d'une table avec le bon type
-        types: begin of lty_delivery_line,
-                 matnr type matnr18,
-               end of lty_delivery_line.
+        TYPES: BEGIN OF lty_delivery_line,
+                 matnr TYPE matnr18,
+               END OF lty_delivery_line.
 
-        types: begin of lty_storage_location,
-                 werks type mard-werks,
-                 matnr type matnr18,
-                 lgort type mard-lgort,
-               end of lty_storage_location.
+        TYPES: BEGIN OF lty_storage_location,
+                 werks TYPE mard-werks,
+                 matnr TYPE matnr18,
+                 lgort TYPE mard-lgort,
+               END OF lty_storage_location.
 
 
-        data lt_delivery_lines type standard table of lty_delivery_line.
-        lt_delivery_lines = corresponding #( ms_message-delivery_lines mapping matnr = ref_bu ).
+        DATA lt_delivery_lines TYPE STANDARD TABLE OF lty_delivery_line.
+        lt_delivery_lines = CORRESPONDING #( ms_message-delivery_lines MAPPING matnr = ref_bu ).
 
         "Création d'un range des articles à vérifier en MARD avec les leading zeros
-        data lr_products_to_check type range of matnr18.
-        lr_products_to_check = value #( for ls_delivery_line in lt_delivery_lines
+        DATA lr_products_to_check TYPE RANGE OF matnr18.
+        lr_products_to_check = VALUE #( FOR ls_delivery_line IN lt_delivery_lines
                                                             ( sign   = 'I'
                                                               option = 'EQ'
-                                                              low    = |{ ls_delivery_line-matnr alpha = in }| )
+                                                              low    = |{ ls_delivery_line-matnr ALPHA = IN }| )
                                       ).
 
-        if lr_products_to_check is not initial.
+        IF lr_products_to_check IS NOT INITIAL.
 
-          data lt_products_to_check_data type sorted table of lty_storage_location with non-unique key werks matnr.
-          select
+          DATA lt_products_to_check_data TYPE SORTED TABLE OF lty_storage_location WITH NON-UNIQUE KEY werks matnr.
+          SELECT
               mard~werks,
               mara~matnr,
               mard~lgort
-          from mara
-          join mard
-            on mara~matnr = mard~matnr
-          where mara~matnr in @lr_products_to_check
-            and mard~werks = @lv_plant
-            and mara~mtart = 'ZAWA'           "articles consommables à étendre uniquement
-          into table @lt_products_to_check_data.
-          if sy-subrc = 0.
+          FROM mara
+          JOIN mard
+            ON mara~matnr = mard~matnr
+          WHERE mara~matnr IN @lr_products_to_check
+            AND mard~werks = @lv_plant
+*            AND mara~mtart = 'ZAWA'           "articles consommables à étendre uniquement
+            AND mara~mtpos_mara = 'NORM'
+          INTO TABLE @lt_products_to_check_data.
+          IF sy-subrc = 0.
 
-            data(lt_products_to_extend) = lt_products_to_check_data.
-            clear lt_products_to_extend.
+            DATA(lt_products_to_extend) = lt_products_to_check_data.
+            CLEAR lt_products_to_extend.
 
             "On étend tous les articles non présent en MARD sur l'emplacement ZVTE_CDE_LGORT
-            loop at lt_products_to_check_data assigning field-symbol(<lg_storage_location>)
-                                         group by ( key1 = <lg_storage_location>-werks
+            LOOP AT lt_products_to_check_data ASSIGNING FIELD-SYMBOL(<lg_storage_location>)
+                                         GROUP BY ( key1 = <lg_storage_location>-werks
                                                     key2 = <lg_storage_location>-matnr
                                                   ).
               "Si l'entrée n'existe pas on le rajoute à la table des articles à étendre
-              if  xsdbool( line_exists( lt_products_to_check_data[ matnr = <lg_storage_location>-matnr
+              IF  xsdbool( line_exists( lt_products_to_check_data[ matnr = <lg_storage_location>-matnr
                                                                    werks = <lg_storage_location>-werks
                                                                    lgort = lv_store_loc
                                                                  ]
                                       )
                           ) = abap_false.
-                insert <lg_storage_location> into table lt_products_to_extend.
-                continue.
-              endif.
-            endloop.
+                INSERT <lg_storage_location> INTO TABLE lt_products_to_extend.
+                CONTINUE.
+              ENDIF.
+            ENDLOOP.
 
             "la ligne n'existe pas sur l'emplacement, on créé la ligne
-            data: ls_headdata             type bapie1mathead,
-                  lt_return1              type bapireturn1,
-                  ls_storagelocationdata  type bapie1mardrt,
-                  lt_storagelocationdata  type standard table of bapie1mardrt,
-                  ls_storagelocationdatax type bapie1mardrtx,
-                  lt_storagelocationdatax type standard table of bapie1mardrtx.
+            DATA: ls_headdata             TYPE bapie1mathead,
+                  lt_return1              TYPE bapireturn1,
+                  ls_storagelocationdata  TYPE bapie1mardrt,
+                  lt_storagelocationdata  TYPE STANDARD TABLE OF bapie1mardrt,
+                  ls_storagelocationdatax TYPE bapie1mardrtx,
+                  lt_storagelocationdatax TYPE STANDARD TABLE OF bapie1mardrtx.
 
             "Pour chaque article dont il n'existe pas de ligne en MARD pour le storage loc défini en TVARVC ZVTE_CDE_LGORT, on créé la ligne
-            loop at lt_products_to_extend assigning field-symbol(<lg_storage_location_ok>)
-                                            group by ( key1 = <lg_storage_location_ok>-werks
+            LOOP AT lt_products_to_extend ASSIGNING FIELD-SYMBOL(<lg_storage_location_ok>)
+                                            GROUP BY ( key1 = <lg_storage_location_ok>-werks
                                                        key2 = <lg_storage_location_ok>-matnr
                                                      ).
-              clear:  ls_headdata            ,
+              CLEAR:  ls_headdata            ,
                       lt_return1             ,
                       ls_storagelocationdata ,
                       lt_storagelocationdata ,
@@ -694,26 +692,26 @@ class zcl_salesorder_from_maestro implementation.
               ls_storagelocationdata-plant      = ls_storagelocationdatax-plant    = <lg_storage_location_ok>-werks.
               ls_storagelocationdata-stge_loc   = ls_storagelocationdatax-stge_loc = lv_store_loc.
 
-              insert ls_storagelocationdata  into table lt_storagelocationdata.
-              insert ls_storagelocationdatax into table lt_storagelocationdatax.
+              INSERT ls_storagelocationdata  INTO TABLE lt_storagelocationdata.
+              INSERT ls_storagelocationdatax INTO TABLE lt_storagelocationdatax.
 
               "On étend les articles un par un (la BAPI ne prenant qu'un seul article à la fois)
-              call function 'BAPI_MATERIAL_MAINTAINDATA_RT'
-                exporting
+              CALL FUNCTION 'BAPI_MATERIAL_MAINTAINDATA_RT'
+                EXPORTING
                   headdata             = ls_headdata
-                importing
+                IMPORTING
                   return               = lt_return1
-                tables
+                TABLES
                   storagelocationdata  = lt_storagelocationdata
                   storagelocationdatax = lt_storagelocationdatax.
               "Il a été décidé ici de ne pas controler le résultat de la bapi
               "-> on laisse la création de commande se créer/passer en erreur
-            endloop.
+            ENDLOOP.
 
-          endif.
-        endif.
+          ENDIF.
+        ENDIF.
 
-        if lv_created = abap_false and lv_modified = abap_false and ms_message-preparation_order_id is initial.
+        IF lv_created = abap_false AND lv_modified = abap_false AND ms_message-preparation_order_id IS INITIAL.
 
 *************      Création de la commande             *************
           "En création de commande on commence par vérifier si le message provient de GPE ou Maestro/ALL'X (DP4PCF-821)
@@ -722,9 +720,9 @@ class zcl_salesorder_from_maestro implementation.
 
 
           "Données des postes et dates d'échéance
-          loop at lt_sort_delivery_lines reference into data(ld_item).
+          LOOP AT lt_sort_delivery_lines REFERENCE INTO DATA(ld_item).
 
-            at first.
+            AT FIRST.
               lv_purch_date       = ld_item->quantity_ordered_date. "convert_timestamp_to_date( ld_item->quantity_ordered_date ).
               lv_name             = ld_item->delivery_contact-last_name.
               lv_telephone        = ld_item->delivery_contact-mobile_number.
@@ -734,9 +732,9 @@ class zcl_salesorder_from_maestro implementation.
               lv_address          = ld_item->delivery_contact-line1.
               lv_zip_code         = ld_item->delivery_contact-zip_code.
               lv_city             = ld_item->delivery_contact-city.
-              concatenate lv_address lv_zip_code lv_city into data(lv_adress_customer) separated by space.
+              CONCATENATE lv_address lv_zip_code lv_city INTO DATA(lv_adress_customer) SEPARATED BY space.
               lv_line_type        = ld_item->line_type.
-            endat.
+            ENDAT.
 
 
 
@@ -749,93 +747,93 @@ class zcl_salesorder_from_maestro implementation.
             ls_order_items_inx-updateflag   = 'I'.
 
             lv_str_matnr = ld_item->ref_bu.
-            ls_order_items_in-material      = |{ lv_str_matnr alpha = in   }|.
+            ls_order_items_in-material      = |{ lv_str_matnr ALPHA = IN   }|.
             ls_order_items_inx-material     = abap_true.
 
 
-            if lv_plant is not initial.
+            IF lv_plant IS NOT INITIAL.
               ls_order_items_in-plant         = lv_plant.
               ls_order_items_inx-plant        = abap_true.
               ls_order_items_in-ship_point    = lv_plant.
               ls_order_items_inx-ship_point   = abap_true.
-            endif.
-            ls_order_items_in-target_qty    = conv dzmeng( ld_item->quantity_ordered ).
+            ENDIF.
+            ls_order_items_in-target_qty    = CONV dzmeng( ld_item->quantity_ordered ).
             ls_order_items_inx-target_qty   = abap_true.
 
 *          select single mtart from mara where matnr = @ls_order_items_in-material into @data(lv_mtart).
 
             " RG8 Alimentation du libellé pour les articles sur mesure
-            if ld_item->line_type = 'SERVICE' and ld_item->label is not initial.
+            IF ld_item->line_type = 'SERVICE' AND ld_item->label IS NOT INITIAL.
               ls_order_items_in-short_text    = ld_item->label.
               ls_order_items_inx-short_text   = abap_true.
-            endif.
+            ENDIF.
 
             lv_additional_label = ld_item->additional_label.
             lv_c1code           = ld_item->c1_code.
 
             " RG9 Données de texte poste
-            if ld_item->line_type ne 'SERVICE'.
-              append value #( itm_number = lv_item_number  text_id = '0007'  langu = 'EN' text_line = lv_additional_label ) to lt_order_text.
-              append value #( itm_number = lv_item_number  text_id = '0002'  langu = 'EN' text_line = lv_c1code ) to lt_order_text.
-            endif.
+            IF ld_item->line_type NE 'SERVICE'.
+              APPEND VALUE #( itm_number = lv_item_number  text_id = '0007'  langu = 'EN' text_line = lv_additional_label ) TO lt_order_text.
+              APPEND VALUE #( itm_number = lv_item_number  text_id = '0002'  langu = 'EN' text_line = lv_c1code ) TO lt_order_text.
+            ENDIF.
 
             "Alimentation de l'Emplacement - si service pas de préparation donc pas d'emplacement
-            if lv_store_loc is not initial and ld_item->line_type <> 'SERVICE'.
+            IF lv_store_loc IS NOT INITIAL AND ld_item->line_type <> 'SERVICE'.
               ls_order_items_in-store_loc     = lv_store_loc.
               ls_order_items_inx-store_loc    = abap_true.
-            endif.
+            ENDIF.
 
-            append ls_order_items_in to lt_order_items_in.
-            append ls_order_items_inx to lt_order_items_inx.
+            APPEND ls_order_items_in TO lt_order_items_in.
+            APPEND ls_order_items_inx TO lt_order_items_inx.
 
             " Données des dates d'écheance
             ls_order_schedules_in-itm_number    = lv_item_number.
             ls_order_schedules_inx-itm_number   = lv_item_number.
 
             "date et heure de livraison
-            if ld_item->delivery_date_promise_long is initial.
+            IF ld_item->delivery_date_promise_long IS INITIAL.
               ls_order_schedules_in-req_date      = ld_item->delivery_date_promise. "convert_timestamp_to_date( ld_item->delivery_date_promise ).
               ls_order_schedules_inx-req_date     = abap_true.
 
-            else.
-              convert_timestamp_to_date_time( exporting iv_timestamp = ld_item->delivery_date_promise_long
-                                              importing ev_date = lv_date
+            ELSE.
+              convert_timestamp_to_date_time( EXPORTING iv_timestamp = ld_item->delivery_date_promise_long
+                                              IMPORTING ev_date = lv_date
                                                         ev_time = lv_time ).
               ls_order_schedules_in-req_date      = lv_date.
               ls_order_schedules_inx-req_date     = abap_true.
               ls_order_schedules_in-req_time      = lv_time.
               ls_order_schedules_inx-req_time     = abap_true.
-            endif.
+            ENDIF.
 
-            ls_order_schedules_in-req_qty       = conv wmeng( ld_item->quantity_ordered ).
+            ls_order_schedules_in-req_qty       = CONV wmeng( ld_item->quantity_ordered ).
             ls_order_schedules_inx-req_qty      = abap_true.
-            append ls_order_schedules_in to lt_order_schedules_in.
-            append ls_order_schedules_inx to lt_order_schedules_inx.
+            APPEND ls_order_schedules_in TO lt_order_schedules_in.
+            APPEND ls_order_schedules_inx TO lt_order_schedules_inx.
 
 
-            clear : ls_order_items_in, ls_order_items_inx, ls_order_schedules_in, ls_order_schedules_inx.
+            CLEAR : ls_order_items_in, ls_order_items_inx, ls_order_schedules_in, ls_order_schedules_inx.
 
-          endloop.
+          ENDLOOP.
 
 
           " RG3 Temps de préparation
-          select single value_new from ztca_conversion
-               where key1 = 'MAESTRO_ORDER' and key2 = 'TOPDRIVE'
-                 and key3 = @lv_top_drive into @lv_dlv_time. "#EC CI_NOORDER
+          SELECT SINGLE value_new FROM ztca_conversion
+               WHERE key1 = 'MAESTRO_ORDER' AND key2 = 'TOPDRIVE'
+                 AND key3 = @lv_top_drive INTO @lv_dlv_time. "#EC CI_NOORDER
 
-          if sy-subrc ne 0.
+          IF sy-subrc NE 0.
             "Erreur conversion du temps de préparation
-            message e009(zcl_cof_order) into lv_msg.
+            MESSAGE e009(zcl_cof_order) INTO lv_msg.
             gs_ztint_p-arbgb = lc_message_class.
-            call method me->add_message_slg1
-              exporting
+            CALL METHOD me->add_message_slg1
+              EXPORTING
                 iv_rc      = 4
                 iv_message = lv_msg
                 iv_arbgb   = gs_ztint_p-arbgb
                 iv_msgnr   = '009'
                 iv_langu   = sy-langu.
-            clear lv_msg.
-          endif.
+            CLEAR lv_msg.
+          ENDIF.
 
           "Données de la commande
           ls_order_header_in-doc_type     = lv_doc_type.
@@ -867,52 +865,52 @@ class zcl_salesorder_from_maestro implementation.
           "Données des conditions
           ls_order_conditions_in-cond_type      = 'HM00'.
           ls_order_conditions_inx-cond_type     = abap_true.
-          ls_order_conditions_in-cond_value     = conv bapikbetr1( ms_message-total_price ).       " faire attention au séparateur + nbre décimals
+          ls_order_conditions_in-cond_value     = CONV bapikbetr1( ms_message-total_price ).       " faire attention au séparateur + nbre décimals
           ls_order_conditions_inx-cond_value    = abap_true.
           ls_order_conditions_in-currency       = lv_currency.
           ls_order_conditions_inx-updateflag    = abap_true.
-          append ls_order_conditions_in to lt_order_conditions_in.
-          append ls_order_conditions_inx to lt_order_conditions_inx.
+          APPEND ls_order_conditions_in TO lt_order_conditions_in.
+          APPEND ls_order_conditions_inx TO lt_order_conditions_inx.
 
           "Données des partenaires
           " Récupération du numéro de partenaire
           zcl_ca_variables=>get_value_parameter(
-            exporting
+            EXPORTING
               iv_name    = 'ZVTE_CDE_KUNNR'
-            importing
+            IMPORTING
               ev_value   = lv_partner_number
           ).
 
           ls_order_partners-partn_role = 'AG'.                    "<----- Sold to party donneur d'ordre
           ls_order_partners-partn_numb = lv_partner_number.        "'0022000041'.
-          append ls_order_partners to lt_order_partners.
-          clear ls_order_partners.
+          APPEND ls_order_partners TO lt_order_partners.
+          CLEAR ls_order_partners.
           ls_order_partners-partn_role = 'WE'.                    "<----- le livré
           ls_order_partners-partn_numb = lv_partner_number.       "'0022000041'.
-          append ls_order_partners to lt_order_partners.
-          clear ls_order_partners.
+          APPEND ls_order_partners TO lt_order_partners.
+          CLEAR ls_order_partners.
           ls_order_partners-partn_role = 'RG'.                     "<----- payeur
           ls_order_partners-partn_numb = lv_partner_number.        "'0022000041'.
-          append ls_order_partners to lt_order_partners.
-          clear ls_order_partners.
+          APPEND ls_order_partners TO lt_order_partners.
+          CLEAR ls_order_partners.
           ls_order_partners-partn_role = 'RE'.                    "<----- destinataire facture
           ls_order_partners-partn_numb = lv_partner_number.       "'0022000041'.
-          append ls_order_partners to lt_order_partners.
-          clear ls_order_partners.
+          APPEND ls_order_partners TO lt_order_partners.
+          CLEAR ls_order_partners.
 
           " Données de texte d'entête
-          append value #( itm_number = '000000'  text_id = 'Z001'  langu = 'EN' text_line = lv_email ) to lt_order_text.
-          append value #( itm_number = '000000'  text_id = 'Z002'  langu = 'EN' text_line = lv_adress_customer ) to lt_order_text.
+          APPEND VALUE #( itm_number = '000000'  text_id = 'Z001'  langu = 'EN' text_line = lv_email ) TO lt_order_text.
+          APPEND VALUE #( itm_number = '000000'  text_id = 'Z002'  langu = 'EN' text_line = lv_adress_customer ) TO lt_order_text.
 
 
-          call function 'BAPI_SALESORDER_CREATEFROMDAT2'
-            exporting
+          CALL FUNCTION 'BAPI_SALESORDER_CREATEFROMDAT2'
+            EXPORTING
 *             salesdocumentin      =
               order_header_in      = ls_order_header_in
               order_header_inx     = ls_order_header_inx
-            importing
+            IMPORTING
               salesdocument        = lv_salesdocument
-            tables
+            TABLES
               return               = lt_return
               order_items_in       = lt_order_items_in
               order_items_inx      = lt_order_items_inx
@@ -936,8 +934,53 @@ class zcl_salesorder_from_maestro implementation.
 *             extensionex          =
             .
 
+          IF sy-subrc IS INITIAL.
+            READ TABLE lt_return TRANSPORTING NO FIELDS WITH KEY type = 'E'.
+            IF sy-subrc IS NOT INITIAL.
 
-        elseif lv_modified = abap_true.
+              " On ajoute aussi une entrée sur la table spécifique ztcof_hist_cusor
+              APPEND INITIAL LINE TO lt_cof_hist_cusor ASSIGNING FIELD-SYMBOL(<fs_cof_hist_cusor>).
+              GET TIME STAMP FIELD lv_timestampl.
+
+
+              <fs_cof_hist_cusor>-vbeln         = lv_salesdocument.
+              <fs_cof_hist_cusor>-posnr         = 000000.
+              <fs_cof_hist_cusor>-timestamp     = lv_timestampl.
+              CONCATENATE 'VB' lv_salesdocument <fs_cof_hist_cusor>-posnr INTO <fs_cof_hist_cusor>-objnr.
+              <fs_cof_hist_cusor>-creation_date = sy-datum.
+              <fs_cof_hist_cusor>-creation_time = sy-uzeit.
+              <fs_cof_hist_cusor>-username      = lv_value_kafka.
+              <fs_cof_hist_cusor>-status_from   = ''.
+              <fs_cof_hist_cusor>-status_to     = me->mc_toprepare.
+              <fs_cof_hist_cusor>-quantity_from = 0.
+              <fs_cof_hist_cusor>-quantity_to   = 0.
+
+              INSERT ztcof_hist_cusor FROM TABLE @lt_cof_hist_cusor.
+              IF sy-subrc NE 0.
+              ENDIF.
+
+              LOOP AT lt_order_items_in ASSIGNING FIELD-SYMBOL(<fs_items>).
+
+                <fs_cof_hist_cusor>-vbeln         = lv_salesdocument.
+                <fs_cof_hist_cusor>-posnr         = <fs_items>-itm_number.
+                <fs_cof_hist_cusor>-timestamp     = lv_timestampl.
+                CONCATENATE 'VB' lv_salesdocument <fs_items>-itm_number INTO <fs_cof_hist_cusor>-objnr.
+                <fs_cof_hist_cusor>-creation_date = sy-datum.
+                <fs_cof_hist_cusor>-creation_time = sy-uzeit.
+                <fs_cof_hist_cusor>-username      = lv_value_kafka.
+                <fs_cof_hist_cusor>-status_from   = ''.
+                <fs_cof_hist_cusor>-status_to     = me->mc_toprepare.
+                <fs_cof_hist_cusor>-quantity_from = 0.
+                <fs_cof_hist_cusor>-quantity_to   = 0.
+
+                INSERT ztcof_hist_cusor FROM TABLE @lt_cof_hist_cusor.
+                IF sy-subrc NE 0.
+                ENDIF.
+              ENDLOOP.
+            ENDIF.
+          ENDIF.
+
+        ELSEIF lv_modified = abap_true.
 
 *************      Modification de la commande             *************
 **********************************************************************
@@ -945,31 +988,31 @@ class zcl_salesorder_from_maestro implementation.
 
 * Pas de modification si statut = CANCELLED ou SHELVED ou SHIPPED
 
-          select single vk~vbeln, vk~objnr, js~stat
-            from vbak as vk
-            inner join jest as js
-            on js~objnr = vk~objnr
-            where vk~vbeln = @ls_vbak_ref-vbeln
-            and js~inact = @abap_false
-            and js~stat like 'E%'
-            into @data(ls_jest).
+          SELECT SINGLE vk~vbeln, vk~objnr, js~stat
+            FROM vbak AS vk
+            INNER JOIN jest AS js
+            ON js~objnr = vk~objnr
+            WHERE vk~vbeln = @ls_vbak_ref-vbeln
+            AND js~inact = @abap_false
+            AND js~stat LIKE 'E%'
+            INTO @DATA(ls_jest).
 
-          if sy-subrc eq 0.
-            if ls_jest-stat = mc_cancelled or ls_jest-stat = mc_shelved or ls_jest-stat = mc_shipped.
+          IF sy-subrc EQ 0.
+            IF ls_jest-stat = mc_cancelled OR ls_jest-stat = mc_shelved OR ls_jest-stat = mc_shipped.
               "Message informatif du blocage de la modification
-              message e046(zcl_cof_order) into lv_msg.
+              MESSAGE e046(zcl_cof_order) INTO lv_msg.
               gs_ztint_p-arbgb = lc_message_class.
-              call method me->add_message_slg1
-                exporting
+              CALL METHOD me->add_message_slg1
+                EXPORTING
                   iv_rc      = 0
                   iv_message = lv_msg
                   iv_arbgb   = gs_ztint_p-arbgb
                   iv_msgnr   = '046'
                   iv_langu   = sy-langu.
-              clear lv_msg.
-              exit.
-            endif.
-          endif.
+              CLEAR lv_msg.
+              EXIT.
+            ENDIF.
+          ENDIF.
 
 **********************************************************************
           lv_order = ls_vbak_ref-vbeln.
@@ -979,38 +1022,38 @@ class zcl_salesorder_from_maestro implementation.
 
           " Données des dates d'échéance
 *          loop at lt_sort_delivery_lines reference into data(ld_item_mod).
-          loop at lt_items into data(ls_item).     "#EC CI_LOOP_INTO_WA
+          LOOP AT lt_items INTO DATA(ls_item).     "#EC CI_LOOP_INTO_WA
 
 *            lv_posex = |{  conv posex( ld_item_mod->line_number ) alpha = in }| .
 *            lv_posex = conv posex( ld_item_mod->line_number ).
 
             " Récupération des postes de la commande initiale
 *            read table lt_items with key posex = lv_posex into data(ls_item).
-            read table lt_sort_delivery_lines index 1 reference into data(ld_item_mod).
+            READ TABLE lt_sort_delivery_lines INDEX 1 REFERENCE INTO DATA(ld_item_mod).
 
             " On ne modifie pas les dates d'échéances pour les postes annulé
-            if ls_item-kwmeng ne 0.
+            IF ls_item-kwmeng NE 0.
 
               " Données des dates d'écheance
-              if ls_item is not initial.
+              IF ls_item IS NOT INITIAL.
                 ls_order_schedules_in-itm_number      = ls_item-posnr.
                 ls_order_schedules_inx-itm_number     = ls_item-posnr.
 
-                read table lt_vbep with key posnr = ls_item-posnr into data(ls_vbep).
-                if sy-subrc = 0.
+                READ TABLE lt_vbep WITH KEY posnr = ls_item-posnr INTO DATA(ls_vbep).
+                IF sy-subrc = 0.
                   ls_order_schedules_in-sched_line      = ls_vbep-etenr.
                   ls_order_schedules_inx-sched_line     = ls_vbep-etenr.
-                endif.
-              endif.
+                ENDIF.
+              ENDIF.
 
               " Date et heure de livraison
-              if ld_item_mod->delivery_date_promise_long is initial.
+              IF ld_item_mod->delivery_date_promise_long IS INITIAL.
                 ls_order_schedules_in-req_date      = ld_item_mod->delivery_date_promise. "convert_timestamp_to_date( ld_item_mod->delivery_date_promise ).
                 ls_order_schedules_inx-req_date     = abap_true.
 
-              else.
-                convert_timestamp_to_date_time( exporting iv_timestamp = ld_item_mod->delivery_date_promise_long
-                                                importing ev_date = lv_date
+              ELSE.
+                convert_timestamp_to_date_time( EXPORTING iv_timestamp = ld_item_mod->delivery_date_promise_long
+                                                IMPORTING ev_date = lv_date
                                                           ev_time = lv_time ).
                 lv_date_modifed = lv_date.
                 lv_time_modified = lv_time.
@@ -1018,21 +1061,21 @@ class zcl_salesorder_from_maestro implementation.
                 ls_order_schedules_inx-req_date     = abap_true.
                 ls_order_schedules_in-req_time      = lv_time_modified.
                 ls_order_schedules_inx-req_time     = abap_true.
-              endif.
+              ENDIF.
 
               ls_order_schedules_inx-updateflag      = 'U'.
-              append ls_order_schedules_in to lt_order_schedules_in.
-              append ls_order_schedules_inx to lt_order_schedules_inx.
-            endif.
+              APPEND ls_order_schedules_in TO lt_order_schedules_in.
+              APPEND ls_order_schedules_inx TO lt_order_schedules_inx.
+            ENDIF.
 
-            clear : ls_order_schedules_in, ls_order_schedules_inx.
+            CLEAR : ls_order_schedules_in, ls_order_schedules_inx.
 
-          endloop.
+          ENDLOOP.
 
-          if lt_order_schedules_in is not initial.
+          IF lt_order_schedules_in IS NOT INITIAL.
 
-            call function 'BAPI_SALESORDER_CREATEFROMDAT2'
-              exporting
+            CALL FUNCTION 'BAPI_SALESORDER_CREATEFROMDAT2'
+              EXPORTING
                 salesdocumentin      = lv_order
                 order_header_in      = ls_order_header_in
                 order_header_inx     = ls_order_header_inx
@@ -1043,9 +1086,9 @@ class zcl_salesorder_from_maestro implementation.
 *               logic_switch         =
 *               testrun              =
 *               convert              = space
-              importing
+              IMPORTING
                 salesdocument        = lv_salesdocument
-              tables
+              TABLES
                 return               = lt_return
                 order_items_in       = lt_order_items_in
                 order_items_inx      = lt_order_items_inx
@@ -1067,38 +1110,38 @@ class zcl_salesorder_from_maestro implementation.
 *               extensionin          =
 *               partneraddresses     =
                 extensionex          = lt_extensionex.
-          endif.
+          ENDIF.
 
-        elseif lv_modified = abap_false and ms_message-preparation_order_id is not initial.
+        ELSEIF lv_modified = abap_false AND ms_message-preparation_order_id IS NOT INITIAL.
           cv_rc = 0.
           "Champ preparationOrderId non vide + création de commande  = commande GPE
-          message e025(zcl_cof_order) into lv_msg.
+          MESSAGE e025(zcl_cof_order) INTO lv_msg.
           gs_ztint_p-arbgb = lc_message_class.
-          call method me->add_message_slg1
-            exporting
+          CALL METHOD me->add_message_slg1
+            EXPORTING
               iv_rc      = 0
               iv_message = lv_msg
               iv_arbgb   = gs_ztint_p-arbgb
               iv_msgnr   = '025'
               iv_langu   = sy-langu.
-          clear lv_msg.
-          exit.
+          CLEAR lv_msg.
+          EXIT.
 
-        endif.
+        ENDIF.
 
-        if sy-subrc = 0.
+        IF sy-subrc = 0.
 
           " Récupération des messages d'erreur lors de la création de la commande
-          loop at lt_return assigning field-symbol(<fs_return>)
-                where type = 'E' or type = 'A'.
+          LOOP AT lt_return ASSIGNING FIELD-SYMBOL(<fs_return>)
+                WHERE type = 'E' OR type = 'A'.
 
             " On récupère le texte du message dans la langue de connexion
-            message id <fs_return>-id type <fs_return>-type number <fs_return>-number into lv_msg
-                    with <fs_return>-message_v1 <fs_return>-message_v2 <fs_return>-message_v3 <fs_return>-message_v4.
+            MESSAGE ID <fs_return>-id TYPE <fs_return>-type NUMBER <fs_return>-number INTO lv_msg
+                    WITH <fs_return>-message_v1 <fs_return>-message_v2 <fs_return>-message_v3 <fs_return>-message_v4.
 
             " Ajout du message sur SLG1 zinterfaces sous-objet ZLCO_DELIVERY
-            call method me->add_message_slg1
-              exporting
+            CALL METHOD me->add_message_slg1
+              EXPORTING
                 iv_rc      = 4
                 iv_message = lv_msg
                 iv_arbgb   = gs_ztint_p-arbgb
@@ -1106,84 +1149,86 @@ class zcl_salesorder_from_maestro implementation.
                 iv_langu   = sy-langu.
             lv_error = abap_true.
 
-          endloop.
+          ENDLOOP.
 
-          if lv_error ne abap_true.
+          IF lv_error NE abap_true.
 
             " Message du succès de création ou de modification puis commit de la commande
             lv_done = abap_true.
-            if lv_modified = abap_true.
+            IF lv_modified = abap_true.
               "Commande & modifiée avec succès
-              message s011(zcl_cof_order) with lv_salesdocument into lv_msg.
-            else.
+              MESSAGE s011(zcl_cof_order) WITH lv_salesdocument INTO lv_msg.
+            ELSE.
               "Commande & créée avec succès
-              message s010(zcl_cof_order) with lv_salesdocument into lv_msg.
-            endif.
+              MESSAGE s010(zcl_cof_order) WITH lv_salesdocument INTO lv_msg.
+            ENDIF.
 
             ev_nbrdoc = 1.
 
-            call method me->add_message_slg1
-              exporting
+            CALL METHOD me->add_message_slg1
+              EXPORTING
                 iv_rc      = 0
                 iv_message = lv_msg
                 iv_arbgb   = gs_ztint_p-arbgb
                 iv_msgnr   = '000'
                 iv_langu   = sy-langu.
-            clear lv_msg.
+            CLEAR lv_msg.
 
-            commit work and wait.
+
+            COMMIT WORK AND WAIT.
+
 
             "Si la création de commande s'est déroulée avec succès, alors on publie le changement de statut à "To prepare" sur le topic KAFKA
-            if lv_modified = abap_false and lv_salesdocument is not initial and sy-subrc = 0.
+            IF lv_modified = abap_false AND lv_salesdocument IS NOT INITIAL AND sy-subrc = 0.
               mv_vbeln = lv_salesdocument.
               publish_status_to_kafka(  prepare_status_to_publish(  ) ).
-            endif.
-          endif.
+            ENDIF.
+          ENDIF.
 
-        else.
+        ELSE.
 
           " Erreur à l'exécution du module fonction de création ou modification de commande
 
 
-        endif.
+        ENDIF.
 
 *      ENDIF.
 
-      else.
+      ELSE.
         cv_rc = 4.
         "Erreur message vide
-        message e004(zcl_cof_order) into lv_msg.
+        MESSAGE e004(zcl_cof_order) INTO lv_msg.
         gs_ztint_p-arbgb = lc_message_class.
-        call method me->add_message_slg1
-          exporting
+        CALL METHOD me->add_message_slg1
+          EXPORTING
             iv_rc      = 4
             iv_message = lv_msg
             iv_arbgb   = gs_ztint_p-arbgb
             iv_msgnr   = '004'
             iv_langu   = sy-langu.
-      endif.      "if ms_message is not initial.
+      ENDIF.      "if ms_message is not initial.
 
       " Si la création ou la modification ne s'est pas bien déroulée alors on met l'étape creation_documents en erreur
-      if lv_done ne abap_true.
+      IF lv_done NE abap_true.
         cv_rc = 4.
-      endif.
+      ENDIF.
 
-    else.
+    ELSE.
 
       "Date inférieure au Go Live
-      message e026(zcl_cof_order) with lv_date_golive into lv_msg.
+      MESSAGE e026(zcl_cof_order) WITH lv_date_golive INTO lv_msg.
       gs_ztint_p-arbgb = lc_message_class.
-      call method me->add_message_slg1
-        exporting
+      CALL METHOD me->add_message_slg1
+        EXPORTING
           iv_rc      = 0
           iv_message = lv_msg
           iv_arbgb   = gs_ztint_p-arbgb
           iv_msgnr   = '026'
           iv_langu   = sy-langu.
 
-    endif.
+    ENDIF.
 
-  endmethod.
+  ENDMETHOD.
 
 
   method get_order_text.
@@ -1403,11 +1448,11 @@ class zcl_salesorder_from_maestro implementation.
 
 
           if ls_vbap_lips-pstyv = 'ZTAD'.
-            ls_co_item_status-expected_quantity    = conv string( round( val = <ls_cust_order_created_item>-kwmeng dec = 2 ) ).
-            ls_co_item_status-cancelled_quantity   = conv string( round( val = ls_vbap_lips-lfimg dec = 2 ) ).
+            ls_co_item_status-expected_quantity    = conv string( round( val = <ls_cust_order_created_item>-kwmeng dec = 3 ) ).
+            ls_co_item_status-cancelled_quantity   = conv string( round( val = ls_vbap_lips-lfimg dec = 3 ) ).
           else.
-            ls_co_item_status-expected_quantity    = conv string( round( val = ls_vbap_lips-lfimg dec = 2 ) ).
-            ls_co_item_status-cancelled_quantity   = conv string( round( val = ( ls_vbap_lips-lfimg - <ls_cust_order_created_item>-kwmeng ) dec = 2 ) ).
+            ls_co_item_status-expected_quantity    = conv string( round( val = ls_vbap_lips-lfimg dec = 3 ) ).
+            ls_co_item_status-cancelled_quantity   = conv string( round( val = ( ls_vbap_lips-lfimg - <ls_cust_order_created_item>-kwmeng ) dec = 3 ) ).
           endif.
           ls_co_item_status-picked_quantity        = '0'.
           ls_co_item_status-controlled_quantity    = '0'.
@@ -1458,4 +1503,4 @@ class zcl_salesorder_from_maestro implementation.
     endif.
 
   endmethod.
-endclass.
+ENDCLASS.

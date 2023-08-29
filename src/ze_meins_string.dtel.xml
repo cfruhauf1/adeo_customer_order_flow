@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZE_MEINS_STRING</ROLLNAME>
+    <DDLANGUAGE>F</DDLANGUAGE>
+    <LOGFLAG>X</LOGFLAG>
+    <HEADLEN>03</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>15</SCRLEN2>
+    <SCRLEN3>20</SCRLEN3>
+    <DDTEXT>Unité de quantité de base</DDTEXT>
+    <REPTEXT>UQ</REPTEXT>
+    <SCRTEXT_S>Unité</SCRTEXT_S>
+    <SCRTEXT_M>UQ base</SCRTEXT_M>
+    <SCRTEXT_L>Unité de qté base</SCRTEXT_L>
+    <APPLCLASS>MG</APPLCLASS>
+    <DTELMASTER>D</DTELMASTER>
+    <DEFFDNAME>BASE_UOM</DEFFDNAME>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000003</LENG>
+    <OUTPUTLEN>000003</OUTPUTLEN>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>E</LANGU>
+    <LANGU>I</LANGU>
+    <LANGU>L</LANGU>
+    <LANGU>P</LANGU>
+    <LANGU>S</LANGU>
+    <LANGU>느</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Basismengeneinheit</DDTEXT>
+     <REPTEXT>BME</REPTEXT>
+     <SCRTEXT_S>Einheit</SCRTEXT_S>
+     <SCRTEXT_M>Basis-ME</SCRTEXT_M>
+     <SCRTEXT_L>Basismengeneinheit</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DDTEXT>Base Unit of Measure</DDTEXT>
+     <REPTEXT>BUn</REPTEXT>
+     <SCRTEXT_S>Unit</SCRTEXT_S>
+     <SCRTEXT_M>Base Unit</SCRTEXT_M>
+     <SCRTEXT_L>Base Unit of Measure</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>I</DDLANGUAGE>
+     <DDTEXT>Unità di misura di base</DDTEXT>
+     <REPTEXT>UMO</REPTEXT>
+     <SCRTEXT_S>Unità</SCRTEXT_S>
+     <SCRTEXT_M>Unità mis. base</SCRTEXT_M>
+     <SCRTEXT_L>Unità misura base</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>L</DDLANGUAGE>
+     <DDTEXT>Podstawowa jednostka miary</DDTEXT>
+     <REPTEXT>JM</REPTEXT>
+     <SCRTEXT_S>Jednostka</SCRTEXT_S>
+     <SCRTEXT_M>Podst.JM</SCRTEXT_M>
+     <SCRTEXT_L>Podst. jedn. miary</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DDTEXT>Unidade de medida básica</DDTEXT>
+     <REPTEXT>UMB</REPTEXT>
+     <SCRTEXT_S>Unidade</SCRTEXT_S>
+     <SCRTEXT_M>UM básica</SCRTEXT_M>
+     <SCRTEXT_L>Unid.medida básica</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Unidad de medida base</DDTEXT>
+     <REPTEXT>UMB</REPTEXT>
+     <SCRTEXT_S>Unidad</SCRTEXT_S>
+     <SCRTEXT_M>UM base</SCRTEXT_M>
+     <SCRTEXT_L>Unidad medida base</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>느</DDLANGUAGE>
+     <DDTEXT>Unidade de medida básica</DDTEXT>
+     <REPTEXT>UMB</REPTEXT>
+     <SCRTEXT_S>Unidade</SCRTEXT_S>
+     <SCRTEXT_M>UM básica</SCRTEXT_M>
+     <SCRTEXT_L>Unid.medida básica</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
